@@ -1,5 +1,5 @@
 {
-  "_note": "Station names and line topology (order, interchanges) reflect the real DMRC network to the best of available knowledge. Per-segment distance_km/duration_seconds are NOT sourced from DMRC timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS). Some far-flung extensions (deep Faridabad, deep Noida) are trimmed for confidence. Replace with authoritative GTFS/DMRC data before treating ETAs as real.",
+  "_note": "Station names and line topology (order, interchanges) reflect the real DMRC network to the best of available knowledge. Per-segment distance_km/duration_seconds are NOT sourced from DMRC timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS). Some far-flung extensions (deep Faridabad, deep Noida, the Red Line's Ghaziabad stretch past Dilshad Garden) are trimmed for confidence. Replace with authoritative GTFS/DMRC data before treating ETAs as real.",
   "lines": [
     {
       "name": "Yellow",
@@ -86,6 +86,29 @@
           "Kalkaji Mandir", "Okhla NSIC", "Sukhdev Vihar", "Jamia Millia Islamia",
           "Okhla Vihar", "Jasola Vihar Shaheen Bagh", "Kalindi Kunj",
           "Okhla Bird Sanctuary", "Botanical Garden"
+        ]
+      ]
+    },
+    {
+      "name": "Red",
+      "color": "#E53935",
+      "segments": [
+        [
+          "Rithala", "Rohini West", "Rohini East", "Pitampura", "Kohat Enclave",
+          "Netaji Subhash Place", "Keshav Puram", "Kanhaiya Nagar", "Inderlok",
+          "Shastri Nagar", "Pratap Nagar", "Pulbangash", "Tis Hazari",
+          "Kashmere Gate", "Shastri Park", "Seelampur", "Welcome", "Shahdara",
+          "Mansarovar Park", "Jhilmil", "Dilshad Garden"
+        ]
+      ]
+    },
+    {
+      "name": "Airport Express",
+      "color": "#F57C00",
+      "segments": [
+        [
+          "New Delhi", "Shivaji Stadium", "Dhaula Kuan", "Delhi Aerocity",
+          "Terminal 1 IGI Airport", "Dwarka Sector 21"
         ]
       ]
     }

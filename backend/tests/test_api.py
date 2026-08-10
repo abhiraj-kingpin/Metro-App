@@ -24,7 +24,7 @@ def test_list_lines():
     resp = client.get("/api/v1/lines")
     assert resp.status_code == 200
     names = {line["name"] for line in resp.json()}
-    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta"}
+    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express"}
 
 
 def test_station_search():

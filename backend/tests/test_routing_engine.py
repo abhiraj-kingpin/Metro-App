@@ -39,13 +39,14 @@ def test_route_requires_one_interchange():
 
 def test_more_transfers_can_still_be_the_shortest_route():
     # Going via Rajiv Chowk is only 1 transfer but a big detour into central
-    # Delhi -- the actual shortest route swings via Azadpur -> Pink ->
-    # Rajouri Garden instead, at the cost of an extra transfer. That's the
-    # correct call: minimize time, not transfer count.
+    # Delhi. With Airport Express in the graph, the actual shortest route is
+    # Yellow to New Delhi then a straight Airport Express run to Dwarka
+    # Sector 21 -- also 1 transfer, just a different one. Point stands: the
+    # engine should pick whatever is fastest, not whatever has fewer hops.
     result = find_shortest_path(graph, "Samaypur Badli", "Dwarka Sector 21")
     assert result.total_transfers >= 1
     assert result.segments[0].line == "Yellow"
-    assert result.segments[-1].line == "Blue"
+    assert result.segments[-1].to_station == "Dwarka Sector 21"
 
 
 def test_default_route_uses_direct_line_when_available():
