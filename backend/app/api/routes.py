@@ -3,6 +3,7 @@ from __future__ import annotations
 from fastapi import APIRouter, HTTPException
 
 from app.schemas.line_status import LineStatusResponse, LineStatusUpdate
+from app.schemas.query import NaturalQueryRequest, NaturalQueryResponse, UnderstoodIntent
 from app.schemas.route import (
     RouteAlert,
     RouteFindRequest,
@@ -13,6 +14,7 @@ from app.schemas.route import (
 from app.services.graph_builder import build_graph
 from app.services.line_status import LineStatusBoard
 from app.services.offline_cache import DEFAULT_DB_PATH, export_to_sqlite
+from app.services.query_parser import parse_query
 from app.services.routing_engine import (
     RouteConstraints,
     RouteNotFoundError,
@@ -84,23 +86,55 @@ def get_station(station_name: str) -> dict:
 @router.post("/routes/find", response_model=RouteFindResponse)
 def find_route(request: RouteFindRequest) -> RouteFindResponse:
     status = _status_board.all()
-    closed = {line for line, s in status.items() if s.status == "CLOSED"}
-    delays = {line: s.delay_seconds for line, s in status.items() if s.status == "DELAYED"}
-
     constraints = RouteConstraints(
-        avoid_lines=frozenset(request.preferences.avoid_lines) | closed,
+        avoid_lines=frozenset(request.preferences.avoid_lines) | _closed_lines(status),
         max_transfers=request.preferences.max_transfers,
     )
     try:
         results = find_k_shortest_paths(
             _graph, request.from_station, request.to_station,
-            constraints, k=request.preferences.alternatives, line_delays=delays,
+            constraints, k=request.preferences.alternatives, line_delays=_delays(status),
         )
     except RouteNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
-    routes = [_to_route_option(result, status) for result in results]
-    return RouteFindResponse(routes=routes)
+    return RouteFindResponse(routes=[_to_route_option(r, status) for r in results])
+
+
+@router.post("/query/natural", response_model=NaturalQueryResponse)
+def query_natural(request: NaturalQueryRequest) -> NaturalQueryResponse:
+    parsed = parse_query(request.query, set(_graph.station_lines), set(_graph.line_colors))
+    understood = UnderstoodIntent(
+        from_station=parsed.from_station, to_station=parsed.to_station, avoid_lines=parsed.avoid_lines
+    )
+    if not parsed.matched:
+        raise HTTPException(
+            status_code=422,
+            detail=f"couldn't confidently pick both stations out of that query -- got {understood.model_dump()}",
+        )
+
+    status = _status_board.all()
+    constraints = RouteConstraints(
+        avoid_lines=frozenset(parsed.avoid_lines) | _closed_lines(status),
+    )
+    try:
+        results = find_k_shortest_paths(
+            _graph, parsed.from_station, parsed.to_station, constraints, k=3, line_delays=_delays(status),
+        )
+    except RouteNotFoundError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+
+    return NaturalQueryResponse(
+        understood=understood, routes=[_to_route_option(r, status) for r in results]
+    )
+
+
+def _closed_lines(status) -> set[str]:
+    return {line for line, s in status.items() if s.status == "CLOSED"}
+
+
+def _delays(status) -> dict[str, int]:
+    return {line: s.delay_seconds for line, s in status.items() if s.status == "DELAYED"}
 
 
 def _to_route_option(result, status) -> RouteOption:
