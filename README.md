@@ -1,23 +1,21 @@
 # Delhi Metro Navigator Pro
 
-Real-time Delhi Metro navigation — placement portfolio project.
+Route planner for the Delhi Metro network — built as a portfolio project, originally scoped as a much bigger enterprise-style system (see `docs/PROJECT_SPEC.md`). This repo is the part of that spec I've actually built and can stand behind, not a scaffold pretending to be more than it is. `docs/ROADMAP.md` keeps an honest list of what's real vs. still on paper.
 
-This repo currently contains a **lean MVP backend**: a FastAPI service with
-a genuine Dijkstra-based routing engine over real Delhi Metro network
-topology. The full target architecture (RAG, live tracking, offline sync,
-mobile app, Kubernetes) is documented but not yet built — see
-[`docs/ROADMAP.md`](docs/ROADMAP.md) for what's real vs. planned, and
-[`docs/PROJECT_SPEC.md`](docs/PROJECT_SPEC.md) for the full original spec.
+## What's actually working
 
-## What works today
+- **Routing engine** — Dijkstra over a real network graph (7 lines, ~150 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
+- **Live-ish disruptions** — an in-memory board tracks per-line status. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes.
+- **Offline mode** — the graph can be exported to a portable SQLite file and reloaded from it with zero network calls. Verified: same query against the live graph and the reloaded-from-disk graph gives identical results.
+- **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
 
-- `POST /api/v1/routes/find` — shortest-route finding between any two of
-  ~140 real Delhi Metro stations across 5 lines (Yellow, Blue, Violet,
-  Pink, Magenta), with `avoid_lines` and `max_transfers` preferences.
-- `GET /api/v1/stations`, `GET /api/v1/stations/{name}`, `GET /api/v1/lines`
-- Interactive API docs at `/docs` once running.
+40 tests, all passing, covering the routing math (including the constraint edge cases) and the HTTP layer.
 
-## Quickstart
+## What's not built
+
+DB persistence, WebSocket/RabbitMQ real-time push, the actual NVIDIA RAG integration, the Flutter app, GPS/live train tracking, Kubernetes/AWS deployment. All of that needs either external accounts I don't have (NVIDIA, AWS) or is a genuinely separate multi-week effort (mobile app). Details and priority order in `docs/ROADMAP.md`.
+
+## Running it
 
 ```powershell
 cd backend
@@ -25,43 +23,62 @@ python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 
-# run the server
 uvicorn main:app --reload
 # -> http://127.0.0.1:8000/docs
 
-# run the tests
 pytest -v
 ```
 
-Example request:
+Or with Docker (untested in the sandbox this was built in — Docker wasn't installed there, so verify it locally):
+
+```powershell
+docker compose -f docker/docker-compose.yml up --build
+```
+
+### Try it
 
 ```powershell
 Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/v1/routes/find `
   -ContentType "application/json" `
   -Body '{"from_station":"Samaypur Badli","to_station":"Dwarka Sector 21"}'
+
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/v1/query/natural `
+  -ContentType "application/json" `
+  -Body '{"query":"Rajiv Chowk se Central Secretariat jana hai, Yellow Line se mat nikalna"}'
 ```
 
-## Project structure
+## Endpoints
+
+| Method | Path | What it does |
+|---|---|---|
+| POST | `/api/v1/routes/find` | top-N routes between two stations, with preferences |
+| POST | `/api/v1/query/natural` | plain-text query → parsed intent → routes |
+| GET | `/api/v1/stations`, `/api/v1/stations/{name}` | station lookup / search |
+| GET | `/api/v1/lines`, `/api/v1/lines/status` | line list, live status board |
+| POST | `/api/v1/lines/{line}/status` | push a status update (stand-in for a real DMRC feed) |
+| POST | `/api/v1/offline/export` | snapshot the graph to SQLite |
+
+## Layout
 
 ```
 backend/
-  main.py                    # FastAPI entrypoint
+  main.py
   app/
-    api/routes.py            # /api/v1 endpoints
+    api/routes.py             # every endpoint above lives here
     services/
-      graph_builder.py       # builds the (station, line) routing graph
-      routing_engine.py      # Dijkstra with avoid_lines / max_transfers
-    schemas/route.py         # request/response models
-    data/metro_data.json     # real DMRC topology, placeholder timings
-  tests/                     # pytest unit + API tests
+      graph_builder.py        # JSON -> in-memory graph
+      routing_engine.py       # Dijkstra + Yen's k-shortest
+      line_status.py          # in-memory disruption board
+      offline_cache.py        # graph <-> SQLite
+      query_parser.py         # regex/fuzzy NL parsing
+    schemas/                  # pydantic request/response models
+    data/metro_data.json      # the network itself
+  tests/
 docs/
-  PROJECT_SPEC.md            # full original enterprise-scale spec
-  ROADMAP.md                 # what's built vs. stubbed, suggested next steps
+  PROJECT_SPEC.md             # the original full spec, kept as-is for reference
+  ROADMAP.md                  # what's real, what's not, what's next
 ```
 
-## Data accuracy note
+## On the data
 
-Station names, line order, and interchange points reflect the real DMRC
-network. **Distances and travel times are flat placeholder averages**, not
-sourced from DMRC timetables — see `metro_data.json`'s `_note` field before
-treating any ETA as real.
+Station names, line order, and interchange points reflect the real DMRC network as best I know it. **Travel times and distances are flat placeholder averages**, not DMRC timetable data — check `metro_data.json`'s `_note` field before trusting an ETA for anything real.

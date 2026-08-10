@@ -1,0 +1,12 @@
+# just the backend for now -- no Postgres/Redis/RabbitMQ services here
+# because the app doesn't talk to any of those yet (routing is all
+# in-memory, line status is an in-process board). Add them when there's
+# an actual reason to, not before.
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8000:8000"

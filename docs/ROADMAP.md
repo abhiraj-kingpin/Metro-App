@@ -1,61 +1,74 @@
 # Roadmap & Scope Decisions
 
-The full spec (`PROJECT_SPEC.md`) describes an enterprise-scale system:
-Postgres + Redis + RabbitMQ + FAISS + NVIDIA NeMo + Flutter + Kubernetes.
-That's the *end state*, not a sane place to start. This file tracks what's
-actually built, what's stubbed, and why — so scope creep vs. real progress
-stays visible.
+`PROJECT_SPEC.md` describes an enterprise-scale system: Postgres + Redis +
+RabbitMQ + FAISS + NVIDIA NeMo + Flutter + Kubernetes. That's the end
+state, not where a solo build starts. This file is the honest ledger of
+what's actually built vs. what's still just described in the spec.
 
-## What exists right now (Phase 0: lean MVP)
+## Built and tested
 
-- `backend/` — a real, runnable FastAPI service.
-- `app/data/metro_data.json` — real DMRC network topology (5 lines: Yellow,
-  Blue, Violet, Pink, Magenta; ~140 unique stations with genuine interchange
-  points). **Not real:** per-segment distance/duration, which are flat
-  placeholder averages (see the file's `_note` field and
-  `graph_builder.py`'s constants) — not scraped DMRC timetables.
-- `app/services/graph_builder.py` + `routing_engine.py` — an actual
-  Dijkstra variant over a `(station, line, transfers_used)` state graph,
-  supporting `avoid_lines` and a hard `max_transfers` cap. This is real
-  algorithm work, not a stub.
-- `POST /api/v1/routes/find`, `GET /api/v1/stations`, `GET /api/v1/lines` —
-  working endpoints, covered by pytest (`tests/test_routing_engine.py`,
-  `tests/test_api.py`).
+- **Network graph** — 7 lines (Yellow, Blue, Violet, Pink, Magenta, Red,
+  Airport Express), ~150 real DMRC stations, genuine interchange points.
+  Distances/durations are flat placeholder averages, not real timetables
+  (see `metro_data.json`'s `_note`).
+- **Routing** — Dijkstra over a `(station, line, transfers_used)` state
+  graph. `avoid_lines` and a hard `max_transfers` cap are both enforced
+  exactly. `find_k_shortest_paths` layers Yen's algorithm on top for top-N
+  alternatives.
+- **Live disruptions** — in-memory status board per line (OPERATIONAL /
+  DELAYED / CLOSED). Closed lines get folded into `avoid_lines`
+  automatically; delays are charged once per line-boarding (not per
+  station) and show up as both extra ETA and an alert on the route.
+- **Offline mode** — graph exports to SQLite and reloads from it with zero
+  network calls. Tested that live-graph and reloaded-from-disk routing
+  produce identical results.
+- **NL query parsing** — regex + fuzzy string matching for "from X to Y"
+  and Hinglish phrasing, with typo tolerance. Explicitly a stand-in for
+  the spec's NVIDIA NeMo RAG pipeline, not a reimplementation of it — no
+  NVIDIA API key available in this environment. Same call signature
+  though, so it's a contained swap later.
+- **Docker** — a Dockerfile and single-service compose file exist and
+  should work, but haven't been build-tested (no Docker in the sandbox
+  this was written in). Verify locally before trusting it.
 
-## What's explicitly stubbed / not started
+40 passing tests across routing, line status, offline cache, and the NL
+parser.
 
-- **Database:** no Postgres/SQLite yet — topology is loaded straight from
-  JSON into memory at process start. Fine for a static graph; revisit once
-  real-time line status needs persistence.
-- **Real-time (Redis, RabbitMQ, WebSocket disruptions):** not started.
-  Phase 4 in the original spec.
-- **RAG / NVIDIA NeMo / Hindi NLU:** not started. Needs an actual NVIDIA
-  API key or local model before it can be more than pseudo-code — flag
-  this when picked up.
-- **Platform-level detail** (platform number, exits, escalators): schema
-  exists in the spec, no data or endpoint yet.
-- **Offline SQLite sync, GPS/live tracking, voice input, Flutter app:**
-  not started.
-- **Docker / Kubernetes / AWS deployment:** not started — premature before
-  there's a service worth deploying at that scale.
+## Not built yet, and why
+
+- **Database (Postgres/SQLite as system of record):** nothing needs to
+  persist yet — the graph is static and status is in-memory. Worth adding
+  once user accounts or saved routes show up.
+- **Real NVIDIA NeMo / RAG:** needs an actual API key. The rule-based
+  parser is a working placeholder with the same interface.
+- **Redis / RabbitMQ / WebSocket push:** the in-memory `LineStatusBoard`
+  covers the same shape (status per line, closed/delayed) for a
+  single-process demo. Swap it for Redis-backed pub/sub once this needs to
+  run across more than one process or survive a restart.
+- **Platform-level detail** (platform number, exits, escalators): schema's
+  in the original spec, no data source for it yet.
+- **GPS / live train positions, voice input, Flutter app:** genuinely
+  separate, multi-week efforts. Not started.
+- **Kubernetes / AWS:** premature before there's a service worth deploying
+  at that scale.
 
 ## Suggested next slice
 
-Pick one, in roughly this order of payoff-per-effort for a portfolio demo:
+In rough order of payoff for a portfolio demo:
 
-1. Expand `metro_data.json` toward the full 12-line/256-station network
-   (mechanical, low risk, makes the algorithm demo more impressive).
-2. K-shortest-routes (return top 3, not just 1) — natural extension of the
-   existing Dijkstra code.
-3. A thin `avoid_lines`/`max_transfers`-aware CLI or minimal web page to
-   demo routing without needing `/docs` Swagger UI.
-4. Real-time line status as an in-memory (then Redis-backed) overlay that
-   the routing engine consults — this is the natural bridge into Phase 4
-   without needing the full WebSocket/RabbitMQ stack yet.
+1. Push the network toward the full 12-line/256-station DMRC map —
+   mechanical, low-risk, makes the demo more convincing.
+2. Actually build-test the Docker setup and wire it into a one-command
+   `run.sh` / `run.ps1`.
+3. A minimal static frontend (even a single HTML page hitting `/api/v1/routes/find`)
+   so the project has something to screenshot besides Swagger docs.
+4. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+   internals for a real NeMo call behind the same `parse_query()` signature.
+5. Redis-backed `LineStatusBoard` once there's a second process (a
+   background poller, say) that needs to see the same state.
 
-## GitHub
+## Git
 
-This directory is a fresh git repo (`git init` was run as part of scaffolding
-Phase 0) with no remote configured. Push to GitHub when ready — the spec's
-"50+ meaningful commits" target is easiest to hit by committing each roadmap
-slice above separately rather than in one big dump.
+Pushed regularly to `abhiraj-kingpin/Metro-App` on GitHub as each slice
+lands, rather than as one large dump — easier to follow the actual build
+order that way.
