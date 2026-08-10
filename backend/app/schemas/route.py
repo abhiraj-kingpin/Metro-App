@@ -26,12 +26,19 @@ class RouteSegmentResponse(BaseModel):
     duration_seconds: int
 
 
+class RouteAlert(BaseModel):
+    type: str
+    line: str
+    message: str
+
+
 class RouteOption(BaseModel):
     segments: list[RouteSegmentResponse]
     total_duration_seconds: int
     total_distance_km: float
     total_transfers: int
     eta_minutes: int
+    alerts: list[RouteAlert] = Field(default_factory=list)
 
 
 class RouteFindResponse(BaseModel):

@@ -1,6 +1,11 @@
 # Dijkstra over (station, line, transfers_used) states so max_transfers
 # can be a hard cap instead of a penalty. find_k_shortest_paths is Yen's
 # algorithm layered on top of that for "top 3 routes" instead of just one.
+#
+# line_delays is separate from RouteConstraints on purpose -- constraints
+# are what the rider asked for (avoid this line, at most N transfers),
+# delays are live network conditions from line_status.py. Different
+# lifetimes, different owners, no reason to tangle them together.
 
 from __future__ import annotations
 
@@ -49,20 +54,22 @@ def find_shortest_path(
     start_station: str,
     end_station: str,
     constraints: RouteConstraints | None = None,
+    line_delays: dict[str, int] | None = None,
 ) -> RouteResult:
     constraints = constraints or RouteConstraints()
+    line_delays = line_delays or {}
     start_states = _validate_and_seed(graph, start_station, end_station, constraints)
 
     if start_station == end_station:
         return RouteResult()
 
-    found = _dijkstra(graph, start_states, end_station, constraints)
+    found = _dijkstra(graph, start_states, end_station, constraints, line_delays=line_delays)
     if found is None:
         raise RouteNotFoundError(
             f"No route found between {start_station!r} and {end_station!r} under the given constraints"
         )
     path_states, path_edges, _ = found
-    return _build_result(graph, path_states, path_edges)
+    return _build_result(graph, path_states, path_edges, line_delays)
 
 
 def find_k_shortest_paths(
@@ -71,14 +78,16 @@ def find_k_shortest_paths(
     end_station: str,
     constraints: RouteConstraints | None = None,
     k: int = 3,
+    line_delays: dict[str, int] | None = None,
 ) -> list[RouteResult]:
     constraints = constraints or RouteConstraints()
+    line_delays = line_delays or {}
     start_states = _validate_and_seed(graph, start_station, end_station, constraints)
 
     if start_station == end_station:
         return [RouteResult()]
 
-    first = _dijkstra(graph, start_states, end_station, constraints)
+    first = _dijkstra(graph, start_states, end_station, constraints, line_delays=line_delays)
     if first is None:
         raise RouteNotFoundError(
             f"No route found between {start_station!r} and {end_station!r} under the given constraints"
@@ -106,7 +115,7 @@ def find_k_shortest_paths(
 
             spur = _dijkstra(
                 graph, [spur_state], end_station, constraints,
-                forbidden_edges=forbidden, forbidden_stations=root_block,
+                forbidden_edges=forbidden, forbidden_stations=root_block, line_delays=line_delays,
             )
             if spur is None:
                 continue
@@ -119,7 +128,7 @@ def find_k_shortest_paths(
                 continue
             seen.add(key)
 
-            cost = sum(e.duration_seconds for e in total_edges)
+            cost = _total_cost(total_states, total_edges, line_delays)
             tiebreak += 1
             heapq.heappush(candidates, (cost, tiebreak, total_states, total_edges))
 
@@ -128,7 +137,7 @@ def find_k_shortest_paths(
         cost, _, states, edges = heapq.heappop(candidates)
         accepted.append((states, edges, cost))
 
-    return [_build_result(graph, states, edges) for states, edges, _ in accepted]
+    return [_build_result(graph, states, edges, line_delays) for states, edges, _ in accepted]
 
 
 def _validate_and_seed(
@@ -147,6 +156,17 @@ def _validate_and_seed(
     return [(start_station, line, 0) for line in start_lines]
 
 
+def _total_cost(path_states: list[State], path_edges: list[Edge], line_delays: dict[str, int]) -> int:
+    # delay is charged once per "boarding": the starting line, plus once
+    # each time a transfer edge puts you onto a new line
+    cost = line_delays.get(path_states[0][1], 0)
+    for edge in path_edges:
+        cost += edge.duration_seconds
+        if edge.is_transfer:
+            cost += line_delays.get(edge.line, 0)
+    return cost
+
+
 def _dijkstra(
     graph: MetroGraph,
     start_states: list[State],
@@ -154,7 +174,9 @@ def _dijkstra(
     constraints: RouteConstraints,
     forbidden_edges: set[EdgeKey] = frozenset(),
     forbidden_stations: set[str] = frozenset(),
+    line_delays: dict[str, int] | None = None,
 ) -> tuple[list[State], list[Edge], int] | None:
+    line_delays = line_delays or {}
     dist: dict[State, float] = {}
     prev: dict[State, tuple[State, Edge]] = {}
     pq: list[tuple[float, State]] = []
@@ -162,8 +184,8 @@ def _dijkstra(
     for state in start_states:
         if state[0] in forbidden_stations:
             continue
-        dist[state] = 0
-        heapq.heappush(pq, (0, state))
+        dist[state] = line_delays.get(state[1], 0)
+        heapq.heappush(pq, (dist[state], state))
 
     best_end_state = None
     while pq:
@@ -188,6 +210,8 @@ def _dijkstra(
                 continue
             next_state: State = (edge.to_station, edge.line, next_transfers)
             new_cost = cost + edge.duration_seconds
+            if edge.is_transfer:
+                new_cost += line_delays.get(edge.line, 0)
             if new_cost < dist.get(next_state, float("inf")):
                 dist[next_state] = new_cost
                 prev[next_state] = (state, edge)
@@ -204,7 +228,13 @@ def _dijkstra(
     return path_states, path_edges, dist[best_end_state]
 
 
-def _build_result(graph: MetroGraph, path_states: list[State], path_edges: list[Edge]) -> RouteResult:
+def _build_result(
+    graph: MetroGraph,
+    path_states: list[State],
+    path_edges: list[Edge],
+    line_delays: dict[str, int] | None = None,
+) -> RouteResult:
+    line_delays = line_delays or {}
     segments: list[RouteSegment] = []
     current_line = path_states[0][1]
     current_stations = [path_states[0][0]]
@@ -242,10 +272,11 @@ def _build_result(graph: MetroGraph, path_states: list[State], path_edges: list[
 
     ride_time = sum(s.duration_seconds for s in segments)
     transfer_time = TRANSFER_PENALTY_SECONDS * max(len(segments) - 1, 0)
+    delay_time = sum(line_delays.get(s.line, 0) for s in segments)
 
     return RouteResult(
         segments=segments,
-        total_duration_seconds=ride_time + transfer_time,
+        total_duration_seconds=ride_time + transfer_time + delay_time,
         total_distance_km=round(sum(s.distance_km for s in segments), 2),
         total_transfers=max(len(segments) - 1, 0),
     )
