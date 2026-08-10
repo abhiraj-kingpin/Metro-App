@@ -12,6 +12,7 @@ from app.schemas.route import (
 )
 from app.services.graph_builder import build_graph
 from app.services.line_status import LineStatusBoard
+from app.services.offline_cache import DEFAULT_DB_PATH, export_to_sqlite
 from app.services.routing_engine import (
     RouteConstraints,
     RouteNotFoundError,
@@ -49,6 +50,19 @@ def set_line_status(line_name: str, body: LineStatusUpdate) -> LineStatusRespons
     return LineStatusResponse(
         line=line_name, status=updated.status, delay_seconds=updated.delay_seconds, reason=updated.reason
     )
+
+
+@router.post("/offline/export")
+def export_offline_cache() -> dict:
+    # snapshots the current graph to a .db a client could download once
+    # and route against with zero server contact afterward
+    export_to_sqlite(_graph, DEFAULT_DB_PATH)
+    return {
+        "path": str(DEFAULT_DB_PATH),
+        "size_kb": round(DEFAULT_DB_PATH.stat().st_size / 1024, 1),
+        "station_count": len(_graph.station_lines),
+        "line_count": len(_graph.line_colors),
+    }
 
 
 @router.get("/stations")

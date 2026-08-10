@@ -86,6 +86,14 @@ def test_find_route_with_avoid_lines_preference():
         assert "Yellow" not in lines_used
 
 
+def test_offline_export_endpoint():
+    resp = client.post("/api/v1/offline/export")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["station_count"] > 0
+    assert body["line_count"] == 7
+
+
 def test_find_route_unreachable_returns_404():
     resp = client.post(
         "/api/v1/routes/find",
