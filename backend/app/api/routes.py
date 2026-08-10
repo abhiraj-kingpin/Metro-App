@@ -1,32 +1,29 @@
-"""Route, station, and line endpoints -- v1 API.
-
-Scoped to what the lean MVP actually supports: static-topology route
-finding. No live disruptions, GPS ETA, RAG, or platform detail yet.
-"""
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
 
-from app.schemas.route import RouteFindRequest, RouteFindResponse, RouteSegmentResponse
+from app.schemas.route import (
+    RouteFindRequest,
+    RouteFindResponse,
+    RouteOption,
+    RouteSegmentResponse,
+)
 from app.services.graph_builder import build_graph
 from app.services.routing_engine import (
     RouteConstraints,
     RouteNotFoundError,
-    find_shortest_path,
+    find_k_shortest_paths,
 )
 
 router = APIRouter(prefix="/api/v1")
 
-# Static topology data -- loaded once at process start, not per-request.
+# loaded once at startup, not per-request
 _graph = build_graph()
 
 
 @router.get("/lines")
 def list_lines() -> list[dict]:
-    return [
-        {"name": name, "color": color}
-        for name, color in sorted(_graph.line_colors.items())
-    ]
+    return [{"name": name, "color": color} for name, color in sorted(_graph.line_colors.items())]
 
 
 @router.get("/stations")
@@ -35,10 +32,7 @@ def list_stations(q: str | None = None) -> list[dict]:
     if q:
         needle = q.lower()
         names = [n for n in names if needle in n.lower()]
-    return [
-        {"name": name, "lines": sorted(_graph.station_lines[name])}
-        for name in names
-    ]
+    return [{"name": name, "lines": sorted(_graph.station_lines[name])} for name in names]
 
 
 @router.get("/stations/{station_name}")
@@ -55,28 +49,33 @@ def find_route(request: RouteFindRequest) -> RouteFindResponse:
         max_transfers=request.preferences.max_transfers,
     )
     try:
-        result = find_shortest_path(
-            _graph, request.from_station, request.to_station, constraints
+        results = find_k_shortest_paths(
+            _graph, request.from_station, request.to_station,
+            constraints, k=request.preferences.alternatives,
         )
     except RouteNotFoundError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
-    return RouteFindResponse(
-        segments=[
-            RouteSegmentResponse(
-                from_station=s.from_station,
-                to_station=s.to_station,
-                line=s.line,
-                line_color=s.line_color,
-                stations=s.stations,
-                stops_count=s.stops_count,
-                distance_km=s.distance_km,
-                duration_seconds=s.duration_seconds,
-            )
-            for s in result.segments
-        ],
-        total_duration_seconds=result.total_duration_seconds,
-        total_distance_km=result.total_distance_km,
-        total_transfers=result.total_transfers,
-        eta_minutes=round(result.total_duration_seconds / 60),
-    )
+    routes = [
+        RouteOption(
+            segments=[
+                RouteSegmentResponse(
+                    from_station=s.from_station,
+                    to_station=s.to_station,
+                    line=s.line,
+                    line_color=s.line_color,
+                    stations=s.stations,
+                    stops_count=s.stops_count,
+                    distance_km=s.distance_km,
+                    duration_seconds=s.duration_seconds,
+                )
+                for s in result.segments
+            ],
+            total_duration_seconds=result.total_duration_seconds,
+            total_distance_km=result.total_distance_km,
+            total_transfers=result.total_transfers,
+            eta_minutes=round(result.total_duration_seconds / 60),
+        )
+        for result in results
+    ]
+    return RouteFindResponse(routes=routes)

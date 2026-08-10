@@ -1,9 +1,3 @@
-"""Pydantic request/response models for the route-finding endpoint.
-
-This is a trimmed-down version of the full API_DOCUMENTATION.md contract in
-docs/PROJECT_SPEC.md: platform-level detail, live disruption alerts, and
-GPS-based ETA are not part of this lean-MVP slice yet (see docs/ROADMAP.md).
-"""
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
@@ -12,6 +6,7 @@ from pydantic import BaseModel, Field
 class RoutePreferences(BaseModel):
     max_transfers: int = 4
     avoid_lines: list[str] = Field(default_factory=list)
+    alternatives: int = Field(default=3, ge=1, le=5)
 
 
 class RouteFindRequest(BaseModel):
@@ -31,9 +26,13 @@ class RouteSegmentResponse(BaseModel):
     duration_seconds: int
 
 
-class RouteFindResponse(BaseModel):
+class RouteOption(BaseModel):
     segments: list[RouteSegmentResponse]
     total_duration_seconds: int
     total_distance_km: float
     total_transfers: int
     eta_minutes: int
+
+
+class RouteFindResponse(BaseModel):
+    routes: list[RouteOption]

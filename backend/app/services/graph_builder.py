@@ -1,22 +1,10 @@
-"""Builds an in-memory routing graph from the static metro topology data.
+# Builds the routing graph from metro_data.json. Nodes are (station, line)
+# pairs, not bare stations, since you can't switch lines without walking
+# across a platform. Interchanges = same-station edge with a time penalty.
+#
+# distance_km / duration_seconds are placeholder averages, not real DMRC
+# numbers -- see the _note field in metro_data.json.
 
-Graph model
------------
-A rider's next move (which platform, which direction) depends on *which
-line* they're currently riding, not just which station they're standing
-in. So the graph is built over ``(station, line)`` states rather than bare
-stations:
-
-- Consecutive stations on the same line get a same-line edge in each
-  direction (weight = ride time).
-- Any station served by more than one line gets a same-station "transfer"
-  edge between every pair of those lines (weight = a fixed penalty).
-
-routing_engine.py then runs Dijkstra over this state graph.
-
-Data caveat: distances/durations below are flat placeholder averages, not
-real DMRC timetable data -- see data/metro_data.json's "_note" field.
-"""
 from __future__ import annotations
 
 import json
@@ -25,7 +13,6 @@ from pathlib import Path
 
 DATA_FILE = Path(__file__).resolve().parent.parent / "data" / "metro_data.json"
 
-# Placeholder averages used until real DMRC schedule/GIS data is wired in.
 AVG_INTERSTATION_KM = 1.2
 AVG_INTERSTATION_SECONDS = 135
 TRANSFER_PENALTY_SECONDS = 180
@@ -43,10 +30,8 @@ class Edge:
 @dataclass
 class MetroGraph:
     line_colors: dict[str, str] = field(default_factory=dict)
-    # (station, line) -> outgoing edges
-    adjacency: dict[tuple[str, str], list[Edge]] = field(default_factory=dict)
-    # station -> set of lines serving it
-    station_lines: dict[str, set[str]] = field(default_factory=dict)
+    adjacency: dict[tuple[str, str], list[Edge]] = field(default_factory=dict)  # (station, line) -> edges
+    station_lines: dict[str, set[str]] = field(default_factory=dict)  # station -> lines serving it
 
     def lines_at(self, station: str) -> set[str]:
         return self.station_lines.get(station, set())
@@ -72,17 +57,10 @@ def build_graph(data_path: Path = DATA_FILE) -> MetroGraph:
                 graph.station_lines.setdefault(station, set()).add(name)
 
             for a, b in zip(segment, segment[1:]):
-                _add_edge(
-                    graph, a, name,
-                    Edge(b, name, AVG_INTERSTATION_KM, AVG_INTERSTATION_SECONDS),
-                )
-                _add_edge(
-                    graph, b, name,
-                    Edge(a, name, AVG_INTERSTATION_KM, AVG_INTERSTATION_SECONDS),
-                )
+                _add_edge(graph, a, name, Edge(b, name, AVG_INTERSTATION_KM, AVG_INTERSTATION_SECONDS))
+                _add_edge(graph, b, name, Edge(a, name, AVG_INTERSTATION_KM, AVG_INTERSTATION_SECONDS))
 
-    # Transfer edges: any station served by >1 line gets a same-station
-    # hop between every ordered pair of lines it touches.
+    # any station touched by 2+ lines gets a transfer edge between every pair of them
     for station, lines in graph.station_lines.items():
         for line_a in lines:
             for line_b in lines:

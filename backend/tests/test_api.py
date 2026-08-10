@@ -1,7 +1,5 @@
-"""Integration tests for the FastAPI HTTP layer.
+# run with (from backend/): pytest -v
 
-Run with (from backend/): pytest -v
-"""
 from __future__ import annotations
 
 import sys
@@ -42,16 +40,35 @@ def test_unknown_station_detail_404():
 
 def test_find_route_success():
     # Chandni Chowk / Barakhamba Road sit right next to the Rajiv Chowk
-    # interchange, so the shortest route is a clean single transfer.
+    # interchange, so the top route should be a clean single transfer.
     resp = client.post(
         "/api/v1/routes/find",
         json={"from_station": "Chandni Chowk", "to_station": "Barakhamba Road"},
     )
     assert resp.status_code == 200
-    body = resp.json()
-    assert body["total_transfers"] == 1
-    lines_used = {seg["line"] for seg in body["segments"]}
+    routes = resp.json()["routes"]
+    assert len(routes) >= 1
+    best = routes[0]
+    assert best["total_transfers"] == 1
+    lines_used = {seg["line"] for seg in best["segments"]}
     assert lines_used == {"Yellow", "Blue"}
+
+
+def test_find_route_returns_multiple_alternatives():
+    resp = client.post(
+        "/api/v1/routes/find",
+        json={
+            "from_station": "Samaypur Badli",
+            "to_station": "Dwarka Sector 21",
+            "preferences": {"alternatives": 3},
+        },
+    )
+    assert resp.status_code == 200
+    routes = resp.json()["routes"]
+    assert len(routes) > 1
+    # routes should come back cheapest first
+    durations = [r["total_duration_seconds"] for r in routes]
+    assert durations == sorted(durations)
 
 
 def test_find_route_with_avoid_lines_preference():
@@ -64,8 +81,9 @@ def test_find_route_with_avoid_lines_preference():
         },
     )
     assert resp.status_code == 200
-    lines_used = {seg["line"] for seg in resp.json()["segments"]}
-    assert "Yellow" not in lines_used
+    for route in resp.json()["routes"]:
+        lines_used = {seg["line"] for seg in route["segments"]}
+        assert "Yellow" not in lines_used
 
 
 def test_find_route_unreachable_returns_404():

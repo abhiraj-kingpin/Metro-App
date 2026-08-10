@@ -1,7 +1,5 @@
-"""Unit tests for the Dijkstra-based routing engine.
+# run with (from backend/): pytest -v
 
-Run with (from backend/): pytest -v
-"""
 from __future__ import annotations
 
 import sys
@@ -15,6 +13,7 @@ from app.services.graph_builder import build_graph
 from app.services.routing_engine import (
     RouteConstraints,
     RouteNotFoundError,
+    find_k_shortest_paths,
     find_shortest_path,
 )
 
@@ -28,9 +27,8 @@ def test_direct_route_same_line_has_zero_transfers():
 
 
 def test_route_requires_one_interchange():
-    # Chandni Chowk (Yellow-only) and Barakhamba Road (Blue-only) sit right
-    # next to the Rajiv Chowk interchange on their respective lines, so the
-    # shortest path is a straight one-transfer hop through it.
+    # Chandni Chowk (Yellow-only) sits right next to Rajiv Chowk, same for
+    # Barakhamba Road (Blue-only) -- so this should be a plain one-transfer hop.
     result = find_shortest_path(graph, "Chandni Chowk", "Barakhamba Road")
     lines_used = {s.line for s in result.segments}
     assert lines_used == {"Yellow", "Blue"}
@@ -40,12 +38,10 @@ def test_route_requires_one_interchange():
 
 
 def test_more_transfers_can_still_be_the_shortest_route():
-    # Samaypur Badli (Yellow-only) -> Dwarka Sector 21 (Blue-only) is a
-    # case where going via Rajiv Chowk (1 transfer) is a big detour into
-    # central Delhi -- the real shortest route detours via Azadpur -> Pink
-    # -> Rajouri Garden -> Blue instead, at the cost of an extra transfer.
-    # This is exactly what Dijkstra should do: minimize total time, not
-    # transfer count.
+    # Going via Rajiv Chowk is only 1 transfer but a big detour into central
+    # Delhi -- the actual shortest route swings via Azadpur -> Pink ->
+    # Rajouri Garden instead, at the cost of an extra transfer. That's the
+    # correct call: minimize time, not transfer count.
     result = find_shortest_path(graph, "Samaypur Badli", "Dwarka Sector 21")
     assert result.total_transfers >= 1
     assert result.segments[0].line == "Yellow"
@@ -53,15 +49,12 @@ def test_more_transfers_can_still_be_the_shortest_route():
 
 
 def test_default_route_uses_direct_line_when_available():
-    # Rajiv Chowk -> Central Secretariat is a direct 2-hop ride on Yellow.
     result = find_shortest_path(graph, "Rajiv Chowk", "Central Secretariat")
     assert result.total_transfers == 0
     assert result.segments[0].line == "Yellow"
 
 
 def test_avoid_lines_forces_alternate_path():
-    # With Yellow avoided, Rajiv Chowk -> Central Secretariat must instead
-    # go Blue (to Mandi House) -> Violet (to Central Secretariat).
     constraints = RouteConstraints(avoid_lines=frozenset({"Yellow"}))
     result = find_shortest_path(graph, "Rajiv Chowk", "Central Secretariat", constraints)
     lines_used = {s.line for s in result.segments}
@@ -87,7 +80,28 @@ def test_unknown_station_raises():
 
 
 def test_avoid_only_line_at_origin_raises():
-    # Samaypur Badli is served only by Yellow -- avoiding Yellow strands it.
     constraints = RouteConstraints(avoid_lines=frozenset({"Yellow"}))
     with pytest.raises(RouteNotFoundError):
         find_shortest_path(graph, "Samaypur Badli", "Dwarka Sector 21", constraints)
+
+
+def test_k_shortest_paths_are_sorted_and_distinct():
+    results = find_k_shortest_paths(graph, "Samaypur Badli", "Dwarka Sector 21", k=3)
+    assert len(results) > 1
+    durations = [r.total_duration_seconds for r in results]
+    assert durations == sorted(durations)
+
+    # no two routes should walk the exact same sequence of stations
+    paths = [tuple(st for seg in r.segments for st in seg.stations) for r in results]
+    assert len(paths) == len(set(paths))
+
+
+def test_k_shortest_paths_respects_k():
+    results = find_k_shortest_paths(graph, "Rajiv Chowk", "Barakhamba Road", k=3)
+    assert 1 <= len(results) <= 3
+
+
+def test_k_shortest_paths_same_station_returns_single_empty_route():
+    results = find_k_shortest_paths(graph, "Rajiv Chowk", "Rajiv Chowk", k=3)
+    assert len(results) == 1
+    assert results[0].segments == []

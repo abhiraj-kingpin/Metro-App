@@ -1,10 +1,6 @@
-"""Delhi Metro Navigator Pro -- lean MVP backend entrypoint.
+# run with: uvicorn main:app --reload
+# then hit http://127.0.0.1:8000/docs
 
-Run locally:
-    uvicorn main:app --reload
-
-Then open http://127.0.0.1:8000/docs for interactive API docs.
-"""
 from fastapi import FastAPI
 
 from app.api.routes import router as api_router
