@@ -7,10 +7,10 @@ what's actually built vs. what's still just described in the spec.
 
 ## Built and tested
 
-- **Network graph** — 7 lines (Yellow, Blue, Violet, Pink, Magenta, Red,
-  Airport Express), ~150 real DMRC stations, genuine interchange points.
-  Distances/durations are flat placeholder averages, not real timetables
-  (see `metro_data.json`'s `_note`).
+- **Network graph** — 8 lines (Yellow, Blue, Violet, Pink, Magenta, Red,
+  Airport Express, Green), ~160 real DMRC stations, genuine interchange
+  points. Distances/durations are flat placeholder averages, not real
+  timetables (see `metro_data.json`'s `_note`).
 - **Routing** — Dijkstra over a `(station, line, transfers_used)` state
   graph. `avoid_lines` and a hard `max_transfers` cap are both enforced
   exactly. `find_k_shortest_paths` layers Yen's algorithm on top for top-N
@@ -30,8 +30,11 @@ what's actually built vs. what's still just described in the spec.
 - **Docker** — a Dockerfile and single-service compose file exist and
   should work, but haven't been build-tested (no Docker in the sandbox
   this was written in). Verify locally before trusting it.
+- **Frontend** — a plain HTML/CSS/JS page (no build step) served off
+  FastAPI's StaticFiles at `/`: route search with station autocomplete,
+  the NL query box, and a live line-status panel with an update form.
 
-40 passing tests across routing, line status, offline cache, and the NL
+41 passing tests across routing, line status, offline cache, and the NL
 parser.
 
 ## Not built yet, and why
@@ -56,16 +59,16 @@ parser.
 
 In rough order of payoff for a portfolio demo:
 
-1. Push the network toward the full 12-line/256-station DMRC map —
-   mechanical, low-risk, makes the demo more convincing.
+1. Keep pushing the network toward the full 12-line/256-station DMRC map
+   (Grey, Orange/Aqua/Rapid Metro still missing) — mechanical, low-risk.
 2. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
-3. A minimal static frontend (even a single HTML page hitting `/api/v1/routes/find`)
-   so the project has something to screenshot besides Swagger docs.
-4. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
-5. Redis-backed `LineStatusBoard` once there's a second process (a
+4. Redis-backed `LineStatusBoard` once there's a second process (a
    background poller, say) that needs to see the same state.
+5. A map view on the frontend (even a simple SVG line diagram) instead of
+   just text-and-color-chip route cards.
 
 ## Git
 

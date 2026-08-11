@@ -4,12 +4,13 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 
 ## What's actually working
 
-- **Routing engine** — Dijkstra over a real network graph (7 lines, ~150 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
+- **Routing engine** — Dijkstra over a real network graph (8 lines, ~160 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
 - **Live-ish disruptions** — an in-memory board tracks per-line status. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes.
 - **Offline mode** — the graph can be exported to a portable SQLite file and reloaded from it with zero network calls. Verified: same query against the live graph and the reloaded-from-disk graph gives identical results.
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
+- **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete, the NL query box, and a live line-status panel you can push updates through.
 
-40 tests, all passing, covering the routing math (including the constraint edge cases) and the HTTP layer.
+41 tests, all passing, covering the routing math (including the constraint edge cases) and the HTTP layer.
 
 ## What's not built
 
@@ -24,7 +25,8 @@ python -m venv .venv
 pip install -r requirements.txt
 
 uvicorn main:app --reload
-# -> http://127.0.0.1:8000/docs
+# -> http://127.0.0.1:8000/       (the UI)
+# -> http://127.0.0.1:8000/docs   (raw API)
 
 pytest -v
 ```
@@ -63,6 +65,7 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/v1/query/natural `
 ```
 backend/
   main.py
+  static/                     # the frontend: index.html, app.js, style.css
   app/
     api/routes.py             # every endpoint above lives here
     services/
