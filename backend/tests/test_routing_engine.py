@@ -86,6 +86,15 @@ def test_avoid_only_line_at_origin_raises():
         find_shortest_path(graph, "Samaypur Badli", "Dwarka Sector 21", constraints)
 
 
+def test_green_line_connects_through_inderlok():
+    # Punjabi Bagh (Green-only) -> Kohat Enclave (Red-only), real
+    # interchange is at Inderlok
+    result = find_shortest_path(graph, "Punjabi Bagh", "Kohat Enclave")
+    lines_used = {s.line for s in result.segments}
+    assert lines_used == {"Green", "Red"}
+    assert result.total_transfers == 1
+
+
 def test_k_shortest_paths_are_sorted_and_distinct():
     results = find_k_shortest_paths(graph, "Samaypur Badli", "Dwarka Sector 21", k=3)
     assert len(results) > 1

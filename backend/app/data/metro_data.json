@@ -1,5 +1,5 @@
 {
-  "_note": "Station names and line topology (order, interchanges) reflect the real DMRC network to the best of available knowledge. Per-segment distance_km/duration_seconds are NOT sourced from DMRC timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS). Some far-flung extensions (deep Faridabad, deep Noida, the Red Line's Ghaziabad stretch past Dilshad Garden) are trimmed for confidence. Replace with authoritative GTFS/DMRC data before treating ETAs as real.",
+  "_note": "Station names and line topology (order, interchanges) reflect the real DMRC network to the best of available knowledge. Per-segment distance_km/duration_seconds are NOT sourced from DMRC timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS). Some far-flung extensions (deep Faridabad, deep Noida, the Red Line's Ghaziabad stretch past Dilshad Garden, the Green Line's Bahadurgarh stretch past Mundka) are trimmed for confidence. Replace with authoritative GTFS/DMRC data before treating ETAs as real.",
   "lines": [
     {
       "name": "Yellow",
@@ -109,6 +109,21 @@
         [
           "New Delhi", "Shivaji Stadium", "Dhaula Kuan", "Delhi Aerocity",
           "Terminal 1 IGI Airport", "Dwarka Sector 21"
+        ]
+      ]
+    },
+    {
+      "name": "Green",
+      "color": "#43A047",
+      "segments": [
+        [
+          "Inderlok", "Ashok Park Main", "Punjabi Bagh", "Shivaji Park", "Madipur",
+          "Paschim Vihar East", "Paschim Vihar West", "Peera Garhi", "Udyog Nagar",
+          "Surajmal Stadium", "Nangloi", "Nangloi Railway Station", "Rajdhani Park",
+          "Mundka"
+        ],
+        [
+          "Ashok Park Main", "Kirti Nagar"
         ]
       ]
     }

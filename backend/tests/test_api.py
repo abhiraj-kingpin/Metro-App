@@ -24,7 +24,7 @@ def test_list_lines():
     resp = client.get("/api/v1/lines")
     assert resp.status_code == 200
     names = {line["name"] for line in resp.json()}
-    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express"}
+    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express", "Green"}
 
 
 def test_station_search():
@@ -91,7 +91,7 @@ def test_offline_export_endpoint():
     assert resp.status_code == 200
     body = resp.json()
     assert body["station_count"] > 0
-    assert body["line_count"] == 7
+    assert body["line_count"] == 8
 
 
 def test_find_route_unreachable_returns_404():
