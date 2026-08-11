@@ -75,3 +75,15 @@ def test_delayed_line_adds_alert_and_extra_time():
 
     assert delayed["total_duration_seconds"] > baseline["total_duration_seconds"]
     assert any(a["line"] == "Yellow" for a in delayed["alerts"])
+
+
+def test_status_change_shows_up_in_history():
+    client.post(
+        "/api/v1/lines/Violet/status",
+        json={"status": "CLOSED", "reason": "unit test marker"},
+    )
+    resp = client.get("/api/v1/disruptions/history", params={"line": "Violet"})
+    assert resp.status_code == 200
+    rows = resp.json()
+    assert rows[0]["status"] == "CLOSED"
+    assert rows[0]["reason"] == "unit test marker"

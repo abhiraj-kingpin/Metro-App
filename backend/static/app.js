@@ -20,6 +20,7 @@ async function init() {
   fillStatusLineSelect(lines);
   renderStatusTable(statusRows);
   loadSavedRoutes();
+  loadDisruptionHistory();
   connectLiveStatus();
 }
 
@@ -95,7 +96,20 @@ function connectLiveStatus() {
       statusRows.push(update);
     }
     renderStatusTable(statusRows);
+    loadDisruptionHistory();
   };
+}
+
+async function loadDisruptionHistory() {
+  const list = document.getElementById("disruption-history");
+  try {
+    const rows = await getJSON(`${API}/disruptions/history?limit=8`);
+    list.innerHTML = rows.length
+      ? rows.map((r) => `<li>${lineChip(r.line)} ${r.status}${r.reason ? " -- " + r.reason : ""}</li>`).join("")
+      : `<li>Nothing logged yet.</li>`;
+  } catch (err) {
+    list.innerHTML = `<li class="error">${err.message}</li>`;
+  }
 }
 
 function lineChip(name) {

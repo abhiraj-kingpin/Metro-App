@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 
+from app.schemas.disruption import DisruptionHistoryEntry
 from app.schemas.line_status import LineStatusResponse, LineStatusUpdate
 from app.schemas.query import NaturalQueryRequest, NaturalQueryResponse, UnderstoodIntent
 from app.schemas.route import (
@@ -12,7 +13,7 @@ from app.schemas.route import (
     RouteSegmentResponse,
 )
 from app.schemas.saved_route import SaveRouteRequest, SavedRouteResponse
-from app.services import saved_routes as saved_routes_db
+from app.services import disruption_history, saved_routes as saved_routes_db
 from app.services.broadcast import Broadcaster
 from app.services.graph_builder import build_graph
 from app.services.line_status import LineStatusBoard
@@ -54,6 +55,7 @@ async def set_line_status(line_name: str, body: LineStatusUpdate) -> LineStatusR
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
+    disruption_history.record(line_name, updated.status, updated.delay_seconds, updated.reason)
     await _broadcaster.broadcast({
         "type": "LINE_STATUS_UPDATE",
         "line": line_name,
@@ -64,6 +66,11 @@ async def set_line_status(line_name: str, body: LineStatusUpdate) -> LineStatusR
     return LineStatusResponse(
         line=line_name, status=updated.status, delay_seconds=updated.delay_seconds, reason=updated.reason
     )
+
+
+@router.get("/disruptions/history", response_model=list[DisruptionHistoryEntry])
+def get_disruption_history(line: str | None = None, limit: int = 50) -> list[DisruptionHistoryEntry]:
+    return [DisruptionHistoryEntry(**row) for row in disruption_history.history(line, limit)]
 
 
 @router.websocket("/disruptions/live")

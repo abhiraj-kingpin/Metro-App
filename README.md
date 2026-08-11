@@ -7,11 +7,12 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 - **Routing engine** — Dijkstra over a real network graph (9 lines, ~160 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
 - **Live disruptions, actually live** — an in-memory board tracks per-line status, pushed out over a WebSocket (`/api/v1/disruptions/live`) to anyone connected. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes. Verified against a real running server, not just the test client, that a status POST shows up on an open socket in real time.
 - **Saved routes** — SQLite-backed, per-`user_id` (a client-supplied string — there's no real auth system, so don't mistake this for verified identity). Saving the same route again bumps a frequency counter instead of piling up duplicate rows.
+- **Disruption history** — every status change is logged to SQLite and readable back via `GET /api/v1/disruptions/history` (optionally filtered by line). The spec's DISRUPTIONS table, trimmed to what actually applies.
 - **Offline mode** — the graph can be exported to a portable SQLite file and reloaded from it with zero network calls. Verified: same query against the live graph and the reloaded-from-disk graph gives identical results.
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
-- **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, and a line-status panel that updates live over the WebSocket instead of polling.
+- **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, a recent-disruptions feed, and a line-status panel that updates live over the WebSocket instead of polling.
 
-50 tests, all passing, covering the routing math (including the constraint edge cases), the websocket, saved routes, and the HTTP layer.
+55 tests, all passing, covering the routing math (including the constraint edge cases), the websocket, saved routes, disruption history, and the HTTP layer.
 
 ## What's not built
 
@@ -60,6 +61,7 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/v1/query/natural `
 | GET | `/api/v1/stations`, `/api/v1/stations/{name}` | station lookup / search |
 | GET | `/api/v1/lines`, `/api/v1/lines/status` | line list, live status board |
 | POST | `/api/v1/lines/{line}/status` | push a status update (stand-in for a real DMRC feed) |
+| GET | `/api/v1/disruptions/history` | recent status changes, optional `?line=` filter |
 | WS | `/api/v1/disruptions/live` | live push of status updates |
 | POST | `/api/v1/offline/export` | snapshot the graph to SQLite |
 
@@ -77,6 +79,7 @@ backend/
       line_status.py          # in-memory disruption board
       broadcast.py            # websocket pub/sub for live status push
       saved_routes.py         # sqlite-backed "routes I use a lot"
+      disruption_history.py   # sqlite-backed status-change log
       offline_cache.py        # graph <-> SQLite
       query_parser.py         # regex/fuzzy NL parsing
     schemas/                  # pydantic request/response models

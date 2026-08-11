@@ -27,6 +27,10 @@ what's actually built vs. what's still just described in the spec.
   client-supplied `user_id` (no real auth exists yet, so this is honestly
   just a string, not a verified identity). Saving the same route again
   bumps a frequency counter instead of duplicating rows.
+- **Disruption history** — every status change through `/lines/{line}/status`
+  gets logged to SQLite (`GET /api/v1/disruptions/history`, optional
+  `?line=` filter). The spec's DISRUPTIONS table, trimmed to the columns
+  that apply — no station_ids/severity since nothing produces those.
 - **Offline mode** — graph exports to SQLite and reloads from it with zero
   network calls. Tested that live-graph and reloaded-from-disk routing
   produce identical results.
@@ -43,15 +47,17 @@ what's actually built vs. what's still just described in the spec.
   and a Save button, the NL query box, a saved-routes list, and a line
   status panel that updates live over the WebSocket instead of polling.
 
-50 passing tests across routing, line status, offline cache, saved
-routes, the websocket, and the NL parser.
+55 passing tests across routing, line status, offline cache, saved
+routes, disruption history, the websocket, and the NL parser.
 
 ## Not built yet, and why
 
-- **Real database as system of record:** SQLite covers the two things
-  that actually need to persist (offline cache, saved routes). A real
-  Postgres migration only matters once there's a reason to run this
-  outside a single box.
+- **Real database as system of record:** SQLite covers the things that
+  actually need to persist (offline cache, saved routes, disruption
+  history) — three separate lightweight files, deliberately not one ORM
+  layer, since nothing here needs cross-table joins yet. A real Postgres
+  migration only matters once there's a reason to run this outside a
+  single box.
 - **Real NVIDIA NeMo / RAG:** needs an actual API key. The rule-based
   parser is a working placeholder with the same interface.
 - **Redis / RabbitMQ:** the in-memory `LineStatusBoard` + `Broadcaster`
