@@ -64,7 +64,13 @@
     <section id="results"></section>
 
     <section class="card">
-      <h2>Line status</h2>
+      <h2>Saved routes</h2>
+      <ul id="saved-routes"></ul>
+      <p class="hint">Tied to a random id kept in this browser's local storage -- there's no login system yet, so this is per-device, not per-account.</p>
+    </section>
+
+    <section class="card">
+      <h2>Line status <span id="ws-indicator" class="hint">(connecting...)</span></h2>
       <table id="status-table">
         <thead><tr><th>Line</th><th>Status</th><th>Delay</th><th>Reason</th></tr></thead>
         <tbody></tbody>

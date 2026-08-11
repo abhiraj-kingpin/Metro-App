@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, WebSocket, WebSocketDisconnect
 
 from app.schemas.line_status import LineStatusResponse, LineStatusUpdate
 from app.schemas.query import NaturalQueryRequest, NaturalQueryResponse, UnderstoodIntent
@@ -11,6 +11,9 @@ from app.schemas.route import (
     RouteOption,
     RouteSegmentResponse,
 )
+from app.schemas.saved_route import SaveRouteRequest, SavedRouteResponse
+from app.services import saved_routes as saved_routes_db
+from app.services.broadcast import Broadcaster
 from app.services.graph_builder import build_graph
 from app.services.line_status import LineStatusBoard
 from app.services.offline_cache import DEFAULT_DB_PATH, export_to_sqlite
@@ -26,6 +29,7 @@ router = APIRouter(prefix="/api/v1")
 # loaded once at startup, not per-request
 _graph = build_graph()
 _status_board = LineStatusBoard(known_lines=set(_graph.line_colors))
+_broadcaster = Broadcaster()
 
 
 @router.get("/lines")
@@ -42,16 +46,36 @@ def get_all_line_status() -> list[LineStatusResponse]:
 
 
 @router.post("/lines/{line_name}/status")
-def set_line_status(line_name: str, body: LineStatusUpdate) -> LineStatusResponse:
+async def set_line_status(line_name: str, body: LineStatusUpdate) -> LineStatusResponse:
     try:
         updated = _status_board.set(line_name, body.status, body.delay_seconds, body.reason)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
     except ValueError as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    await _broadcaster.broadcast({
+        "type": "LINE_STATUS_UPDATE",
+        "line": line_name,
+        "status": updated.status,
+        "delay_seconds": updated.delay_seconds,
+        "reason": updated.reason,
+    })
     return LineStatusResponse(
         line=line_name, status=updated.status, delay_seconds=updated.delay_seconds, reason=updated.reason
     )
+
+
+@router.websocket("/disruptions/live")
+async def disruptions_live(websocket: WebSocket) -> None:
+    # in-process stand-in for the spec's RabbitMQ/Redis pub-sub -- pushes
+    # every status change to whoever's connected, no history/replay
+    await _broadcaster.connect(websocket)
+    try:
+        while True:
+            await websocket.receive_text()  # not expecting client messages, just keeping the socket open
+    except WebSocketDisconnect:
+        _broadcaster.disconnect(websocket)
 
 
 @router.post("/offline/export")
@@ -99,6 +123,22 @@ def find_route(request: RouteFindRequest) -> RouteFindResponse:
         raise HTTPException(status_code=404, detail=str(exc)) from exc
 
     return RouteFindResponse(routes=[_to_route_option(r, status) for r in results])
+
+
+@router.post("/routes/save", response_model=SavedRouteResponse)
+def save_route(request: SaveRouteRequest) -> SavedRouteResponse:
+    if not _graph.has_station(request.from_station):
+        raise HTTPException(status_code=404, detail=f"Unknown station: {request.from_station}")
+    if not _graph.has_station(request.to_station):
+        raise HTTPException(status_code=404, detail=f"Unknown station: {request.to_station}")
+    return SavedRouteResponse(
+        **saved_routes_db.save_route(request.user_id, request.from_station, request.to_station)
+    )
+
+
+@router.get("/routes/saved", response_model=list[SavedRouteResponse])
+def get_saved_routes(user_id: str) -> list[SavedRouteResponse]:
+    return [SavedRouteResponse(**r) for r in saved_routes_db.list_routes(user_id)]
 
 
 @router.post("/query/natural", response_model=NaturalQueryResponse)

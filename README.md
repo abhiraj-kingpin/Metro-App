@@ -4,17 +4,18 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 
 ## What's actually working
 
-- **Routing engine** — Dijkstra over a real network graph (8 lines, ~160 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
-- **Live-ish disruptions** — an in-memory board tracks per-line status. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes.
+- **Routing engine** — Dijkstra over a real network graph (9 lines, ~160 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
+- **Live disruptions, actually live** — an in-memory board tracks per-line status, pushed out over a WebSocket (`/api/v1/disruptions/live`) to anyone connected. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes. Verified against a real running server, not just the test client, that a status POST shows up on an open socket in real time.
+- **Saved routes** — SQLite-backed, per-`user_id` (a client-supplied string — there's no real auth system, so don't mistake this for verified identity). Saving the same route again bumps a frequency counter instead of piling up duplicate rows.
 - **Offline mode** — the graph can be exported to a portable SQLite file and reloaded from it with zero network calls. Verified: same query against the live graph and the reloaded-from-disk graph gives identical results.
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
-- **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete, the NL query box, and a live line-status panel you can push updates through.
+- **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, and a line-status panel that updates live over the WebSocket instead of polling.
 
-41 tests, all passing, covering the routing math (including the constraint edge cases) and the HTTP layer.
+50 tests, all passing, covering the routing math (including the constraint edge cases), the websocket, saved routes, and the HTTP layer.
 
 ## What's not built
 
-DB persistence, WebSocket/RabbitMQ real-time push, the actual NVIDIA RAG integration, the Flutter app, GPS/live train tracking, Kubernetes/AWS deployment. All of that needs either external accounts I don't have (NVIDIA, AWS) or is a genuinely separate multi-week effort (mobile app). Details and priority order in `docs/ROADMAP.md`.
+The actual NVIDIA RAG integration, the Flutter app, GPS/live train tracking, Kubernetes/AWS deployment, a real Postgres migration. All of that needs either external accounts I don't have (NVIDIA, AWS), hardware/SDKs not in this environment (mobile), or just isn't justified yet at this scale (Postgres, K8s). Details and priority order in `docs/ROADMAP.md`.
 
 ## Running it
 
@@ -55,9 +56,11 @@ Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/api/v1/query/natural `
 |---|---|---|
 | POST | `/api/v1/routes/find` | top-N routes between two stations, with preferences |
 | POST | `/api/v1/query/natural` | plain-text query → parsed intent → routes |
+| POST | `/api/v1/routes/save`, GET `/api/v1/routes/saved` | save / list a user's frequent routes |
 | GET | `/api/v1/stations`, `/api/v1/stations/{name}` | station lookup / search |
 | GET | `/api/v1/lines`, `/api/v1/lines/status` | line list, live status board |
 | POST | `/api/v1/lines/{line}/status` | push a status update (stand-in for a real DMRC feed) |
+| WS | `/api/v1/disruptions/live` | live push of status updates |
 | POST | `/api/v1/offline/export` | snapshot the graph to SQLite |
 
 ## Layout
@@ -72,6 +75,8 @@ backend/
       graph_builder.py        # JSON -> in-memory graph
       routing_engine.py       # Dijkstra + Yen's k-shortest
       line_status.py          # in-memory disruption board
+      broadcast.py            # websocket pub/sub for live status push
+      saved_routes.py         # sqlite-backed "routes I use a lot"
       offline_cache.py        # graph <-> SQLite
       query_parser.py         # regex/fuzzy NL parsing
     schemas/                  # pydantic request/response models

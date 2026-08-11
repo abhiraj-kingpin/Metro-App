@@ -126,6 +126,15 @@
           "Ashok Park Main", "Kirti Nagar"
         ]
       ]
+    },
+    {
+      "name": "Grey",
+      "color": "#9E9E9E",
+      "segments": [
+        [
+          "Dwarka", "Nangli", "Kharkhari Nahar", "Najafgarh"
+        ]
+      ]
     }
   ]
 }

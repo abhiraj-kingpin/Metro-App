@@ -24,7 +24,7 @@ def test_list_lines():
     resp = client.get("/api/v1/lines")
     assert resp.status_code == 200
     names = {line["name"] for line in resp.json()}
-    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express", "Green"}
+    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express", "Green", "Grey"}
 
 
 def test_station_search():
@@ -91,7 +91,28 @@ def test_offline_export_endpoint():
     assert resp.status_code == 200
     body = resp.json()
     assert body["station_count"] > 0
-    assert body["line_count"] == 8
+    assert body["line_count"] == 9
+
+
+def test_save_and_list_route():
+    save = client.post(
+        "/api/v1/routes/save",
+        json={"user_id": "test-user", "from_station": "Rajiv Chowk", "to_station": "Central Secretariat"},
+    )
+    assert save.status_code == 200
+    assert save.json()["frequency_count"] >= 1
+
+    saved = client.get("/api/v1/routes/saved", params={"user_id": "test-user"})
+    assert saved.status_code == 200
+    assert any(r["from_station"] == "Rajiv Chowk" for r in saved.json())
+
+
+def test_save_route_unknown_station_404():
+    resp = client.post(
+        "/api/v1/routes/save",
+        json={"user_id": "test-user", "from_station": "Nowhereville", "to_station": "Rajiv Chowk"},
+    )
+    assert resp.status_code == 404
 
 
 def test_find_route_unreachable_returns_404():

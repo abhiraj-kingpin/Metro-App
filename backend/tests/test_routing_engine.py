@@ -95,6 +95,14 @@ def test_green_line_connects_through_inderlok():
     assert result.total_transfers == 1
 
 
+def test_grey_line_connects_through_dwarka():
+    # Najafgarh (Grey-only) -> Dwarka Mor (Blue-only), interchange at Dwarka
+    result = find_shortest_path(graph, "Najafgarh", "Dwarka Mor")
+    lines_used = {s.line for s in result.segments}
+    assert lines_used == {"Grey", "Blue"}
+    assert result.total_transfers == 1
+
+
 def test_k_shortest_paths_are_sorted_and_distinct():
     results = find_k_shortest_paths(graph, "Samaypur Badli", "Dwarka Sector 21", k=3)
     assert len(results) > 1

@@ -1,8 +1,9 @@
-// no framework, no build step -- just fetch() against the API and some
-// DOM writes. Small enough that a bundler would be overkill.
+// no framework, no build step -- just fetch()/WebSocket against the API
+// and some DOM writes. Small enough that a bundler would be overkill.
 
 const API = "/api/v1";
 let lineColors = {};
+let statusRows = [];
 
 async function init() {
   const [stations, lines, status] = await Promise.all([
@@ -12,11 +13,14 @@ async function init() {
   ]);
 
   lineColors = Object.fromEntries(lines.map((l) => [l.name, l.color]));
+  statusRows = status;
 
   fillStationList(stations);
   fillAvoidLines(lines);
   fillStatusLineSelect(lines);
-  renderStatusTable(status);
+  renderStatusTable(statusRows);
+  loadSavedRoutes();
+  connectLiveStatus();
 }
 
 async function getJSON(url, options) {
@@ -24,6 +28,17 @@ async function getJSON(url, options) {
   const body = await resp.json();
   if (!resp.ok) throw new Error(body.detail || resp.statusText);
   return body;
+}
+
+// per-device id, no login system yet -- see the hint text next to the
+// saved routes list
+function deviceId() {
+  let id = localStorage.getItem("metro_user_id");
+  if (!id) {
+    id = "device-" + Math.random().toString(36).slice(2, 10);
+    localStorage.setItem("metro_user_id", id);
+  }
+  return id;
 }
 
 function fillStationList(stations) {
@@ -60,6 +75,29 @@ function renderStatusTable(rows) {
     .join("");
 }
 
+function connectLiveStatus() {
+  const indicator = document.getElementById("ws-indicator");
+  const proto = location.protocol === "https:" ? "wss:" : "ws:";
+  const ws = new WebSocket(`${proto}//${location.host}${API}/disruptions/live`);
+
+  ws.onopen = () => (indicator.textContent = "(live)");
+  ws.onclose = () => (indicator.textContent = "(disconnected)");
+  ws.onerror = () => (indicator.textContent = "(connection error)");
+
+  ws.onmessage = (event) => {
+    const update = JSON.parse(event.data);
+    const row = statusRows.find((r) => r.line === update.line);
+    if (row) {
+      row.status = update.status;
+      row.delay_seconds = update.delay_seconds;
+      row.reason = update.reason;
+    } else {
+      statusRows.push(update);
+    }
+    renderStatusTable(statusRows);
+  };
+}
+
 function lineChip(name) {
   const color = lineColors[name] || "#888";
   return `<span class="line-chip" style="background:${color}">${name}</span>`;
@@ -73,7 +111,10 @@ function renderRoutes(routes) {
   }
 
   results.innerHTML = routes
-    .map((route) => {
+    .map((route, i) => {
+      const from = route.segments[0].from_station;
+      const to = route.segments[route.segments.length - 1].to_station;
+
       const segments = route.segments
         .map(
           (seg) => `
@@ -93,12 +134,25 @@ function renderRoutes(routes) {
         <div class="route-card">
           <div class="route-summary">
             <span>${route.eta_minutes} min &middot; ${route.total_transfers} transfer(s) &middot; ${route.total_distance_km} km</span>
+            <button type="button" class="save-route" data-from="${from}" data-to="${to}">Save</button>
           </div>
           ${segments}
           ${alerts}
         </div>`;
     })
     .join("");
+}
+
+async function loadSavedRoutes() {
+  const list = document.getElementById("saved-routes");
+  try {
+    const rows = await getJSON(`${API}/routes/saved?user_id=${encodeURIComponent(deviceId())}`);
+    list.innerHTML = rows.length
+      ? rows.map((r) => `<li>${r.from_station} &rarr; ${r.to_station} <span class="hint">(used ${r.frequency_count}x)</span></li>`).join("")
+      : `<li class="hint">Nothing saved yet -- find a route and hit Save.</li>`;
+  } catch (err) {
+    list.innerHTML = `<li class="error">${err.message}</li>`;
+  }
 }
 
 document.getElementById("route-form").addEventListener("submit", async (e) => {
@@ -141,6 +195,26 @@ document.getElementById("nl-form").addEventListener("submit", async (e) => {
   }
 });
 
+// event delegation -- route cards (and their Save buttons) get replaced
+// on every search, so a listener bound to a button that no longer exists
+// would just go quiet
+document.getElementById("results").addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("save-route")) return;
+  const { from, to } = e.target.dataset;
+
+  try {
+    await getJSON(`${API}/routes/save`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user_id: deviceId(), from_station: from, to_station: to }),
+    });
+    e.target.textContent = "Saved";
+    loadSavedRoutes();
+  } catch (err) {
+    alert(err.message);
+  }
+});
+
 document.getElementById("status-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const line = document.getElementById("status-line").value;
@@ -155,8 +229,7 @@ document.getElementById("status-form").addEventListener("submit", async (e) => {
         reason: document.getElementById("status-reason").value || null,
       }),
     });
-    const status = await getJSON(`${API}/lines/status`);
-    renderStatusTable(status);
+    // no need to refetch -- the websocket message will update the table
   } catch (err) {
     alert(err.message);
   }
