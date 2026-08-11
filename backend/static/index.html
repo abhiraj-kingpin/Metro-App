@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Delhi Metro Navigator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Delhi Metro Navigator</h1>
+    <p class="subtitle">Route planner over a real DMRC network graph. See <a href="/docs">/docs</a> for the raw API.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Find a route</h2>
+      <form id="route-form">
+        <div class="field-row">
+          <label>
+            From
+            <input list="station-list" id="from-station" required placeholder="e.g. Rajiv Chowk" />
+          </label>
+          <label>
+            To
+            <input list="station-list" id="to-station" required placeholder="e.g. Central Secretariat" />
+          </label>
+        </div>
+        <datalist id="station-list"></datalist>
+
+        <div class="field-row">
+          <label>
+            Max transfers
+            <input type="number" id="max-transfers" value="4" min="0" max="10" />
+          </label>
+          <label>
+            Alternatives
+            <select id="alternatives">
+              <option value="1">1</option>
+              <option value="3" selected>3</option>
+              <option value="5">5</option>
+            </select>
+          </label>
+        </div>
+
+        <fieldset id="avoid-lines">
+          <legend>Avoid lines</legend>
+          <!-- filled in by app.js -->
+        </fieldset>
+
+        <button type="submit">Find routes</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Or just ask</h2>
+      <form id="nl-form">
+        <input id="nl-query" type="text" placeholder="from Chandni Chowk to Barakhamba Road, avoid Yellow line" />
+        <button type="submit">Ask</button>
+      </form>
+      <p class="hint">Rule-based parser, not an LLM -- handles plain English and basic Hinglish ("X se Y jana hai"), with typo tolerance.</p>
+    </section>
+
+    <section id="results"></section>
+
+    <section class="card">
+      <h2>Line status</h2>
+      <table id="status-table">
+        <thead><tr><th>Line</th><th>Status</th><th>Delay</th><th>Reason</th></tr></thead>
+        <tbody></tbody>
+      </table>
+
+      <form id="status-form">
+        <select id="status-line"></select>
+        <select id="status-value">
+          <option>OPERATIONAL</option>
+          <option>DELAYED</option>
+          <option>CLOSED</option>
+        </select>
+        <input id="status-delay" type="number" placeholder="delay (sec)" min="0" value="0" />
+        <input id="status-reason" type="text" placeholder="reason (optional)" />
+        <button type="submit">Update</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
