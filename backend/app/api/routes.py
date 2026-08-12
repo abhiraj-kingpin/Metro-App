@@ -35,7 +35,10 @@ _broadcaster = Broadcaster()
 
 @router.get("/lines")
 def list_lines() -> list[dict]:
-    return [{"name": name, "color": color} for name, color in sorted(_graph.line_colors.items())]
+    return [
+        {"name": name, "color": color, "operator": _graph.line_operators.get(name, "DMRC")}
+        for name, color in sorted(_graph.line_colors.items())
+    ]
 
 
 @router.get("/lines/status")

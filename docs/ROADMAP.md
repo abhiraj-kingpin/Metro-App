@@ -7,10 +7,16 @@ what's actually built vs. what's still just described in the spec.
 
 ## Built and tested
 
-- **Network graph** — 9 lines (Yellow, Blue, Violet, Pink, Magenta, Red,
-  Airport Express, Green, Grey), ~160 real DMRC stations, genuine
-  interchange points. Distances/durations are flat placeholder averages,
-  not real timetables (see `metro_data.json`'s `_note`).
+- **Network graph** — 11 lines across 3 operators (see "Delhi-NCR Network
+  Coverage" below), 239 stations, 24 same-name interchange stations plus
+  1 named walkway interchange. Distances/durations are flat placeholder
+  averages, not real timetables (see `metro_data.json`'s `_note`).
+- **Multi-operator support** — every line carries an `operator` field
+  (DMRC / NMRC / RAPID_METRO). Interchanges come in two flavors: same-name
+  (automatic — any station name shared by 2+ lines gets a transfer edge)
+  and named pairs (`metro_data.json`'s `named_interchanges` — two
+  differently-named stations linked by an explicit walkway, for cases
+  like Aqua's "Noida Sector 51" to Blue's "Noida Sector 52").
 - **Routing** — Dijkstra over a `(station, line, transfers_used)` state
   graph. `avoid_lines` and a hard `max_transfers` cap are both enforced
   exactly. `find_k_shortest_paths` layers Yen's algorithm on top for top-N
@@ -47,8 +53,72 @@ what's actually built vs. what's still just described in the spec.
   and a Save button, the NL query box, a saved-routes list, and a line
   status panel that updates live over the WebSocket instead of polling.
 
-55 passing tests across routing, line status, offline cache, saved
-routes, disruption history, the websocket, and the NL parser.
+78 passing tests across routing, line status, offline cache, saved
+routes, disruption history, the websocket, the NL parser, and the
+Delhi-NCR network additions.
+
+## Delhi-NCR Network Coverage
+
+Everything below is **operational** as of the sources checked (see Data
+sources). Nothing under construction or proposed is included.
+
+**Operators:** DMRC, NMRC, RAPID_METRO (jointly run by DMRC and GMRL as of
+this writing — a handover to GMRL alone is in progress but not complete).
+
+**Lines (11 total):**
+
+| Line | Operator | Stations | Terminals |
+|---|---|---|---|
+| Yellow | DMRC | 37 | Samaypur Badli ↔ Millennium City Centre Gurugram |
+| Blue (trunk + 2 branches) | DMRC | 57 | Dwarka Sector 21 ↔ Noida Electronic City / Vaishali |
+| Violet | DMRC | 28 | Kashmere Gate ↔ Raja Nahar Singh |
+| Pink | DMRC | 38 | Majlis Park ↔ Shiv Vihar |
+| Magenta | DMRC | 25 | Janakpuri West ↔ Botanical Garden |
+| Red | DMRC | 21 | Rithala ↔ Dilshad Garden (trimmed short of the real Ghaziabad terminus) |
+| Airport Express | DMRC | 7 | New Delhi ↔ Yashobhoomi Dwarka Sector 25 |
+| Green (trunk + branch) | DMRC | 15 | Inderlok/Kirti Nagar ↔ Mundka (trimmed short of the real Bahadurgarh terminus) |
+| Grey | DMRC | 4 | Dwarka ↔ Dhansa Bus Stand |
+| **Aqua** | **NMRC** | **21** | **Noida Sector 51 ↔ Depot** |
+| **Rapid Metro** | **RAPID_METRO** | **11** | **Sikanderpur ↔ Sector 55-56** |
+
+**Interchanges:** 24 same-name (all DMRC-internal except Rapid Metro's
+Sikanderpur, shared with Yellow) + 1 named walkway pair (Aqua's Noida
+Sector 51 ↔ Blue's Noida Sector 52, ~300-450m on foot, not a shared
+platform).
+
+**Corrections made to existing DMRC data while verifying it against the
+new sources** (see `metro_data.json`'s `_note` for the full account):
+Yellow's terminus renamed HUDA City Centre → Millennium City Centre
+Gurugram (official DMRC rename); Grey Line fixed — "Kharkhari Nahar" was
+never a real station, the actual sequence is Dwarka/Nangli/Najafgarh/Dhansa
+Bus Stand; Airport Express extended to its real current terminus
+Yashobhoomi Dwarka Sector 25; Blue Line's Noida branch was missing 5 real
+stations (Sector 34/52/59/61/62) between Noida City Centre and Noida
+Electronic City.
+
+**Known limitations / unverified:**
+- The Aqua↔Blue walkway's exact current completion status was genuinely
+  ambiguous across sources (one said connected via an existing ~300m
+  walkway, another said the dedicated overhead walkway wasn't finished).
+  Modeled as operational per user decision — re-verify if this matters
+  for something high-stakes.
+- Blue Line's Sector 34/52/59/61/62 insertion is single-source verified
+  (Wikipedia), not cross-checked against a second independent source.
+- Rapid Metro station names use unprefixed base names (e.g. "Cyber City"
+  rather than "IndusInd Bank Cyber City") since corporate sponsorship
+  naming is transient — differs from some signage.
+- No platform numbers, exits, GPS coordinates, fares, or frequencies for
+  either new network — not fabricated, simply not sourced.
+- Namo Bharat / Meerut Metro (visible on the DMRC map, NCRTC-operated,
+  different mode/ticketing entirely) intentionally excluded — out of
+  scope for a Delhi Metro app.
+
+**Data sources:** DMRC's official network map (as supplied, dated August
+2026); NMRC's Aqua Line station list (cross-checked, Wikipedia + a second
+independent summary, matches the 21-station/Noida Sector 51 starting
+point stated in the task brief); Rapid Metro Gurugram's station list and
+order (cross-checked twice, both agreed); DMRC rename/extension facts via
+news sources (Tribune, PM India press release) and Wikipedia.
 
 ## Not built yet, and why
 

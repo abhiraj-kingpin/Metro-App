@@ -4,7 +4,7 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 
 ## What's actually working
 
-- **Routing engine** — Dijkstra over a real network graph (9 lines, ~160 stations, genuine DMRC interchange points), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap.
+- **Routing engine** — Dijkstra over a real Delhi-NCR network graph (11 lines across DMRC, NMRC, and Rapid Metro Gurugram — 239 stations, genuine interchanges including a cross-operator walkway transfer), returns the top N alternative routes (Yen's algorithm), respects `avoid_lines` and a hard `max_transfers` cap. See `docs/ROADMAP.md`'s "Delhi-NCR Network Coverage" for exactly what's operational vs. excluded.
 - **Live disruptions, actually live** — an in-memory board tracks per-line status, pushed out over a WebSocket (`/api/v1/disruptions/live`) to anyone connected. Close a line and routing reroutes around it automatically; delay a line and it shows up as extra ETA plus an alert on affected routes. Verified against a real running server, not just the test client, that a status POST shows up on an open socket in real time.
 - **Saved routes** — SQLite-backed, per-`user_id` (a client-supplied string — there's no real auth system, so don't mistake this for verified identity). Saving the same route again bumps a frequency counter instead of piling up duplicate rows.
 - **Disruption history** — every status change is logged to SQLite and readable back via `GET /api/v1/disruptions/history` (optionally filtered by line). The spec's DISRUPTIONS table, trimmed to what actually applies.
@@ -12,7 +12,7 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
 - **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, a recent-disruptions feed, and a line-status panel that updates live over the WebSocket instead of polling.
 
-55 tests, all passing, covering the routing math (including the constraint edge cases), the websocket, saved routes, disruption history, and the HTTP layer.
+78 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, and the HTTP layer.
 
 ## What's not built
 

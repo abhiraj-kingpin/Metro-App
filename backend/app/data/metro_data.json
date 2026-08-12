@@ -1,8 +1,9 @@
 {
-  "_note": "Station names and line topology (order, interchanges) reflect the real DMRC network to the best of available knowledge. Per-segment distance_km/duration_seconds are NOT sourced from DMRC timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS). Some far-flung extensions (deep Faridabad, deep Noida, the Red Line's Ghaziabad stretch past Dilshad Garden, the Green Line's Bahadurgarh stretch past Mundka) are trimmed for confidence. Replace with authoritative GTFS/DMRC data before treating ETAs as real.",
+  "_note": "Station names and line topology (order, interchanges) reflect the real operational Delhi-NCR metro network as verified against official/authoritative sources (DMRC's Aug 2026 network map, NMRC's published Aqua Line station list, Wikipedia cross-checked against multiple secondary sources for Rapid Metro Gurugram and the Blue Line's Noida branch). Per-segment distance_km/duration_seconds are NOT sourced from timetables -- they are computed at load time from flat averages in graph_builder.py (AVG_INTERSTATION_KM / AVG_INTERSTATION_SECONDS / WALKWAY_TRANSFER_SECONDS). Corrections made against the previous version of this file: Yellow Line terminus renamed HUDA City Centre -> Millennium City Centre Gurugram (official DMRC rename); Grey Line fixed from the invented 'Kharkhari Nahar' to the real Dwarka/Nangli/Najafgarh/Dhansa Bus Stand sequence; Airport Express extended to its real current terminus Yashobhoomi Dwarka Sector-25; Blue Line's Noida branch had 5 real intermediate stations (Sector 34/52/59/61/62) missing between Noida City Centre and Noida Electronic City, now added -- single-source verified, re-check if precision matters. Some far-flung extensions (deep Faridabad, deep Noida, the Red Line's Ghaziabad stretch past Dilshad Garden, the Green Line's Bahadurgarh stretch past Mundka) remain intentionally trimmed for confidence -- not part of this pass. Future/under-construction infrastructure (Phase IV corridors, Aqua Line's Knowledge Park V / Botanical Garden / Boraki extensions) is deliberately excluded as it is not operational.",
   "lines": [
     {
       "name": "Yellow",
+      "operator": "DMRC",
       "color": "#F9A825",
       "segments": [
         [
@@ -13,12 +14,13 @@
           "Lok Kalyan Marg", "Jor Bagh", "INA", "AIIMS", "Green Park", "Hauz Khas",
           "Malviya Nagar", "Saket", "Qutub Minar", "Chhatarpur", "Sultanpur", "Ghitorni",
           "Arjan Garh", "Guru Dronacharya", "Sikanderpur", "MG Road", "IFFCO Chowk",
-          "HUDA City Centre"
+          "Millennium City Centre Gurugram"
         ]
       ]
     },
     {
       "name": "Blue",
+      "operator": "DMRC",
       "color": "#1565C0",
       "segments": [
         [
@@ -34,7 +36,9 @@
         [
           "Yamuna Bank", "Akshardham", "Mayur Vihar Phase 1", "Mayur Vihar Extension",
           "New Ashok Nagar", "Noida Sector 15", "Noida Sector 16", "Noida Sector 18",
-          "Botanical Garden", "Golf Course", "Noida City Centre", "Noida Electronic City"
+          "Botanical Garden", "Golf Course", "Noida City Centre", "Noida Sector 34",
+          "Noida Sector 52", "Noida Sector 61", "Noida Sector 59", "Noida Sector 62",
+          "Noida Electronic City"
         ],
         [
           "Yamuna Bank", "Laxmi Nagar", "Nirman Vihar", "Preet Vihar", "Karkarduma",
@@ -44,6 +48,7 @@
     },
     {
       "name": "Violet",
+      "operator": "DMRC",
       "color": "#673AB7",
       "segments": [
         [
@@ -59,6 +64,7 @@
     },
     {
       "name": "Pink",
+      "operator": "DMRC",
       "color": "#F06292",
       "segments": [
         [
@@ -76,6 +82,7 @@
     },
     {
       "name": "Magenta",
+      "operator": "DMRC",
       "color": "#9C27B0",
       "segments": [
         [
@@ -91,6 +98,7 @@
     },
     {
       "name": "Red",
+      "operator": "DMRC",
       "color": "#E53935",
       "segments": [
         [
@@ -104,16 +112,18 @@
     },
     {
       "name": "Airport Express",
+      "operator": "DMRC",
       "color": "#F57C00",
       "segments": [
         [
           "New Delhi", "Shivaji Stadium", "Dhaula Kuan", "Delhi Aerocity",
-          "Terminal 1 IGI Airport", "Dwarka Sector 21"
+          "Terminal 1 IGI Airport", "Dwarka Sector 21", "Yashobhoomi Dwarka Sector 25"
         ]
       ]
     },
     {
       "name": "Green",
+      "operator": "DMRC",
       "color": "#43A047",
       "segments": [
         [
@@ -129,12 +139,46 @@
     },
     {
       "name": "Grey",
+      "operator": "DMRC",
       "color": "#9E9E9E",
       "segments": [
         [
-          "Dwarka", "Nangli", "Kharkhari Nahar", "Najafgarh"
+          "Dwarka", "Nangli", "Najafgarh", "Dhansa Bus Stand"
         ]
       ]
+    },
+    {
+      "name": "Aqua",
+      "operator": "NMRC",
+      "color": "#00ACC1",
+      "segments": [
+        [
+          "Noida Sector 51", "Noida Sector 50", "Noida Sector 76", "Noida Sector 101",
+          "Noida Sector 81", "NSEZ", "Noida Sector 83", "Noida Sector 137",
+          "Noida Sector 142", "Noida Sector 143", "Noida Sector 144", "Noida Sector 145",
+          "Noida Sector 146", "Noida Sector 147", "Noida Sector 148", "Knowledge Park II",
+          "Pari Chowk", "Alpha 1", "Delta 1", "GNIDA Office", "Depot"
+        ]
+      ]
+    },
+    {
+      "name": "Rapid Metro",
+      "operator": "RAPID_METRO",
+      "color": "#6D4C41",
+      "segments": [
+        [
+          "Sikanderpur", "DLF Phase 2", "Belvedere Towers", "Cyber City", "Moulsari Avenue",
+          "DLF Phase 3", "DLF Phase 1", "Sector 42-43", "Sector 53-54", "Sector 54 Chowk",
+          "Sector 55-56"
+        ]
+      ]
+    }
+  ],
+  "named_interchanges": [
+    {
+      "stations": ["Noida Sector 51", "Noida Sector 52"],
+      "walk_seconds": 420,
+      "note": "NMRC Aqua Line <-> DMRC Blue Line. Not a shared platform -- a pedestrian walkway between two separately-named stations. Sources disagreed on whether the dedicated IKEA-sponsored overhead walkway was complete; treated as operational per a separate report of an existing ~300-450m pedestrian walkway already connecting the two stations. Re-verify before treating as certain."
     }
   ]
 }

@@ -16,7 +16,8 @@ DEFAULT_DB_PATH = Path(__file__).resolve().parent.parent / "data" / "metro_offli
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS lines (
     name TEXT PRIMARY KEY,
-    color TEXT NOT NULL
+    color TEXT NOT NULL,
+    operator TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS stations (
@@ -47,7 +48,10 @@ def export_to_sqlite(graph: MetroGraph, db_path: Path = DEFAULT_DB_PATH) -> None
         conn.execute("DELETE FROM stations")
         conn.execute("DELETE FROM edges")
 
-        conn.executemany("INSERT INTO lines VALUES (?, ?)", list(graph.line_colors.items()))
+        conn.executemany(
+            "INSERT INTO lines VALUES (?, ?, ?)",
+            [(name, color, graph.line_operators.get(name, "DMRC")) for name, color in graph.line_colors.items()],
+        )
         conn.executemany(
             "INSERT INTO stations VALUES (?, ?)",
             [(name, ",".join(sorted(lines))) for name, lines in graph.station_lines.items()],
@@ -71,8 +75,9 @@ def load_graph_from_sqlite(db_path: Path = DEFAULT_DB_PATH) -> MetroGraph:
     conn = sqlite3.connect(db_path)
     try:
         graph = MetroGraph()
-        for name, color in conn.execute("SELECT name, color FROM lines"):
+        for name, color, operator in conn.execute("SELECT name, color, operator FROM lines"):
             graph.line_colors[name] = color
+            graph.line_operators[name] = operator
         for name, lines_csv in conn.execute("SELECT name, lines FROM stations"):
             graph.station_lines[name] = set(lines_csv.split(","))
         for from_station, from_line, to_station, to_line, dist, dur, is_transfer in conn.execute(

@@ -23,6 +23,7 @@ def test_export_and_reload_produces_equivalent_graph(tmp_path):
 
     assert offline_graph.station_lines == live_graph.station_lines
     assert offline_graph.line_colors == live_graph.line_colors
+    assert offline_graph.line_operators == live_graph.line_operators
 
 
 def test_offline_graph_routes_the_same_as_live(tmp_path):

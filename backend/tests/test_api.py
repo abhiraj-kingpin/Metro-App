@@ -23,8 +23,17 @@ def test_health():
 def test_list_lines():
     resp = client.get("/api/v1/lines")
     assert resp.status_code == 200
-    names = {line["name"] for line in resp.json()}
-    assert names == {"Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express", "Green", "Grey"}
+    lines = resp.json()
+    names = {line["name"] for line in lines}
+    assert names == {
+        "Yellow", "Blue", "Violet", "Pink", "Magenta", "Red", "Airport Express", "Green", "Grey",
+        "Aqua", "Rapid Metro",
+    }
+
+    operators = {line["name"]: line["operator"] for line in lines}
+    assert operators["Aqua"] == "NMRC"
+    assert operators["Rapid Metro"] == "RAPID_METRO"
+    assert operators["Yellow"] == "DMRC"
 
 
 def test_station_search():
@@ -91,7 +100,7 @@ def test_offline_export_endpoint():
     assert resp.status_code == 200
     body = resp.json()
     assert body["station_count"] > 0
-    assert body["line_count"] == 9
+    assert body["line_count"] == 11
 
 
 def test_save_and_list_route():

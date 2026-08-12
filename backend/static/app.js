@@ -3,6 +3,7 @@
 
 const API = "/api/v1";
 let lineColors = {};
+let lineOperators = {};
 let statusRows = [];
 
 async function init() {
@@ -13,6 +14,7 @@ async function init() {
   ]);
 
   lineColors = Object.fromEntries(lines.map((l) => [l.name, l.color]));
+  lineOperators = Object.fromEntries(lines.map((l) => [l.name, l.operator]));
   statusRows = status;
 
   fillStationList(stations);
@@ -51,14 +53,22 @@ function fillAvoidLines(lines) {
   const box = document.getElementById("avoid-lines");
   box.innerHTML = lines
     .map(
-      (l) => `<label><input type="checkbox" value="${l.name}" /> ${l.name}</label>`
+      (l) => `<label><input type="checkbox" value="${l.name}" /> ${l.name}${operatorSuffix(l.operator)}</label>`
     )
     .join("");
 }
 
+// most lines are DMRC -- only call it out when it's not, so the common
+// case doesn't get cluttered with a badge on every single line
+function operatorSuffix(operator) {
+  return operator && operator !== "DMRC" ? ` <span class="hint">(${operator})</span>` : "";
+}
+
 function fillStatusLineSelect(lines) {
   const select = document.getElementById("status-line");
-  select.innerHTML = lines.map((l) => `<option>${l.name}</option>`).join("");
+  select.innerHTML = lines
+    .map((l) => `<option value="${l.name}">${l.name}${l.operator !== "DMRC" ? ` (${l.operator})` : ""}</option>`)
+    .join("");
 }
 
 function renderStatusTable(rows) {
@@ -114,7 +124,9 @@ async function loadDisruptionHistory() {
 
 function lineChip(name) {
   const color = lineColors[name] || "#888";
-  return `<span class="line-chip" style="background:${color}">${name}</span>`;
+  const operator = lineOperators[name];
+  const title = operator && operator !== "DMRC" ? ` title="${operator}"` : "";
+  return `<span class="line-chip" style="background:${color}"${title}>${name}</span>`;
 }
 
 function renderRoutes(routes) {

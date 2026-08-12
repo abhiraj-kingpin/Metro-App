@@ -56,3 +56,10 @@ def test_no_from_to_pattern_leaves_both_none():
     assert result.from_station is None
     assert result.to_station is None
     assert not result.matched
+
+
+def test_handles_case_and_spacing_variations():
+    result = parse_query("from noida sector 51 to  pari chowk", STATIONS, LINES)
+    assert result.from_station == "Noida Sector 51"
+    assert result.to_station == "Pari Chowk"
+    assert result.matched
