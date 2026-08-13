@@ -114,7 +114,15 @@ def list_stations(q: str | None = None) -> list[dict]:
 def get_station(station_name: str) -> dict:
     if not _graph.has_station(station_name):
         raise HTTPException(status_code=404, detail=f"Unknown station: {station_name}")
-    return {"name": station_name, "lines": sorted(_graph.lines_at(station_name))}
+    metadata = _graph.station_metadata.get(station_name)
+    return {
+        "name": station_name,
+        "lines": sorted(_graph.lines_at(station_name)),
+        "coordinates": metadata.get("coordinates") if metadata else None,
+        "platform_type": metadata.get("platform_type") if metadata else None,
+        "platform_count": metadata.get("platform_count") if metadata else None,
+        "source_url": metadata.get("source_url") if metadata else None,
+    }
 
 
 @router.post("/routes/find", response_model=RouteFindResponse)

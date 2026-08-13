@@ -19,7 +19,7 @@ from app.services.routing_engine import RouteConstraints, RouteNotFoundError, fi
 graph = build_graph()
 
 AQUA_STATIONS_IN_ORDER = [
-    "Noida Sector 51", "Noida Sector 50", "Noida Sector 76", "Noida Sector 101",
+    "Noida Sector 51", "Rainbow", "Noida Sector 76", "Noida Sector 101",
     "Noida Sector 81", "NSEZ", "Noida Sector 83", "Noida Sector 137",
     "Noida Sector 142", "Noida Sector 143", "Noida Sector 144", "Noida Sector 145",
     "Noida Sector 146", "Noida Sector 147", "Noida Sector 148", "Knowledge Park II",
@@ -194,3 +194,39 @@ def test_no_orphan_stations():
     for station, lines in graph.station_lines.items():
         has_edge = any(graph.adjacency.get((station, line)) for line in lines)
         assert has_edge, f"{station} has no outgoing edges on any of its lines"
+
+
+# --- station metadata (coordinates / platform info) ---------------------------------------------------
+
+# rough Delhi-NCR bounding box -- catches gross errors (swapped lat/lng,
+# wrong sign, wrong region entirely), not a precision check
+NCR_LAT_RANGE = (28.0, 29.0)
+NCR_LNG_RANGE = (76.5, 78.0)
+
+
+def test_every_new_station_has_sourced_metadata():
+    for station in AQUA_STATIONS_IN_ORDER + RAPID_METRO_STATIONS_IN_ORDER:
+        assert station in graph.station_metadata, f"{station} is missing station_metadata"
+        meta = graph.station_metadata[station]
+        assert "coordinates" in meta
+        assert "source_url" in meta and meta["source_url"].startswith("https://en.wikipedia.org/wiki/")
+
+
+def test_metadata_coordinates_are_within_ncr():
+    for station, meta in graph.station_metadata.items():
+        lat, lng = meta["coordinates"]["lat"], meta["coordinates"]["lng"]
+        assert NCR_LAT_RANGE[0] <= lat <= NCR_LAT_RANGE[1], f"{station} latitude {lat} looks wrong"
+        assert NCR_LNG_RANGE[0] <= lng <= NCR_LNG_RANGE[1], f"{station} longitude {lng} looks wrong"
+
+
+def test_rainbow_rename_replaced_noida_sector_50():
+    assert "Noida Sector 50" not in graph.station_lines
+    assert "Rainbow" in graph.station_lines
+    assert graph.lines_at("Rainbow") == {"Aqua"}
+
+
+def test_pre_existing_dmrc_stations_have_no_metadata():
+    # honest partial coverage, not a bug -- only the 32 stations
+    # researched in this pass have entries
+    assert "Rajiv Chowk" not in graph.station_metadata
+    assert "Dwarka Sector 21" not in graph.station_metadata

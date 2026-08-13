@@ -43,6 +43,7 @@ class MetroGraph:
     line_operators: dict[str, str] = field(default_factory=dict)
     adjacency: dict[tuple[str, str], list[Edge]] = field(default_factory=dict)  # (station, line) -> edges
     station_lines: dict[str, set[str]] = field(default_factory=dict)  # station -> lines serving it
+    station_metadata: dict[str, dict] = field(default_factory=dict)  # station -> {coordinates, platform_*, source_url, ...}, only where sourced
 
     def lines_at(self, station: str) -> set[str]:
         return self.station_lines.get(station, set())
@@ -94,5 +95,9 @@ def build_graph(data_path: Path = DATA_FILE) -> MetroGraph:
             for line_b in graph.station_lines.get(station_b, set()):
                 _add_edge(graph, station_a, line_a, Edge(station_b, line_b, 0.0, walk_seconds, is_transfer=True))
                 _add_edge(graph, station_b, line_b, Edge(station_a, line_a, 0.0, walk_seconds, is_transfer=True))
+
+    # optional, sourced-only metadata (coordinates, platform info) -- most
+    # stations won't have an entry, and that's the honest state, not a bug
+    graph.station_metadata = raw.get("station_metadata", {})
 
     return graph

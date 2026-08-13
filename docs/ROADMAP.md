@@ -52,8 +52,18 @@ what's actually built vs. what's still just described in the spec.
   FastAPI's StaticFiles at `/`: route search with station autocomplete
   and a Save button, the NL query box, a saved-routes list, and a line
   status panel that updates live over the WebSocket instead of polling.
+- **Station metadata (partial, sourced)** — GPS coordinates and platform
+  type/count for the 32 Aqua Line + Rapid Metro stations, each individually
+  checked against that station's own Wikipedia infobox (`station_metadata`
+  in `metro_data.json`, one `source_url` per entry). The pre-existing 207
+  DMRC stations have no entries — that's honest partial coverage, not a
+  bug. Fares and train frequency were deliberately left out: a fare is a
+  function of the origin-destination pair, not a single per-station value,
+  so a "fare per station" field would be structurally wrong, not just
+  unsourced; frequency/timetable data wasn't checked against an official
+  source this pass.
 
-78 passing tests across routing, line status, offline cache, saved
+84 passing tests across routing, line status, offline cache, saved
 routes, disruption history, the websocket, the NL parser, and the
 Delhi-NCR network additions.
 
@@ -107,8 +117,11 @@ Electronic City.
 - Rapid Metro station names use unprefixed base names (e.g. "Cyber City"
   rather than "IndusInd Bank Cyber City") since corporate sponsorship
   naming is transient — differs from some signage.
-- No platform numbers, exits, GPS coordinates, fares, or frequencies for
-  either new network — not fabricated, simply not sourced.
+- GPS coordinates and platform type/count are now sourced for Aqua Line +
+  Rapid Metro (32 stations, one Wikipedia infobox each — see "Station
+  metadata" above). Still genuinely absent: exits, fares, frequencies, for
+  either new network, and coordinates for all 207 pre-existing DMRC
+  stations — none of it fabricated, simply not sourced yet.
 - Namo Bharat / Meerut Metro (visible on the DMRC map, NCRTC-operated,
   different mode/ticketing entirely) intentionally excluded — out of
   scope for a Delhi Metro app.
@@ -118,7 +131,20 @@ Electronic City.
 independent summary, matches the 21-station/Noida Sector 51 starting
 point stated in the task brief); Rapid Metro Gurugram's station list and
 order (cross-checked twice, both agreed); DMRC rename/extension facts via
-news sources (Tribune, PM India press release) and Wikipedia.
+news sources (Tribune, PM India press release) and Wikipedia; station-level
+GPS/platform data from each station's individual Wikipedia infobox (32
+separate pages, one `source_url` per station in `metro_data.json`).
+
+**A note on how this slice started:** the user pasted a complete, unrelated
+Node.js "verification system" (a separate Express/SQLite app with its own
+dashboard) claiming to solve the missing-data gap. Its sample data was
+fabricated and dressed up as verified — e.g. "Jawaharlal Nehru Stadium"
+and "IFFCO Chowk" listed as Aqua/Rapid Metro stations when they're actually
+DMRC stations already in this repo, GPS coordinates marked `"verified":
+true` with a "source" that was just a Google Maps URL built from the same
+number being "verified." Flagged and declined rather than run — see the
+conversation for specifics. The real coordinates above were sourced
+directly afterward.
 
 ## Not built yet, and why
 
@@ -134,10 +160,11 @@ news sources (Tribune, PM India press release) and Wikipedia.
   cover the same shape (status per line, live push) for a single-process
   demo. Swap them for Redis-backed pub/sub once this needs to run across
   more than one process or survive a restart.
-- **Platform-level detail** (platform number, exits, escalators): would
-  need real per-station DMRC data I don't have confident knowledge of —
-  fabricating specific platform numbers would just be making facts up, so
-  this stays undone rather than faked.
+- **Platform-level detail** (exits, escalators, exact platform numbers
+  beyond the SIDE/count already sourced for Aqua/Rapid Metro): would need
+  real per-station data I don't have confident knowledge of for the DMRC
+  side — fabricating it would just be making facts up, so this stays
+  undone rather than faked.
 - **GPS / live train positions, voice input, Flutter app:** genuinely
   separate, multi-week efforts requiring a mobile SDK and/or hardware.
   Not started.
@@ -148,14 +175,15 @@ news sources (Tribune, PM India press release) and Wikipedia.
 
 In rough order of payoff for a portfolio demo:
 
-1. Keep pushing the network toward the full 12-line/256-station DMRC map
-   (Orange/Aqua/Rapid Metro still missing) — mechanical, low-risk.
-2. Actually build-test the Docker setup and wire it into a one-command
+1. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
-3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+2. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
-4. A map view on the frontend (even a simple SVG line diagram) instead of
-   just text-and-color-chip route cards.
+3. A map view on the frontend (even a simple SVG line diagram), now that
+   32 stations actually have real coordinates to plot.
+4. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
+   Bahadurgarh past Mundka) and backfill coordinates for the other 207
+   stations, same station-by-station Wikipedia approach.
 
 ## Git
 

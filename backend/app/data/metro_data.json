@@ -153,7 +153,7 @@
       "color": "#00ACC1",
       "segments": [
         [
-          "Noida Sector 51", "Noida Sector 50", "Noida Sector 76", "Noida Sector 101",
+          "Noida Sector 51", "Rainbow", "Noida Sector 76", "Noida Sector 101",
           "Noida Sector 81", "NSEZ", "Noida Sector 83", "Noida Sector 137",
           "Noida Sector 142", "Noida Sector 143", "Noida Sector 144", "Noida Sector 145",
           "Noida Sector 146", "Noida Sector 147", "Noida Sector 148", "Knowledge Park II",
@@ -180,5 +180,41 @@
       "walk_seconds": 420,
       "note": "NMRC Aqua Line <-> DMRC Blue Line. Not a shared platform -- a pedestrian walkway between two separately-named stations. Sources disagreed on whether the dedicated IKEA-sponsored overhead walkway was complete; treated as operational per a separate report of an existing ~300-450m pedestrian walkway already connecting the two stations. Re-verify before treating as certain."
     }
-  ]
+  ],
+  "_station_metadata_note": "Coordinates and platform type/count below are per-station Wikipedia infobox data, checked one station at a time (each entry's source_url is that exact page) -- not bulk-sourced, not estimated. Deliberately NOT included: fares (a real metro fare is a function of the origin-destination pair, not a single per-station number -- modeling it as one value per station would be structurally wrong, not just unsourced) and train frequency/first-last timings (no official timetable was consulted for this pass). Coverage is intentionally partial: only the 32 Aqua Line + Rapid Metro stations researched in this pass have entries; the pre-existing 207 DMRC stations have none -- that's an honest reflection of what's actually been verified, not a bug.",
+  "station_metadata": {
+    "Noida Sector 51": {"coordinates": {"lat": 28.5857, "lng": 77.3753}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_51_metro_station"},
+    "Rainbow": {"coordinates": {"lat": 28.574518, "lng": 77.3772057}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Rainbow_metro_station", "note": "officially Noida Sector 50 until renamed June 2020, dedicated to the transgender community"},
+    "Noida Sector 76": {"coordinates": {"lat": 28.5653, "lng": 77.3797}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_76_metro_station"},
+    "Noida Sector 101": {"coordinates": {"lat": 28.556402, "lng": 77.384798}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_101_metro_station"},
+    "Noida Sector 81": {"coordinates": {"lat": 28.549476, "lng": 77.389988}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_81_metro_station"},
+    "NSEZ": {"coordinates": {"lat": 28.5323, "lng": 77.3948}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/NSEZ_metro_station"},
+    "Noida Sector 83": {"coordinates": {"lat": 28.522206, "lng": 77.396545}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_83_metro_station"},
+    "Noida Sector 137": {"coordinates": {"lat": 28.510870, "lng": 77.403453}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_137_metro_station"},
+    "Noida Sector 142": {"coordinates": {"lat": 28.499084, "lng": 77.412611}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_142_metro_station"},
+    "Noida Sector 143": {"coordinates": {"lat": 28.494461, "lng": 77.422179}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_143_metro_station"},
+    "Noida Sector 144": {"coordinates": {"lat": 28.486483, "lng": 77.432877}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_144_metro_station"},
+    "Noida Sector 145": {"coordinates": {"lat": 28.4790, "lng": 77.4425}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_145_metro_station"},
+    "Noida Sector 146": {"coordinates": {"lat": 28.468877, "lng": 77.454964}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_146_metro_station"},
+    "Noida Sector 147": {"coordinates": {"lat": 28.459502, "lng": 77.465914}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_147_metro_station"},
+    "Noida Sector 148": {"coordinates": {"lat": 28.4481, "lng": 77.4766}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_148_metro_station"},
+    "Knowledge Park II": {"coordinates": {"lat": 28.456956, "lng": 77.500189}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Knowledge_Park_II_metro_station"},
+    "Pari Chowk": {"coordinates": {"lat": 28.463276, "lng": 77.508196}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Pari_Chowk_metro_station"},
+    "Alpha 1": {"coordinates": {"lat": 28.470948, "lng": 77.512593}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/ALPHA_1_metro_station"},
+    "Delta 1": {"coordinates": {"lat": 28.478448, "lng": 77.525704}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/DELTA_1_metro_station"},
+    "GNIDA Office": {"coordinates": {"lat": 28.4846, "lng": 77.5365}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/GNIDA_Office_metro_station"},
+    "Depot": {"coordinates": {"lat": 28.488962, "lng": 77.543994}, "platform_type": "SIDE", "platform_count": 3, "source_url": "https://en.wikipedia.org/wiki/Depot_Station_metro_station_(Noida)"},
+
+    "Sikanderpur": {"coordinates": {"lat": 28.4814, "lng": 77.0931}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Sikanderpur_metro_station", "note": "shared DMRC Yellow / Rapid Metro complex, each system has its own side platforms"},
+    "DLF Phase 2": {"coordinates": {"lat": 28.487534, "lng": 77.092947}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Phase_2_metro_station"},
+    "Belvedere Towers": {"coordinates": {"lat": 28.491664, "lng": 77.088139}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Belvedere_Towers_metro_station"},
+    "Cyber City": {"coordinates": {"lat": 28.497963, "lng": 77.089168}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Cyber_City_metro_station"},
+    "Moulsari Avenue": {"coordinates": {"lat": 28.500697, "lng": 77.094600}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Moulsari_Avenue_metro_station"},
+    "DLF Phase 3": {"coordinates": {"lat": 28.493512, "lng": 77.093676}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Phase_3_metro_station"},
+    "DLF Phase 1": {"coordinates": {"lat": 28.471408, "lng": 77.093933}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Phase_1_metro_station"},
+    "Sector 42-43": {"coordinates": {"lat": 28.457392, "lng": 77.096895}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Sector_42-43_metro_station"},
+    "Sector 53-54": {"coordinates": {"lat": 28.446374, "lng": 77.100435}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Sector_53-54_metro_station"},
+    "Sector 54 Chowk": {"coordinates": {"lat": 28.432921, "lng": 77.104921}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Sector_54_Chowk_metro_station"},
+    "Sector 55-56": {"coordinates": {"lat": 28.423278, "lng": 77.105221}, "platform_type": "SIDE", "platform_count": 2, "source_url": "https://en.wikipedia.org/wiki/Sector_55-56_metro_station"}
+  }
 }

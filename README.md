@@ -12,7 +12,7 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
 - **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, a recent-disruptions feed, and a line-status panel that updates live over the WebSocket instead of polling.
 
-78 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, and the HTTP layer.
+84 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, station metadata, and the HTTP layer.
 
 ## What's not built
 

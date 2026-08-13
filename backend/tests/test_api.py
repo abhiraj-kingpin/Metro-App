@@ -47,6 +47,21 @@ def test_unknown_station_detail_404():
     assert resp.status_code == 404
 
 
+def test_station_detail_includes_coordinates_when_sourced():
+    resp = client.get("/api/v1/stations/Noida Sector 51")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["coordinates"] == {"lat": 28.5857, "lng": 77.3753}
+    assert body["source_url"]
+
+
+def test_station_detail_omits_coordinates_when_not_sourced():
+    resp = client.get("/api/v1/stations/Rajiv Chowk")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["coordinates"] is None
+
+
 def test_find_route_success():
     # Chandni Chowk / Barakhamba Road sit right next to the Rajiv Chowk
     # interchange, so the top route should be a clean single transfer.

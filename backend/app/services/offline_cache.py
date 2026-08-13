@@ -3,6 +3,11 @@
 # network. Once you've got the .db, routing_engine doesn't know or care
 # where the graph came from. That's the actual point: this is what a
 # mobile client would download once and route against forever after.
+#
+# Deliberately NOT round-tripped: station_metadata (coordinates, platform
+# info). Routing doesn't need it, so an offline-loaded graph just won't
+# have it -- a real gap if some future feature needs coordinates offline,
+# not an oversight.
 
 from __future__ import annotations
 
