@@ -11,8 +11,9 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 - **Offline mode** — the graph can be exported to a portable SQLite file and reloaded from it with zero network calls. Verified: same query against the live graph and the reloaded-from-disk graph gives identical results.
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
 - **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, a recent-disruptions feed, and a line-status panel that updates live over the WebSocket instead of polling.
+- **Station coordinates** — 237 of 239 stations have real, sourced GPS coordinates (`scripts/fetch_station_coordinates.py` pulls them from Wikipedia's structured API, one `source_url` per station in `metro_data.json`). The 2 gaps are explicit, not silent — see `docs/ROADMAP.md`.
 
-84 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, station metadata, and the HTTP layer.
+88 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, station metadata, and the HTTP layer.
 
 ## What's not built
 
@@ -84,6 +85,8 @@ backend/
       query_parser.py         # regex/fuzzy NL parsing
     schemas/                  # pydantic request/response models
     data/metro_data.json      # the network itself
+  scripts/
+    fetch_station_coordinates.py  # sources GPS coords from Wikipedia's API
   tests/
 docs/
   PROJECT_SPEC.md             # the original full spec, kept as-is for reference
@@ -92,4 +95,4 @@ docs/
 
 ## On the data
 
-Station names, line order, and interchange points reflect the real DMRC network as best I know it. **Travel times and distances are flat placeholder averages**, not DMRC timetable data — check `metro_data.json`'s `_note` field before trusting an ETA for anything real.
+Station names, line order, and interchange points reflect the real DMRC/NMRC/Rapid Metro networks as best I know them, cross-checked against official/authoritative sources where possible (see `docs/ROADMAP.md`). **Travel times and distances are flat placeholder averages**, not real timetable data — check `metro_data.json`'s `_note` field before trusting an ETA for anything real. GPS coordinates, where present, are individually sourced (each entry has its own `source_url`), not estimated.

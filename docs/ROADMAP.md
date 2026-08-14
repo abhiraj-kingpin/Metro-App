@@ -52,18 +52,23 @@ what's actually built vs. what's still just described in the spec.
   FastAPI's StaticFiles at `/`: route search with station autocomplete
   and a Save button, the NL query box, a saved-routes list, and a line
   status panel that updates live over the WebSocket instead of polling.
-- **Station metadata (partial, sourced)** — GPS coordinates and platform
-  type/count for the 32 Aqua Line + Rapid Metro stations, each individually
-  checked against that station's own Wikipedia infobox (`station_metadata`
-  in `metro_data.json`, one `source_url` per entry). The pre-existing 207
-  DMRC stations have no entries — that's honest partial coverage, not a
-  bug. Fares and train frequency were deliberately left out: a fare is a
-  function of the origin-destination pair, not a single per-station value,
-  so a "fare per station" field would be structurally wrong, not just
-  unsourced; frequency/timetable data wasn't checked against an official
-  source this pass.
+- **Station metadata (near-complete, sourced)** — GPS coordinates for 237
+  of 239 stations (`station_metadata` in `metro_data.json`, one
+  `source_url` per entry). The 32 Aqua/Rapid Metro entries were checked by
+  hand, one Wikipedia page at a time, and also carry platform_type/count.
+  The 207 DMRC entries were fetched by `scripts/fetch_station_coordinates.py`,
+  which queries Wikipedia's structured coordinates API (not a regex scrape)
+  and only accepts a match if the returned page title contains every word
+  of the station name — coordinates-only, no platform data. Exactly 2
+  stations are honestly left without coordinates (Pitampura's Wikipedia
+  article redirects to an unrelated station; Mayur Vihar Pocket I has none
+  on Wikipedia at all) rather than guessed. Fares and train frequency
+  remain deliberately absent everywhere: a fare is a function of the
+  origin-destination pair, not a single per-station value, so a "fare per
+  station" field would be structurally wrong, not just unsourced;
+  frequency/timetable data hasn't been checked against an official source.
 
-84 passing tests across routing, line status, offline cache, saved
+88 passing tests across routing, line status, offline cache, saved
 routes, disruption history, the websocket, the NL parser, and the
 Delhi-NCR network additions.
 
@@ -104,7 +109,11 @@ never a real station, the actual sequence is Dwarka/Nangli/Najafgarh/Dhansa
 Bus Stand; Airport Express extended to its real current terminus
 Yashobhoomi Dwarka Sector 25; Blue Line's Noida branch was missing 5 real
 stations (Sector 34/52/59/61/62) between Noida City Centre and Noida
-Electronic City.
+Electronic City; Noida Sector 50 renamed Rainbow (2020, dedicated to the
+transgender community); Rohini East renamed Rohini. The last two turned up
+incidentally while cross-checking coordinates, not from a dedicated pass —
+worth keeping in mind that more renames like this probably exist
+undiscovered in the remaining data.
 
 **Known limitations / unverified:**
 - The Aqua↔Blue walkway's exact current completion status was genuinely
@@ -117,11 +126,10 @@ Electronic City.
 - Rapid Metro station names use unprefixed base names (e.g. "Cyber City"
   rather than "IndusInd Bank Cyber City") since corporate sponsorship
   naming is transient — differs from some signage.
-- GPS coordinates and platform type/count are now sourced for Aqua Line +
-  Rapid Metro (32 stations, one Wikipedia infobox each — see "Station
-  metadata" above). Still genuinely absent: exits, fares, frequencies, for
-  either new network, and coordinates for all 207 pre-existing DMRC
-  stations — none of it fabricated, simply not sourced yet.
+- Coordinates now cover 237/239 stations (see "Station metadata" above).
+  Still genuinely absent everywhere: exits, fares, frequencies, and
+  platform type/count for the 207 DMRC stations (only Aqua/Rapid Metro
+  have that) — none of it fabricated, simply not sourced yet.
 - Namo Bharat / Meerut Metro (visible on the DMRC map, NCRTC-operated,
   different mode/ticketing entirely) intentionally excluded — out of
   scope for a Delhi Metro app.
@@ -132,19 +140,28 @@ independent summary, matches the 21-station/Noida Sector 51 starting
 point stated in the task brief); Rapid Metro Gurugram's station list and
 order (cross-checked twice, both agreed); DMRC rename/extension facts via
 news sources (Tribune, PM India press release) and Wikipedia; station-level
-GPS/platform data from each station's individual Wikipedia infobox (32
-separate pages, one `source_url` per station in `metro_data.json`).
+GPS data from each station's individual Wikipedia infobox — 32 checked by
+hand, 207 fetched via Wikipedia's structured API by
+`scripts/fetch_station_coordinates.py`, every entry carries its own
+`source_url` in `metro_data.json`.
 
-**A note on how this slice started:** the user pasted a complete, unrelated
-Node.js "verification system" (a separate Express/SQLite app with its own
-dashboard) claiming to solve the missing-data gap. Its sample data was
-fabricated and dressed up as verified — e.g. "Jawaharlal Nehru Stadium"
-and "IFFCO Chowk" listed as Aqua/Rapid Metro stations when they're actually
-DMRC stations already in this repo, GPS coordinates marked `"verified":
-true` with a "source" that was just a Google Maps URL built from the same
-number being "verified." Flagged and declined rather than run — see the
-conversation for specifics. The real coordinates above were sourced
-directly afterward.
+**A note on how this slice started (twice):** the user pasted two
+successive third-party bundles claiming to solve the missing-data gap.
+The first was a complete Node.js "verification system" (its own
+Express/SQLite app with a dashboard) whose sample data was fabricated and
+dressed up as verified — e.g. "Jawaharlal Nehru Stadium" and "IFFCO Chowk"
+listed as Aqua/Rapid Metro stations when they're actually DMRC stations
+already in this repo, GPS coordinates marked `"verified": true` with a
+"source" that was just a Google Maps URL built from the same number being
+"verified." The second, after being asked for "the part that's doable by
+code," was a more polished Node scraper whose hardcoded DMRC station list
+invented a "Purple Line" that doesn't exist, included "Dum Dum" (a real
+station — in Kolkata, not Delhi), and reused the first bundle's fabricated
+Aqua Line list relabeled as DMRC Blue Line. Both declined, both with
+specific cited evidence rather than a general "looks off." The real
+coordinates above were sourced directly afterward, in Python (matching the
+existing stack) using this repo's own already-verified station list as
+input and Wikipedia's structured API instead of regex scraping.
 
 ## Not built yet, and why
 
@@ -175,15 +192,18 @@ directly afterward.
 
 In rough order of payoff for a portfolio demo:
 
-1. Actually build-test the Docker setup and wire it into a one-command
+1. A map view on the frontend (even a simple SVG line diagram) — 237 of
+   239 stations now have real coordinates to plot.
+2. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
-2. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
-3. A map view on the frontend (even a simple SVG line diagram), now that
-   32 stations actually have real coordinates to plot.
 4. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
-   Bahadurgarh past Mundka) and backfill coordinates for the other 207
-   stations, same station-by-station Wikipedia approach.
+   Bahadurgarh past Mundka); resolve the 2 remaining coordinate gaps by
+   hand (Pitampura, Mayur Vihar Pocket I) if it ever matters; do a second
+   pass over the full 239-station list specifically looking for more
+   quiet renames like Rainbow/Rohini, since those two were found by
+   accident, not by a systematic check.
 
 ## Git
 

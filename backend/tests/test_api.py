@@ -55,8 +55,20 @@ def test_station_detail_includes_coordinates_when_sourced():
     assert body["source_url"]
 
 
-def test_station_detail_omits_coordinates_when_not_sourced():
+def test_dmrc_station_now_has_sourced_coordinates_too():
+    # most DMRC stations got coordinates in a later pass -- this used to
+    # be Aqua/Rapid-Metro-only, no longer is
     resp = client.get("/api/v1/stations/Rajiv Chowk")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["coordinates"] is not None
+    assert body["source_url"].startswith("https://en.wikipedia.org/wiki/")
+
+
+def test_station_detail_omits_coordinates_when_genuinely_unresolved():
+    # Pitampura's Wikipedia URL redirects to an unrelated station, so it
+    # was deliberately left out rather than guessed -- see metro_data.json
+    resp = client.get("/api/v1/stations/Pitampura")
     assert resp.status_code == 200
     body = resp.json()
     assert body["coordinates"] is None

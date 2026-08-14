@@ -225,8 +225,36 @@ def test_rainbow_rename_replaced_noida_sector_50():
     assert graph.lines_at("Rainbow") == {"Aqua"}
 
 
-def test_pre_existing_dmrc_stations_have_no_metadata():
-    # honest partial coverage, not a bug -- only the 32 stations
-    # researched in this pass have entries
-    assert "Rajiv Chowk" not in graph.station_metadata
-    assert "Dwarka Sector 21" not in graph.station_metadata
+def test_rohini_rename_replaced_rohini_east():
+    assert "Rohini East" not in graph.station_lines
+    assert "Rohini" in graph.station_lines
+    assert graph.lines_at("Rohini") == {"Red"}
+
+
+def test_dmrc_stations_now_have_sourced_coordinates():
+    # a later pass added coordinates for almost all 207 DMRC stations too,
+    # not just the 32 Aqua/Rapid Metro ones from the earlier pass
+    for station in ("Rajiv Chowk", "Dwarka Sector 21", "Kashmere Gate"):
+        assert station in graph.station_metadata
+        assert "coordinates" in graph.station_metadata[station]
+
+    # DMRC entries are coordinates-only -- no platform_type/count for these,
+    # unlike the hand-checked Aqua/Rapid Metro entries
+    assert "platform_type" not in graph.station_metadata["Rajiv Chowk"]
+
+
+def test_two_stations_are_honestly_left_without_coordinates():
+    # Pitampura's Wikipedia article redirects to an unrelated station
+    # (Madhuban Chowk); Mayur Vihar Pocket I has no dedicated coordinates
+    # on Wikipedia at all. Both left out rather than guessed.
+    assert "Pitampura" not in graph.station_metadata
+    assert "Mayur Vihar Pocket I" not in graph.station_metadata
+    assert graph.has_station("Pitampura")  # still a real, routable station
+    assert graph.has_station("Mayur Vihar Pocket I")
+
+
+def test_almost_all_stations_have_metadata_now():
+    total = len(graph.station_lines)
+    with_metadata = len(graph.station_metadata)
+    assert total - with_metadata == 2  # exactly the two documented gaps
+    assert with_metadata / total > 0.99
