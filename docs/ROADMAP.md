@@ -50,8 +50,13 @@ what's actually built vs. what's still just described in the spec.
   this was written in). Verify locally before trusting it.
 - **Frontend** — a plain HTML/CSS/JS page (no build step) served off
   FastAPI's StaticFiles at `/`: route search with station autocomplete
-  and a Save button, the NL query box, a saved-routes list, and a line
-  status panel that updates live over the WebSocket instead of polling.
+  and a Save button, the NL query box, a saved-routes list, a line
+  status panel that updates live over the WebSocket instead of polling,
+  and a Leaflet/OpenStreetMap station map (all 239 sourced coordinates,
+  colored by line, interchanges marked distinctly). Leaflet loads via CDN
+  with real SRI hashes (verified by hash-comparing the downloaded files,
+  not copied blind) — deliberately not React/Vite, to stay consistent
+  with the rest of this frontend's no-build-step approach.
 - **Station metadata (complete, sourced)** — GPS coordinates for all 239
   stations (`station_metadata` in `metro_data.json`, one `source_url` per
   entry). The 32 Aqua/Rapid Metro entries were checked by hand, one
@@ -72,7 +77,7 @@ what's actually built vs. what's still just described in the spec.
   structurally wrong, not just unsourced; frequency/timetable data hasn't
   been checked against an official source.
 
-88 passing tests across routing, line status, offline cache, saved
+90 passing tests across routing, line status, offline cache, saved
 routes, disruption history, the websocket, the NL parser, and the
 Delhi-NCR network additions.
 
@@ -208,13 +213,11 @@ input and Wikipedia's structured API instead of regex scraping.
 
 In rough order of payoff for a portfolio demo:
 
-1. A map view on the frontend (even a simple SVG line diagram) — all 239
-   stations now have real coordinates to plot.
-2. Actually build-test the Docker setup and wire it into a one-command
+1. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
-3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+2. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
-4. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
+3. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
    Bahadurgarh past Mundka); decide whether to apply the Madhuban Chowk /
    Shree Ram Mandir Mayur Vihar renames to the topology (deliberately left
    as a flagged, separate decision — see "Two more renames found" above);

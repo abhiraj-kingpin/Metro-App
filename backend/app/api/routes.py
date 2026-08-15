@@ -110,6 +110,22 @@ def list_stations(q: str | None = None) -> list[dict]:
     return [{"name": name, "lines": sorted(_graph.station_lines[name])} for name in names]
 
 
+@router.get("/stations/map")
+def list_stations_for_map() -> list[dict]:
+    # only stations with a sourced coordinate -- the frontend map has
+    # nothing to plot for the rest, no point sending nulls
+    out = []
+    for name in sorted(_graph.station_lines):
+        metadata = _graph.station_metadata.get(name)
+        if metadata and "coordinates" in metadata:
+            out.append({
+                "name": name,
+                "lines": sorted(_graph.lines_at(name)),
+                "coordinates": metadata["coordinates"],
+            })
+    return out
+
+
 @router.get("/stations/{station_name}")
 def get_station(station_name: str) -> dict:
     if not _graph.has_station(station_name):

@@ -47,6 +47,16 @@ def test_unknown_station_detail_404():
     assert resp.status_code == 404
 
 
+def test_stations_map_endpoint_returns_only_sourced_coordinates():
+    resp = client.get("/api/v1/stations/map")
+    assert resp.status_code == 200
+    body = resp.json()
+    names = {s["name"] for s in body}
+    assert "Rajiv Chowk" in names  # has a sourced coordinate
+    for s in body:
+        assert "lat" in s["coordinates"] and "lng" in s["coordinates"]
+
+
 def test_station_detail_includes_coordinates_when_sourced():
     resp = client.get("/api/v1/stations/Noida Sector 51")
     assert resp.status_code == 200
