@@ -65,13 +65,22 @@ def test_dmrc_station_now_has_sourced_coordinates_too():
     assert body["source_url"].startswith("https://en.wikipedia.org/wiki/")
 
 
-def test_station_detail_omits_coordinates_when_genuinely_unresolved():
-    # Pitampura's Wikipedia URL redirects to an unrelated station, so it
-    # was deliberately left out rather than guessed -- see metro_data.json
+def test_pitampura_coordinates_now_resolved():
+    # was a documented gap (Wikipedia redirected to a different station);
+    # resolved via Wikidata + a directly-verified OSM node, see metro_data.json
     resp = client.get("/api/v1/stations/Pitampura")
     assert resp.status_code == 200
     body = resp.json()
-    assert body["coordinates"] is None
+    assert body["coordinates"] == {"lat": 28.703151, "lng": 77.132397}
+
+
+def test_mayur_vihar_pocket_i_coordinates_now_resolved():
+    # was a documented gap (no Wikipedia infobox coordinate under either
+    # name); resolved via Wikidata + a directly-verified OSM node
+    resp = client.get("/api/v1/stations/Mayur Vihar Pocket I")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["coordinates"] == {"lat": 28.6057942, "lng": 77.2987036}
 
 
 def test_find_route_success():

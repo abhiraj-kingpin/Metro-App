@@ -243,18 +243,25 @@ def test_dmrc_stations_now_have_sourced_coordinates():
     assert "platform_type" not in graph.station_metadata["Rajiv Chowk"]
 
 
-def test_two_stations_are_honestly_left_without_coordinates():
-    # Pitampura's Wikipedia article redirects to an unrelated station
-    # (Madhuban Chowk); Mayur Vihar Pocket I has no dedicated coordinates
-    # on Wikipedia at all. Both left out rather than guessed.
-    assert "Pitampura" not in graph.station_metadata
-    assert "Mayur Vihar Pocket I" not in graph.station_metadata
-    assert graph.has_station("Pitampura")  # still a real, routable station
+def test_pitampura_and_mayur_vihar_pocket_i_now_resolved():
+    # were the last 2 documented coordinate gaps -- Pitampura's Wikipedia
+    # article redirected to a different station (Madhuban Chowk, which
+    # Pitampura was renamed to), Mayur Vihar Pocket I had no Wikipedia
+    # infobox coordinate under either name. Both resolved via Wikidata,
+    # cross-verified against a directly-fetched OSM node each -- see the
+    # "note" field on each entry in metro_data.json for the full trail.
+    assert "Pitampura" in graph.station_metadata
+    assert "Mayur Vihar Pocket I" in graph.station_metadata
+    assert graph.has_station("Pitampura")
     assert graph.has_station("Mayur Vihar Pocket I")
+    # topology deliberately untouched -- still under their existing names,
+    # not renamed to Madhuban Chowk / Shree Ram Mandir Mayur Vihar
+    assert graph.lines_at("Pitampura") == {"Red"}
+    assert graph.lines_at("Mayur Vihar Pocket I") == {"Pink"}
 
 
-def test_almost_all_stations_have_metadata_now():
+def test_all_stations_have_metadata_now():
     total = len(graph.station_lines)
     with_metadata = len(graph.station_metadata)
-    assert total - with_metadata == 2  # exactly the two documented gaps
+    assert total == with_metadata == 239
     assert with_metadata / total > 0.99

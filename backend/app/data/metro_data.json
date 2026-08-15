@@ -384,7 +384,7 @@
       "note": "NMRC Aqua Line <-> DMRC Blue Line. Not a shared platform -- a pedestrian walkway between two separately-named stations. Sources disagreed on whether the dedicated IKEA-sponsored overhead walkway was complete; treated as operational per a separate report of an existing ~300-450m pedestrian walkway already connecting the two stations. Re-verify before treating as certain."
     }
   ],
-  "_station_metadata_note": "Coordinates are per-station Wikipedia infobox data. The 32 Aqua/Rapid Metro entries were checked one page at a time by hand (each has platform_type/platform_count too). The 207 DMRC entries were fetched by scripts/fetch_station_coordinates.py, which queries Wikipedia's structured coordinates API (not a regex scrape) and only accepts a match if the returned page title contains every word of the station name -- anything that redirected somewhere suspicious or had no confident match was left out rather than guessed (205/207 resolved automatically or by manual follow-up; the remaining 2, Pitampura and Mayur Vihar Pocket I, are genuinely unresolved: Pitampura's article redirects to an unrelated station, and Mayur Vihar Pocket I has no dedicated coordinates on Wikipedia). DMRC entries do not have platform_type/platform_count -- coordinates only, this pass. Deliberately NOT included anywhere: fares (a real metro fare is a function of the origin-destination pair, not a single per-station number -- modeling it as one value per station would be structurally wrong, not just unsourced) and train frequency/first-last timings (no official timetable was consulted). Two more official renames turned up while cross-checking coordinates and were applied to the line data itself: Rohini East -> Rohini, and (already applied in an earlier pass) Noida Sector 50 -> Rainbow.",
+  "_station_metadata_note": "Coordinates are sourced for all 239 stations. The 32 Aqua/Rapid Metro entries were checked one Wikipedia page at a time by hand (each has platform_type/platform_count too). 205 DMRC entries were fetched by scripts/fetch_station_coordinates.py, which queries Wikipedia's structured coordinates API (not a regex scrape) and only accepts a match if the returned page title contains every word of the station name -- anything that redirected somewhere suspicious or had no confident match was left out rather than guessed. The last 2 (Pitampura, Mayur Vihar Pocket I) needed a dedicated follow-up: neither had a usable Wikipedia infobox coordinate, so both were resolved via Wikidata's structured coordinate claims, each independently cross-verified against a directly-fetched OpenStreetMap node (not a search-summary guess -- see each entry's own 'note' field for the full verification trail, including a case where a candidate OSM node pair turned out to belong to a different station and was correctly excluded). DMRC entries (except the 2 follow-up ones, which include a note) do not have platform_type/platform_count -- coordinates only. Deliberately NOT included anywhere: fares (a real metro fare is a function of the origin-destination pair, not a single per-station number -- modeling it as one value per station would be structurally wrong, not just unsourced) and train frequency/first-last timings (no official timetable was consulted). Four official renames have turned up so far while cross-checking coordinates, all found incidentally rather than from a dedicated search: Noida Sector 50 -> Rainbow and Rohini East -> Rohini (both applied to the line topology); Pitampura -> Madhuban Chowk and Mayur Vihar Pocket I -> Shree Ram Mandir Mayur Vihar (both NOT applied -- topology changes were explicitly out of scope for the pass that found them, so the stations remain under their existing names with the rename documented in each entry's 'note' field).",
   "station_metadata": {
     "Noida Sector 51": {
       "coordinates": {
@@ -2111,6 +2111,22 @@
         "lng": 77.1113
       },
       "source_url": "https://en.wikipedia.org/wiki/Sadar_Bazar_Cantonment_metro_station"
+    },
+    "Pitampura": {
+      "coordinates": {
+        "lat": 28.703151,
+        "lng": 77.132397
+      },
+      "source_url": "https://www.wikidata.org/wiki/Q7198601",
+      "note": "Officially renamed Madhuban Chowk in November 2025; kept under the existing 'Pitampura' key since renaming the topology was explicitly out of scope for this pass. Coordinate is Wikidata's structured claim (P625, precision 0.0001). Cross-verified against three independent sources, all agreeing within a few meters: Wikipedia infobox (28.7032, 77.1324), raw OpenStreetMap node 663765153 (28.7032676, 77.1322497, tagged railway=station + alt_name=Pitampura, confirming same physical station), and a third-party aggregator (28.703173, 77.132233). Red Line adjacency (Rohini / Kohat Enclave) matches this repo's existing topology exactly, confirming station identity. No disagreement across sources."
+    },
+    "Mayur Vihar Pocket I": {
+      "coordinates": {
+        "lat": 28.6057942,
+        "lng": 77.2987036
+      },
+      "source_url": "https://www.wikidata.org/wiki/Q55421995",
+      "note": "Officially renamed Shree Ram Mandir Mayur Vihar in February 2026 (confirmed via India TV News, https://www.indiatvnews.com/delhi/mayur-vihar-phase-1-metro-station-in-east-delhi-renamed-as-shree-ram-mandir-mayur-vihar-2026-02-07-1029305); kept under the existing 'Mayur Vihar Pocket I' key, topology unchanged, per this pass's scope. Wikipedia has no infobox coordinate for this station under either name -- Wikidata's structured claim (P625, precision 1e-7) is the primary source, cross-verified against OpenStreetMap node 6196100479 (28.6058619, 77.2987023, tagged railway=station, distinct ref=RMAR), agreeing within ~7m. Caution during verification: two other OSM node IDs surfaced by a search-engine summary (6196100478, 6539745133) were checked directly and found to actually belong to a DIFFERENT station (Mayur Vihar-I / ref=MVP1, already in this file under 'Mayur Vihar Phase 1') -- excluded rather than used. No disagreement between the two sources actually used."
     }
   }
 }

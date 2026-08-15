@@ -52,21 +52,25 @@ what's actually built vs. what's still just described in the spec.
   FastAPI's StaticFiles at `/`: route search with station autocomplete
   and a Save button, the NL query box, a saved-routes list, and a line
   status panel that updates live over the WebSocket instead of polling.
-- **Station metadata (near-complete, sourced)** — GPS coordinates for 237
-  of 239 stations (`station_metadata` in `metro_data.json`, one
-  `source_url` per entry). The 32 Aqua/Rapid Metro entries were checked by
-  hand, one Wikipedia page at a time, and also carry platform_type/count.
-  The 207 DMRC entries were fetched by `scripts/fetch_station_coordinates.py`,
-  which queries Wikipedia's structured coordinates API (not a regex scrape)
-  and only accepts a match if the returned page title contains every word
-  of the station name — coordinates-only, no platform data. Exactly 2
-  stations are honestly left without coordinates (Pitampura's Wikipedia
-  article redirects to an unrelated station; Mayur Vihar Pocket I has none
-  on Wikipedia at all) rather than guessed. Fares and train frequency
-  remain deliberately absent everywhere: a fare is a function of the
-  origin-destination pair, not a single per-station value, so a "fare per
-  station" field would be structurally wrong, not just unsourced;
-  frequency/timetable data hasn't been checked against an official source.
+- **Station metadata (complete, sourced)** — GPS coordinates for all 239
+  stations (`station_metadata` in `metro_data.json`, one `source_url` per
+  entry). The 32 Aqua/Rapid Metro entries were checked by hand, one
+  Wikipedia page at a time, and also carry platform_type/count. 205 DMRC
+  entries were fetched by `scripts/fetch_station_coordinates.py`, which
+  queries Wikipedia's structured coordinates API (not a regex scrape) and
+  only accepts a match if the returned page title contains every word of
+  the station name — coordinates-only, no platform data. The last 2 (Red
+  Line's Pitampura, Pink Line's Mayur Vihar Pocket I) needed a dedicated
+  follow-up pass since neither had a usable Wikipedia infobox coordinate —
+  both resolved via Wikidata's structured claims, each independently
+  cross-verified against a directly-fetched OpenStreetMap node (not a
+  search-summary guess — one candidate OSM node pair turned out to belong
+  to a different station entirely and was correctly excluded after direct
+  verification). Fares and train frequency remain deliberately absent
+  everywhere: a fare is a function of the origin-destination pair, not a
+  single per-station value, so a "fare per station" field would be
+  structurally wrong, not just unsourced; frequency/timetable data hasn't
+  been checked against an official source.
 
 88 passing tests across routing, line status, offline cache, saved
 routes, disruption history, the websocket, the NL parser, and the
@@ -115,6 +119,18 @@ incidentally while cross-checking coordinates, not from a dedicated pass —
 worth keeping in mind that more renames like this probably exist
 undiscovered in the remaining data.
 
+**Two more renames found, deliberately NOT applied to the topology:**
+while resolving the Pitampura and Mayur Vihar Pocket I coordinate gaps
+(a task explicitly scoped to coordinates only, no topology changes),
+turned up that both stations have since been officially renamed —
+Pitampura → Madhuban Chowk (November 2025) and Mayur Vihar Pocket I →
+Shree Ram Mandir Mayur Vihar (February 2026, per India TV News). Station
+identity was confirmed (adjacency match for Pitampura/Madhuban Chowk;
+name-history match for Mayur Vihar Pocket I) and the coordinate was
+attached under the existing station name rather than the new one. If the
+topology should reflect the current names, that's a separate, deliberate
+edit — flagging it here rather than making the call unilaterally.
+
 **Known limitations / unverified:**
 - The Aqua↔Blue walkway's exact current completion status was genuinely
   ambiguous across sources (one said connected via an existing ~300m
@@ -126,7 +142,7 @@ undiscovered in the remaining data.
 - Rapid Metro station names use unprefixed base names (e.g. "Cyber City"
   rather than "IndusInd Bank Cyber City") since corporate sponsorship
   naming is transient — differs from some signage.
-- Coordinates now cover 237/239 stations (see "Station metadata" above).
+- Coordinates now cover all 239 stations (see "Station metadata" above).
   Still genuinely absent everywhere: exits, fares, frequencies, and
   platform type/count for the 207 DMRC stations (only Aqua/Rapid Metro
   have that) — none of it fabricated, simply not sourced yet.
@@ -192,18 +208,20 @@ input and Wikipedia's structured API instead of regex scraping.
 
 In rough order of payoff for a portfolio demo:
 
-1. A map view on the frontend (even a simple SVG line diagram) — 237 of
-   239 stations now have real coordinates to plot.
+1. A map view on the frontend (even a simple SVG line diagram) — all 239
+   stations now have real coordinates to plot.
 2. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
 3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
 4. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
-   Bahadurgarh past Mundka); resolve the 2 remaining coordinate gaps by
-   hand (Pitampura, Mayur Vihar Pocket I) if it ever matters; do a second
-   pass over the full 239-station list specifically looking for more
-   quiet renames like Rainbow/Rohini, since those two were found by
-   accident, not by a systematic check.
+   Bahadurgarh past Mundka); decide whether to apply the Madhuban Chowk /
+   Shree Ram Mandir Mayur Vihar renames to the topology (deliberately left
+   as a flagged, separate decision — see "Two more renames found" above);
+   do a systematic pass over all 239 stations specifically looking for
+   more quiet renames, since all 4 found so far (Rainbow, Rohini, Madhuban
+   Chowk, Shree Ram Mandir Mayur Vihar) turned up by accident, not from a
+   dedicated check.
 
 ## Git
 
