@@ -135,8 +135,14 @@ def get_station(station_name: str) -> dict:
         "name": station_name,
         "lines": sorted(_graph.lines_at(station_name)),
         "coordinates": metadata.get("coordinates") if metadata else None,
+        # single value for stations with one uniform platform config;
+        # None at interchanges where it genuinely differs per line --
+        # see platforms_by_line instead
         "platform_type": metadata.get("platform_type") if metadata else None,
         "platform_count": metadata.get("platform_count") if metadata else None,
+        # populated only at interchanges where platform config actually
+        # differs by line (e.g. Rajiv Chowk: Island for Yellow, Side for Blue)
+        "platforms_by_line": metadata.get("platforms_by_line") if metadata else None,
         "source_url": metadata.get("source_url") if metadata else None,
     }
 

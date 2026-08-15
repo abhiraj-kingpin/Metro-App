@@ -57,29 +57,73 @@ what's actually built vs. what's still just described in the spec.
   with real SRI hashes (verified by hash-comparing the downloaded files,
   not copied blind) — deliberately not React/Vite, to stay consistent
   with the rest of this frontend's no-build-step approach.
-- **Station metadata (complete, sourced)** — GPS coordinates for all 239
-  stations (`station_metadata` in `metro_data.json`, one `source_url` per
-  entry). The 32 Aqua/Rapid Metro entries were checked by hand, one
-  Wikipedia page at a time, and also carry platform_type/count. 205 DMRC
-  entries were fetched by `scripts/fetch_station_coordinates.py`, which
-  queries Wikipedia's structured coordinates API (not a regex scrape) and
-  only accepts a match if the returned page title contains every word of
-  the station name — coordinates-only, no platform data. The last 2 (Red
-  Line's Pitampura, Pink Line's Mayur Vihar Pocket I) needed a dedicated
-  follow-up pass since neither had a usable Wikipedia infobox coordinate —
-  both resolved via Wikidata's structured claims, each independently
-  cross-verified against a directly-fetched OpenStreetMap node (not a
-  search-summary guess — one candidate OSM node pair turned out to belong
-  to a different station entirely and was correctly excluded after direct
-  verification). Fares and train frequency remain deliberately absent
-  everywhere: a fare is a function of the origin-destination pair, not a
-  single per-station value, so a "fare per station" field would be
-  structurally wrong, not just unsourced; frequency/timetable data hasn't
-  been checked against an official source.
+- **Station metadata: coordinates (complete, sourced)** — GPS coordinates
+  for all 239 stations (`station_metadata` in `metro_data.json`, one
+  `source_url` per entry). The 32 Aqua/Rapid Metro entries were checked by
+  hand, one Wikipedia page at a time. 205 DMRC entries were fetched by
+  `scripts/fetch_station_coordinates.py` via Wikipedia's structured
+  coordinates API (not a regex scrape), accepting a match only if the
+  returned page title contains every word of the station name. The last 2
+  (Pitampura, Mayur Vihar Pocket I) needed Wikidata + a directly-verified
+  OpenStreetMap node each, since neither had a usable Wikipedia infobox
+  coordinate.
+- **Station metadata: platform type/count (near-complete, sourced)** —
+  213 of 239 stations have `platform_type`/`platform_count`; the 24
+  same-name interchanges (23 + Sikanderpur) instead carry a
+  `platforms_by_line` dict, since their platform config genuinely differs
+  per line (e.g. Rajiv Chowk: Island platform for Yellow, Side platform
+  for Blue — a single flat value would be wrong, not just imprecise).
+  `scripts/fetch_platform_data.py` parses each station's raw infobox
+  wikitext for the `platform`/`platforms` field (no structured API exists
+  for this, unlike coordinates). Only 5 stations are left genuinely
+  unresolved: Jama Masjid, Mayur Vihar Pocket I, Yashobhoomi Dwarka Sector
+  25 (single-line, no source states a usable type+count), and Dwarka /
+  Dwarka Sector 21 (interchanges — one infobox states a bare total of "5"
+  platforms with no type or per-line split, the other's field is empty).
+  A real bug was caught and fixed mid-pass: the first version of the
+  parser only recognized "Platform-1" (hyphenated); Pink Line's circular-
+  route articles use "Platform 1" inside a `{{font color|...}}` template
+  instead, which the regex didn't match, wrongly routing ~35 clean
+  stations to manual review before the fix.
+- Fares and train frequency remain deliberately absent everywhere: a fare
+  is a function of the origin-destination pair, not a single per-station
+  value, so a "fare per station" field would be structurally wrong, not
+  just unsourced; frequency/timetable data hasn't been checked against an
+  official source.
 
-90 passing tests across routing, line status, offline cache, saved
+100 passing tests across routing, line status, offline cache, saved
 routes, disruption history, the websocket, the NL parser, and the
 Delhi-NCR network additions.
+
+## Topology findings that need a decision (found while sourcing platform data, not acted on)
+
+Digging through real DMRC infobox wikitext for platform data surfaced
+several things that suggest this repo's topology has gaps or an outright
+error — none of these were touched, since topology changes were out of
+scope for that pass, but they're real enough to flag rather than sit on:
+
+- **A Magenta Line extension appears at four stations not in this
+  repo's topology**: Haiderpur Badli Mor, Pitampura (Madhuban Chowk),
+  Majlis Park, and New Delhi all have infobox platforms explicitly tagged
+  for Magenta (sometimes marked "TBC" — to be confirmed / not yet
+  operational) alongside the lines this repo does model there. Consistent
+  enough across 4 independent stations that it's very likely a real
+  Magenta Phase IV extension, not a fluke.
+- **Punjabi Bagh West's infobox explicitly tags 2 of its 4 platforms as
+  Green Line** — this repo's Green Line has a separate, unconnected
+  "Punjabi Bagh" (no "West") station. Worth checking whether these are
+  actually the same complex.
+- **Likely real error, not just a gap**: research while sourcing platform
+  data for "Terminal 1 IGI Airport" turned up that Airport Express does
+  not serve Terminal 1 in reality — it serves Terminals 2/3 via a
+  different station. This repo currently models "Terminal 1 IGI Airport"
+  as an Airport Express + Magenta interchange. That may be wrong, not
+  just incomplete. Airport Express's platform data was deliberately left
+  unpopulated at this station rather than attached to a possibly-fictitious
+  interchange.
+
+None of these were corrected — flagging for a dedicated topology-focused
+pass, with the same source-verification rigor as everything else here.
 
 ## Delhi-NCR Network Coverage
 
@@ -198,11 +242,10 @@ input and Wikipedia's structured API instead of regex scraping.
   cover the same shape (status per line, live push) for a single-process
   demo. Swap them for Redis-backed pub/sub once this needs to run across
   more than one process or survive a restart.
-- **Platform-level detail** (exits, escalators, exact platform numbers
-  beyond the SIDE/count already sourced for Aqua/Rapid Metro): would need
-  real per-station data I don't have confident knowledge of for the DMRC
-  side — fabricating it would just be making facts up, so this stays
-  undone rather than faked.
+- **Platform type/count** is now sourced for 213/239 stations (see above)
+  — what's still genuinely absent is **exits and escalators**, and the
+  final 5 unresolved stations' platform data. No source found for exits
+  during this pass; fabricating them would just be making facts up.
 - **GPS / live train positions, voice input, Flutter app:** genuinely
   separate, multi-week efforts requiring a mobile SDK and/or hardware.
   Not started.
@@ -213,18 +256,23 @@ input and Wikipedia's structured API instead of regex scraping.
 
 In rough order of payoff for a portfolio demo:
 
-1. Actually build-test the Docker setup and wire it into a one-command
+1. Investigate the topology findings above (possible Magenta Phase IV
+   extension at 4 stations, Green/Punjabi Bagh West connection, the
+   likely Airport Express/Terminal 1 IGI Airport error) — these came up
+   as a side effect of sourcing platform data, not from a dedicated check,
+   so a real pass would probably find more.
+2. Actually build-test the Docker setup and wire it into a one-command
    `run.sh` / `run.ps1`.
-2. If an NVIDIA API key becomes available, swap `query_parser.py`'s
+3. If an NVIDIA API key becomes available, swap `query_parser.py`'s
    internals for a real NeMo call behind the same `parse_query()` signature.
-3. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
+4. Push remaining DMRC extensions (Ghaziabad past Dilshad Garden,
    Bahadurgarh past Mundka); decide whether to apply the Madhuban Chowk /
    Shree Ram Mandir Mayur Vihar renames to the topology (deliberately left
-   as a flagged, separate decision — see "Two more renames found" above);
-   do a systematic pass over all 239 stations specifically looking for
-   more quiet renames, since all 4 found so far (Rainbow, Rohini, Madhuban
-   Chowk, Shree Ram Mandir Mayur Vihar) turned up by accident, not from a
-   dedicated check.
+   as a flagged, separate decision); do a systematic pass over all 239
+   stations specifically looking for more quiet renames, since all 4
+   found so far (Rainbow, Rohini, Madhuban Chowk, Shree Ram Mandir Mayur
+   Vihar) turned up by accident, not from a dedicated check.
+5. Source exits/gates and resolve the 5 remaining platform-data gaps.
 
 ## Git
 

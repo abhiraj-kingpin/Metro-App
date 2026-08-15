@@ -12,8 +12,9 @@ Route planner for the Delhi Metro network — built as a portfolio project, orig
 - **Natural language input** — a regex/fuzzy-match parser handles "from X to Y" and Hinglish ("X se Y jana hai") phrasing, with typo tolerance. It is explicitly *not* the NVIDIA RAG pipeline described in the spec — I don't have a NeMo API key — but it's a working stand-in with the same interface, so swapping in a real LLM later is a one-file change.
 - **Frontend** — a plain HTML/CSS/JS page at `/` (no build step, no framework): route search with station autocomplete and a Save button, the NL query box, a saved-routes list, a recent-disruptions feed, a line-status panel that updates live over the WebSocket instead of polling, and a Leaflet/OpenStreetMap station map (all 239 stations, colored by line). Leaflet loads via CDN — deliberately not React/Vite, to stay consistent with the no-build-step approach everything else here uses.
 - **Station coordinates** — all 239 stations have real, sourced GPS coordinates, one `source_url` per station in `metro_data.json`. Most came from `scripts/fetch_station_coordinates.py` (Wikipedia's structured API); the last 2 needed a dedicated pass via Wikidata + directly-verified OpenStreetMap nodes — see `docs/ROADMAP.md` for the full trail.
+- **Platform type/count** — sourced for 213/239 stations. `scripts/fetch_platform_data.py` parses infobox wikitext directly (no structured API exists for this). The 24 same-name interchanges carry a `platforms_by_line` breakdown instead of one flat value, since platform config genuinely differs by line at a real interchange. 5 stations remain honestly unresolved. Sourcing this also surfaced real topology questions this repo's data doesn't currently answer correctly — see `docs/ROADMAP.md`.
 
-90 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, station metadata, and the HTTP layer.
+100 tests, all passing, covering the routing math (including the constraint edge cases), cross-operator routing, the websocket, saved routes, disruption history, station metadata, and the HTTP layer.
 
 ## What's not built
 
@@ -87,6 +88,7 @@ backend/
     data/metro_data.json      # the network itself
   scripts/
     fetch_station_coordinates.py  # sources GPS coords from Wikipedia's API
+    fetch_platform_data.py        # sources platform type/count from infobox wikitext
   tests/
 docs/
   PROJECT_SPEC.md             # the original full spec, kept as-is for reference

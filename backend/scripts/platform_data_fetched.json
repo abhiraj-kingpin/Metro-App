@@ -1,0 +1,860 @@
+{
+  "confident": {
+    "AIIMS": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/AIIMS_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Adarsh Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Adarsh_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Akshardham": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Akshardham_metro_station_(Delhi_Metro)",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Arjan Garh": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Arjan_Garh_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Ashok Park Main": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Ashok_Park_Main_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Badarpur Border": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Badarpur_Border_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Barakhamba Road": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Barakhamba_Road_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Bata Chowk": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Bata_Chowk_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Chawri Bazar": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Chawri_Bazar_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Chhatarpur": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Chhatarpur_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Chirag Delhi": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Chirag_Delhi_metro_station",
+      "raw_field": "[[Island platform]]<br>Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Delhi Gate": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Delhi_Gate_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Dhansa Bus Stand": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dhansa_Bus_Stand_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 Train Terminates | Platform-2 \u2192 {{ltl|Delhi Metro|Grey|R}}}}"
+    },
+    "Dhaula Kuan": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dhaula_Kuan_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 [[Yashobhoomi Dwarka Sector - 25 metro station|Yashobhoomi Dwarka Sector - 25]]|Platform-2 \u2192 {{ltl|Delhi Metro|Airport|R}}}}"
+    },
+    "Dilshad Garden": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dilshad_Garden_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Dwarka Mor": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Mor_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 10": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_10_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 11": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_11_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 13": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_13_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 14": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_14_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 8": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_8_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Dwarka Sector 9": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_9_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Escorts Mujesar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Escorts_Mujesar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Ghitorni": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Ghitorni_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Golf Course": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Golf_Course_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Govind Puri": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Govindpuri_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Greater Kailash": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Greater_Kailash_metro_station",
+      "raw_field": "[[Island platform]]<br>Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Green Park": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Green_Park_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Guru Dronacharya": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Guru_Dronacharya_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "IFFCO Chowk": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/IFFCO_Chowk_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "ITO": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/ITO_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Indraprastha": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Indraprastha_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Jamia Millia Islamia": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jamia_Millia_Islamia_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Janakpuri East": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Janakpuri_East_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Jangpura": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jangpura_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Janpath": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Janpath_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Jasola Apollo": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jasola_Apollo_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Jasola Vihar Shaheen Bagh": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jasola_Vihar_Shaheen_Bagh_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Jawaharlal Nehru Stadium": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jawaharlal_Nehru_Stadium_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Jhandewalan": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jhandewalan_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Jor Bagh": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jor_Bagh_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Kailash Colony": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Kailash_Colony_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Kalindi Kunj": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Kalindi_Kunj_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Kanhaiya Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Kanhaiya_Nagar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Karol Bagh": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Karol_Bagh_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Kaushambi": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Kaushambi_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Keshav Puram": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Keshav_Puram_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Khan Market": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Khan_Market_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Laxmi Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Laxmi_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Lok Kalyan Marg": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Lok_Kalyan_Marg_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "MG Road": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/MG_Road_metro_station_(Gurgaon)",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Madipur": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Madipur_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Mansarovar Park": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Mansarovar_Park_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Mayur Vihar Extension": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Mayur_Vihar_Extension_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Millennium City Centre Gurugram": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Millennium_City_Centre_Gurugram_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 Train Terminates Here|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Mohan Estate": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Mohan_Estate_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Moolchand": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Moolchand_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Moti Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Moti_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Mundka": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Mundka_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Munirka": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Munirka_metro_station",
+      "raw_field": "[[Island platform]]<br>Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Najafgarh": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Najafgarh_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Grey|L}} |Platform-2 \u2192 {{ltl|Delhi Metro|Grey|R}}}}"
+    },
+    "Nangli": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nangli_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Grey|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Grey|R}}}}"
+    },
+    "Nangloi": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nangloi_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Nangloi Railway Station": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nangloi_Railway_Station_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Neelam Chowk Ajronda": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Neelam_Chowk_Ajronda_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Nehru Enclave": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nehru_Enclave_metro_station",
+      "raw_field": "[[Island platform]]<br>Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Nehru Place": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nehru_Place_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "New Ashok Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/New_Ashok_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Nirman Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nirman_Vihar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida City Centre": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_City_Centre_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 15": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_15_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 16": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_16_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 18": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_18_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 52": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_52_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 59": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_59_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 61": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_61_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 62": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_62_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Okhla Bird Sanctuary": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_Bird_Sanctuary_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Okhla NSIC": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_NSIC_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Okhla Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_Vihar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Panchsheel Park": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Panchsheel_Park_metro_station",
+      "raw_field": "[[Island platform]] <br>Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Paschim Vihar East": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_East_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Patel Chowk": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Patel_Chowk_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Patel Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Patel_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Peera Garhi": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Peeragarhi_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Pratap Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Pratap_Nagar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Preet Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Preet_Vihar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Pulbangash": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Pulbangash_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}}}"
+    },
+    "Punjabi Bagh": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Punjabi_Bagh_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "R K Puram": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/R._K._Puram_metro_station",
+      "raw_field": "[[Island platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Rajdhani Park": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Rajdhani_Park_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Rajendra Place": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Rajendra_Place_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Ramesh Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Ramesh_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Rithala": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Rithala_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 Train Terminates Here<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Rohini Sector 18-19": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Rohini_Sector_18,_19_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Saket": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Saket_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Samaypur Badli": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Samaypur_Badli_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 Train Terminates}}"
+    },
+    "Sarita Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Sarita_Vihar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Seelampur": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Seelampur_metro_station",
+      "raw_field": "[[Island platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Shadipur": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shadipur_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Shahdara": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shahdara_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Shankar Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shankar_Vihar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Shastri Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shastri_Nagar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Shastri Park": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shastri_Park_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Shivaji Park": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Park_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Sukhdev Vihar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Sukhdev_Vihar_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br/>Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Sultanpur": {
+      "platform_type": "SIDE",
+      "platform_count": 3,
+      "source_url": "https://en.wikipedia.org/wiki/Sultanpur_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}|Platform-3 \u2192 Train Terminates}}"
+    },
+    "Supreme Court": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Supreme_Court_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Surajmal Stadium": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Maharaja_Surajmal_Stadium_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Tagore Garden": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Tagore_Garden_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Tilak Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Tilak_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Tis Hazari": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Tis_Hazari_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Tughlakabad": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Tughlakabad_Station_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Udyog Bhawan": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Udyog_Bhawan_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Udyog Nagar": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Udyog_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Uttam Nagar East": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_East_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Uttam Nagar West": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_West_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Vasant Vihar": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Vasant_Vihar_metro_station",
+      "raw_field": "[[Island platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Magenta|R}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Magenta|L}}"
+    },
+    "Vidhan Sabha": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Vidhan_Sabha_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Delhi Aerocity": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Delhi_Aerocity_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 [[Yashobhoomi Dwarka Sector - 25 metro station|Yashobhoomi Dwarka Sector - 25]]|Platform-2 \u2192 {{ltl|Delhi Metro|Airport|R}}}}"
+    },
+    "Dwarka Sector 12": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_12_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Faridabad Old": {
+      "platform_type": "SIDE",
+      "platform_count": 3,
+      "source_url": "https://en.wikipedia.org/wiki/Old_Faridabad_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}|Platform-3 \u2192 Train Terminates}}"
+    },
+    "Harkesh Nagar Okhla": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Harkesh_Nagar_Okhla_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Violet|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Violet|L}}}}"
+    },
+    "Jhilmil": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jhilmil_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Kohat Enclave": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Kohat_Enclave_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Model Town": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Model_Town_metro_station,_Delhi",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Nawada": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Nawada_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}} / {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Noida Sector 34": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_34_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Paschim Vihar West": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_West_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Green|L}}|Platform-2 \u2192 {{ltl|Delhi Metro|Green|R|type=main}} / {{ltl|Delhi Metro|Green|R|type=branch}}}}"
+    },
+    "Rohini": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Rohini_metro_station",
+      "raw_field": "[[Side platform]]<br />Platform-1 \u2192 {{ltl|Delhi Metro|Red|L}}<br />Platform-2 \u2192 {{ltl|Delhi Metro|Red|R}}"
+    },
+    "Shivaji Stadium": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Stadium_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 [[Yashobhoomi Dwarka Sector - 25 metro station|Yashobhoomi Dwarka Sector - 25]]|Platform-2 \u2192 {{ltl|Delhi Metro|Airport|R}}}}"
+    },
+    "Yamuna Bank": {
+      "platform_type": "ISLAND",
+      "platform_count": 4,
+      "source_url": "https://en.wikipedia.org/wiki/Yamuna_Bank_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Blue|R|type=main}}|Platform-2 \u2192 {{ltl|Delhi Metro|Blue|L}}|Platform-3 \u2192 {{ltl|Delhi Metro|Blue|R|type=branch}}|Platform-4 \u2192 {{ltl|Delhi Metro|Blue|L}}}}"
+    },
+    "Jahangirpuri": {
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Jahangirpuri_metro_station",
+      "raw_field": "{{ubl|[[Side platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    },
+    "Malviya Nagar": {
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "source_url": "https://en.wikipedia.org/wiki/Malviya_Nagar_metro_station",
+      "raw_field": "{{ubl|[[Island platform]]|Platform-1 \u2192 {{ltl|Delhi Metro|Yellow|R}}|Platform-2 \u2192 {{ltl|Delhi Metro|Yellow|L}}}}"
+    }
+  },
+  "needs_review": [
+    "Ashram",
+    "Bhikaji Cama Place",
+    "Chandni Chowk",
+    "Civil Lines",
+    "Dabri Mor-Janakpuri South",
+    "Dashrath Puri",
+    "Delhi Cantt",
+    "Durgabai Deshmukh South Campus",
+    "ESI Hospital",
+    "East Azad Nagar",
+    "East Vinod Nagar",
+    "GTB Nagar",
+    "Gokulpuri",
+    "Haiderpur Badli Mor",
+    "Hazrat Nizamuddin",
+    "IIT Delhi",
+    "IP Extension",
+    "Jaffrabad",
+    "Jama Masjid",
+    "Johri Enclave",
+    "Karkarduma Court",
+    "Krishna Nagar",
+    "Lal Quila",
+    "Majlis Park",
+    "Mandawali",
+    "Maujpur-Babarpur",
+    "Mayapuri",
+    "Mayur Vihar Pocket I",
+    "Naraina Vihar",
+    "Noida Electronic City",
+    "Palam",
+    "Pitampura",
+    "Punjabi Bagh West",
+    "Qutub Minar",
+    "RK Ashram Marg",
+    "Raja Nahar Singh",
+    "Rohini West",
+    "Sadar Bazaar Cantonment",
+    "Sarojini Nagar",
+    "Shakurpur",
+    "Shalimar Bagh",
+    "Shiv Vihar",
+    "Sir Vishweshwaraiah Moti Bagh",
+    "South Extension",
+    "Subhash Nagar",
+    "Trilokpuri Sanjay Lake",
+    "Vaishali",
+    "Vinobapuri",
+    "Vishwavidyalaya",
+    "Yashobhoomi Dwarka Sector 25"
+  ]
+}

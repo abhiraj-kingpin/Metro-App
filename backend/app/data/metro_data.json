@@ -581,10 +581,18 @@
         "lat": 28.4814,
         "lng": 77.0931
       },
-      "platform_type": "SIDE",
-      "platform_count": 2,
       "source_url": "https://en.wikipedia.org/wiki/Sikanderpur_metro_station",
-      "note": "shared DMRC Yellow / Rapid Metro complex, each system has its own side platforms"
+      "note": "shared DMRC Yellow / Rapid Metro complex, each system has its own side platforms",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Rapid Metro": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "DLF Phase 2": {
       "coordinates": {
@@ -681,301 +689,458 @@
         "lat": 28.56689569,
         "lng": 77.20804331
       },
-      "source_url": "https://en.wikipedia.org/wiki/AIIMS_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/AIIMS_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Chirag Delhi": {
       "coordinates": {
         "lat": 28.54,
         "lng": 77.23
       },
-      "source_url": "https://en.wikipedia.org/wiki/Chirag_Delhi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Chirag_Delhi_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Civil Lines": {
       "coordinates": {
         "lat": 28.6769,
         "lng": 77.225
       },
-      "source_url": "https://en.wikipedia.org/wiki/Civil_Lines_metro_station_(Delhi)"
+      "source_url": "https://en.wikipedia.org/wiki/Civil_Lines_metro_station_(Delhi)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dabri Mor-Janakpuri South": {
       "coordinates": {
         "lat": 28.61590589,
         "lng": 77.08525681
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dabri_Mor_-_Janakpuri_South_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dabri_Mor_-_Janakpuri_South_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Dashrath Puri": {
       "coordinates": {
         "lat": 28.6019,
         "lng": 77.0824
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dashrathpuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dashrathpuri_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Delhi Aerocity": {
       "coordinates": {
         "lat": 28.54905,
         "lng": 77.12079
       },
-      "source_url": "https://en.wikipedia.org/wiki/Delhi_Aerocity_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Delhi_Aerocity_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Kalkaji Mandir": {
       "coordinates": {
         "lat": 28.5496,
         "lng": 77.2591
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kalkaji_Mandir_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kalkaji_Mandir_metro_station",
+      "platforms_by_line": {
+        "Violet": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Magenta": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Kanhaiya Nagar": {
       "coordinates": {
         "lat": 28.6824,
         "lng": 77.1648
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kanhaiya_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kanhaiya_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Karkarduma": {
       "coordinates": {
         "lat": 28.64853889,
         "lng": 77.30556
       },
-      "source_url": "https://en.wikipedia.org/wiki/Karkarduma_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Karkarduma_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Karkarduma Court": {
       "coordinates": {
         "lat": 28.65368469,
         "lng": 77.29578669
       },
-      "source_url": "https://en.wikipedia.org/wiki/Karkarduma_Court_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Karkarduma_Court_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Karol Bagh": {
       "coordinates": {
         "lat": 28.6439,
         "lng": 77.1885
       },
-      "source_url": "https://en.wikipedia.org/wiki/Karol_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Karol_Bagh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Kashmere Gate": {
       "coordinates": {
         "lat": 28.6675,
         "lng": 77.228
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kashmere_Gate_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kashmere_Gate_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Red": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Violet": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Kaushambi": {
       "coordinates": {
         "lat": 28.64552311,
         "lng": 77.32429689
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kaushambi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kaushambi_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Keshav Puram": {
       "coordinates": {
         "lat": 28.6889,
         "lng": 77.1618
       },
-      "source_url": "https://en.wikipedia.org/wiki/Keshav_Puram_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Keshav_Puram_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Khan Market": {
       "coordinates": {
         "lat": 28.60246,
         "lng": 77.22788306
       },
-      "source_url": "https://en.wikipedia.org/wiki/Khan_Market_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Khan_Market_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Kirti Nagar": {
       "coordinates": {
         "lat": 28.6551,
         "lng": 77.1515
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kirti_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kirti_Nagar_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Green": {
+          "platform_type": "SIDE",
+          "platform_count": 2,
+          "note": "Platform 3 explicitly tagged Green; platform 4 only says 'train terminates' with no line tag -- inferred as Green since Green terminates here via the short Ashok Park Main branch spur (Blue does not terminate at this station). Not an explicit label, flagged."
+        }
+      }
     },
     "Peera Garhi": {
       "coordinates": {
         "lat": 28.6797,
         "lng": 77.0926
       },
-      "source_url": "https://en.wikipedia.org/wiki/Peeragarhi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Peeragarhi_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Pratap Nagar": {
       "coordinates": {
         "lat": 28.6667,
         "lng": 77.1988
       },
-      "source_url": "https://en.wikipedia.org/wiki/Pratap_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Pratap_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Preet Vihar": {
       "coordinates": {
         "lat": 28.6415,
         "lng": 77.2951
       },
-      "source_url": "https://en.wikipedia.org/wiki/Preet_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Preet_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Pulbangash": {
       "coordinates": {
         "lat": 28.6663,
         "lng": 77.207
       },
-      "source_url": "https://en.wikipedia.org/wiki/Pulbangash_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Pulbangash_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Punjabi Bagh": {
       "coordinates": {
         "lat": 28.67292881,
         "lng": 77.14605911
       },
-      "source_url": "https://en.wikipedia.org/wiki/Punjabi_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Punjabi_Bagh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Punjabi Bagh West": {
       "coordinates": {
         "lat": 28.67282589,
         "lng": 77.13925639
       },
-      "source_url": "https://en.wikipedia.org/wiki/Punjabi_Bagh_West_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Punjabi_Bagh_West_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "note": "Infobox lists 4 platforms total, but platforms 3-4 are explicitly tagged for the Green Line -- not modeled as an interchange in this repo's topology (a real gap worth checking, this repo's Green Line has a separate unconnected 'Punjabi Bagh' station). Counting only the 2 Pink Line platforms actually modeled here."
     },
     "Adarsh Nagar": {
       "coordinates": {
         "lat": 28.716535,
         "lng": 77.17045194
       },
-      "source_url": "https://en.wikipedia.org/wiki/Adarsh_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Adarsh_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Akshardham": {
       "coordinates": {
         "lat": 28.617911,
         "lng": 77.279415
       },
-      "source_url": "https://en.wikipedia.org/wiki/Akshardham_metro_station_(Delhi_Metro)"
+      "source_url": "https://en.wikipedia.org/wiki/Akshardham_metro_station_(Delhi_Metro)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Anand Vihar": {
       "coordinates": {
         "lat": 28.64688611,
         "lng": 77.31587806
       },
-      "source_url": "https://en.wikipedia.org/wiki/Anand_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Anand_Vihar_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Arjan Garh": {
       "coordinates": {
         "lat": 28.4808,
         "lng": 77.1258
       },
-      "source_url": "https://en.wikipedia.org/wiki/Arjan_Garh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Arjan_Garh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Ashok Park Main": {
       "coordinates": {
         "lat": 28.6716,
         "lng": 77.155
       },
-      "source_url": "https://en.wikipedia.org/wiki/Ashok_Park_Main_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Ashok_Park_Main_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Ashram": {
       "coordinates": {
         "lat": 28.57220761,
         "lng": 77.2584745
       },
-      "source_url": "https://en.wikipedia.org/wiki/Ashram_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Ashram_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Azadpur": {
       "coordinates": {
         "lat": 28.7073,
         "lng": 77.18
       },
-      "source_url": "https://en.wikipedia.org/wiki/Azadpur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Azadpur_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Badarpur Border": {
       "coordinates": {
         "lat": 28.49358,
         "lng": 77.30306
       },
-      "source_url": "https://en.wikipedia.org/wiki/Badarpur_Border_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Badarpur_Border_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Barakhamba Road": {
       "coordinates": {
         "lat": 28.62998,
         "lng": 77.22452611
       },
-      "source_url": "https://en.wikipedia.org/wiki/Barakhamba_Road_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Barakhamba_Road_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Bata Chowk": {
       "coordinates": {
         "lat": 28.39,
         "lng": 77.31
       },
-      "source_url": "https://en.wikipedia.org/wiki/Bata_Chowk_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Bata_Chowk_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Bhikaji Cama Place": {
       "coordinates": {
         "lat": 28.57021119,
         "lng": 77.18788819
       },
-      "source_url": "https://en.wikipedia.org/wiki/Bhikaji_Cama_Place_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Bhikaji_Cama_Place_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Botanical Garden": {
       "coordinates": {
         "lat": 28.5642,
         "lng": 77.3348
       },
-      "source_url": "https://en.wikipedia.org/wiki/Botanical_Garden_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Botanical_Garden_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Magenta": {
+          "platform_type": "SIDE",
+          "platform_count": 2,
+          "note": "Platform 4 explicitly tagged Magenta; platform 3 only says 'train terminates' with no line tag -- inferred as Magenta since Magenta (not Blue) terminates at this station. Not an explicit label, flagged."
+        }
+      }
     },
     "Central Secretariat": {
       "coordinates": {
         "lat": 28.615,
         "lng": 77.2118
       },
-      "source_url": "https://en.wikipedia.org/wiki/Central_Secretariat_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Central_Secretariat_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Violet": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Chandni Chowk": {
       "coordinates": {
         "lat": 28.6578,
         "lng": 77.2302
       },
-      "source_url": "https://en.wikipedia.org/wiki/Chandni_Chowk_metro_station_(Delhi)"
+      "source_url": "https://en.wikipedia.org/wiki/Chandni_Chowk_metro_station_(Delhi)",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Chawri Bazar": {
       "coordinates": {
         "lat": 28.6496,
         "lng": 77.2262
       },
-      "source_url": "https://en.wikipedia.org/wiki/Chawri_Bazar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Chawri_Bazar_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Chhatarpur": {
       "coordinates": {
         "lat": 28.5066,
         "lng": 77.1749
       },
-      "source_url": "https://en.wikipedia.org/wiki/Chhatarpur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Chhatarpur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Delhi Gate": {
       "coordinates": {
         "lat": 28.64007161,
         "lng": 77.24037969
       },
-      "source_url": "https://en.wikipedia.org/wiki/Delhi_Gate_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Delhi_Gate_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Dhansa Bus Stand": {
       "coordinates": {
         "lat": 28.61191,
         "lng": 76.97848
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dhansa_Bus_Stand_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dhansa_Bus_Stand_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dhaula Kuan": {
       "coordinates": {
         "lat": 28.59185306,
         "lng": 77.16169
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dhaula_Kuan_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dhaula_Kuan_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dilshad Garden": {
       "coordinates": {
         "lat": 28.67589194,
         "lng": 77.32148611
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dilshad_Garden_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dilshad_Garden_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Durgabai Deshmukh South Campus": {
       "coordinates": {
         "lat": 28.5894,
         "lng": 77.1695
       },
-      "source_url": "https://en.wikipedia.org/wiki/Durgabai_Deshmukh_South_Campus_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Durgabai_Deshmukh_South_Campus_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka": {
       "coordinates": {
@@ -989,35 +1154,45 @@
         "lat": 28.6193,
         "lng": 77.0334
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Mor_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Mor_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 10": {
       "coordinates": {
         "lat": 28.58109889,
         "lng": 77.05742194
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_10_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_10_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 11": {
       "coordinates": {
         "lat": 28.5865,
         "lng": 77.0494
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_11_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_11_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 12": {
       "coordinates": {
         "lat": 28.59230306,
         "lng": 77.04068194
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_12_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_12_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 14": {
       "coordinates": {
         "lat": 28.6023,
         "lng": 77.026
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_14_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_14_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 21": {
       "coordinates": {
@@ -1031,882 +1206,1220 @@
         "lat": 28.56562,
         "lng": 77.06703
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_8_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_8_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Dwarka Sector 9": {
       "coordinates": {
         "lat": 28.5743,
         "lng": 77.0652
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_9_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_9_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "East Azad Nagar": {
       "coordinates": {
         "lat": 28.6647,
         "lng": 77.285
       },
-      "source_url": "https://en.wikipedia.org/wiki/East_Azad_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/East_Azad_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Escorts Mujesar": {
       "coordinates": {
         "lat": 28.370081,
         "lng": 77.314954
       },
-      "source_url": "https://en.wikipedia.org/wiki/Escorts_Mujesar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Escorts_Mujesar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Ghitorni": {
       "coordinates": {
         "lat": 28.493785,
         "lng": 77.14915
       },
-      "source_url": "https://en.wikipedia.org/wiki/Ghitorni_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Ghitorni_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Gokulpuri": {
       "coordinates": {
         "lat": 28.7025,
         "lng": 77.2861
       },
-      "source_url": "https://en.wikipedia.org/wiki/Gokulpuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Gokulpuri_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Golf Course": {
       "coordinates": {
         "lat": 28.56718111,
         "lng": 77.34602889
       },
-      "source_url": "https://en.wikipedia.org/wiki/Golf_Course_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Golf_Course_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Govind Puri": {
       "coordinates": {
         "lat": 28.54460561,
         "lng": 77.2642865
       },
-      "source_url": "https://en.wikipedia.org/wiki/Govindpuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Govindpuri_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Greater Kailash": {
       "coordinates": {
         "lat": 28.54183181,
         "lng": 77.23824731
       },
-      "source_url": "https://en.wikipedia.org/wiki/Greater_Kailash_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Greater_Kailash_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Green Park": {
       "coordinates": {
         "lat": 28.55803769,
         "lng": 77.20702639
       },
-      "source_url": "https://en.wikipedia.org/wiki/Green_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Green_Park_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Guru Dronacharya": {
       "coordinates": {
         "lat": 28.4819,
         "lng": 77.1025
       },
-      "source_url": "https://en.wikipedia.org/wiki/Guru_Dronacharya_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Guru_Dronacharya_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Haiderpur Badli Mor": {
       "coordinates": {
         "lat": 28.72992306,
         "lng": 77.14913
       },
-      "source_url": "https://en.wikipedia.org/wiki/Haiderpur_Badli_Mor_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Haiderpur_Badli_Mor_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2,
+      "note": "Infobox lists 4 platforms total, but platforms 3-4 are tagged for a Magenta Line extension not in this repo's topology (see ROADMAP.md). Counting only the 2 Yellow Line platforms actually modeled here."
     },
     "Hauz Khas": {
       "coordinates": {
         "lat": 28.54344381,
         "lng": 77.20634419
       },
-      "source_url": "https://en.wikipedia.org/wiki/Hauz_Khas_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Hauz_Khas_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Magenta": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Hazrat Nizamuddin": {
       "coordinates": {
         "lat": 28.58916667,
         "lng": 77.25416667
       },
-      "source_url": "https://en.wikipedia.org/wiki/Hazrat_Nizamuddin_railway_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sarai_Kale_Khan_–_Nizamuddin_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "IFFCO Chowk": {
       "coordinates": {
         "lat": 28.47208889,
         "lng": 77.0725545
       },
-      "source_url": "https://en.wikipedia.org/wiki/IFFCO_Chowk_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/IFFCO_Chowk_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "INA": {
       "coordinates": {
         "lat": 28.5752,
         "lng": 77.2073
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dilli_Haat_–_INA_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dilli_Haat_%E2%80%93_INA_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "IP Extension": {
       "coordinates": {
         "lat": 28.63189811,
         "lng": 77.31090031
       },
-      "source_url": "https://en.wikipedia.org/wiki/IP_Extension_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/IP_Extension_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 3
     },
     "ITO": {
       "coordinates": {
         "lat": 28.62937139,
         "lng": 77.24131981
       },
-      "source_url": "https://en.wikipedia.org/wiki/ITO_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/ITO_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Indraprastha": {
       "coordinates": {
         "lat": 28.6205,
         "lng": 77.25
       },
-      "source_url": "https://en.wikipedia.org/wiki/Indraprastha_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Indraprastha_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jaffrabad": {
       "coordinates": {
         "lat": 28.68275869,
         "lng": 77.2747475
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jaffrabad_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jaffrabad_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jahangirpuri": {
       "coordinates": {
         "lat": 28.7258,
         "lng": 77.1628
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jahangirpuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jahangirpuri_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jamia Millia Islamia": {
       "coordinates": {
         "lat": 28.56288269,
         "lng": 77.28623139
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jamia_Millia_Islamia_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jamia_Millia_Islamia_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Janakpuri East": {
       "coordinates": {
         "lat": 28.63301306,
         "lng": 77.08659306
       },
-      "source_url": "https://en.wikipedia.org/wiki/Janakpuri_East_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Janakpuri_East_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Janakpuri West": {
       "coordinates": {
         "lat": 28.6295,
         "lng": 77.0782
       },
-      "source_url": "https://en.wikipedia.org/wiki/Janakpuri_West_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Janakpuri_West_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2,
+          "note": "count/type split confirmed by a secondary source (Wikipedia's own field only stated 'side platform' without enumerating or splitting by line)"
+        },
+        "Magenta": {
+          "platform_type": "ISLAND",
+          "platform_count": 2,
+          "note": "count/type split confirmed by a secondary source (Wikipedia's own field only stated 'side platform' without enumerating or splitting by line)"
+        }
+      }
     },
     "Jangpura": {
       "coordinates": {
         "lat": 28.58330969,
         "lng": 77.23965861
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jangpura_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jangpura_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Janpath": {
       "coordinates": {
         "lat": 28.6250595,
         "lng": 77.21918419
       },
-      "source_url": "https://en.wikipedia.org/wiki/Janpath_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Janpath_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Jasola Vihar Shaheen Bagh": {
       "coordinates": {
         "lat": 28.54588511,
         "lng": 77.29664369
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jasola_Vihar_Shaheen_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jasola_Vihar_Shaheen_Bagh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jawaharlal Nehru Stadium": {
       "coordinates": {
         "lat": 28.59038111,
         "lng": 77.23304889
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jawaharlal_Nehru_Stadium_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jawaharlal_Nehru_Stadium_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Jhandewalan": {
       "coordinates": {
         "lat": 28.6444,
         "lng": 77.1998
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jhandewalan_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jhandewalan_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jhilmil": {
       "coordinates": {
         "lat": 28.6757,
         "lng": 77.3125
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jhilmil_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jhilmil_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Johri Enclave": {
       "coordinates": {
         "lat": 28.71316669,
         "lng": 77.29010661
       },
-      "source_url": "https://en.wikipedia.org/wiki/Johri_Enclave_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Johri_Enclave_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jor Bagh": {
       "coordinates": {
         "lat": 28.5861,
         "lng": 77.212
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jor_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jor_Bagh_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Kailash Colony": {
       "coordinates": {
         "lat": 28.55538761,
         "lng": 77.24195411
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kailash_Colony_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kailash_Colony_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Kalindi Kunj": {
       "coordinates": {
         "lat": 28.54281319,
         "lng": 77.31017411
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kalindi_Kunj_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kalindi_Kunj_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Kohat Enclave": {
       "coordinates": {
         "lat": 28.698,
         "lng": 77.1408
       },
-      "source_url": "https://en.wikipedia.org/wiki/Kohat_Enclave_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Kohat_Enclave_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Lajpat Nagar": {
       "coordinates": {
         "lat": 28.57056581,
         "lng": 77.23646031
       },
-      "source_url": "https://en.wikipedia.org/wiki/Lajpat_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Lajpat_Nagar_metro_station",
+      "platforms_by_line": {
+        "Violet": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Laxmi Nagar": {
       "coordinates": {
         "lat": 28.63059611,
         "lng": 77.27760306
       },
-      "source_url": "https://en.wikipedia.org/wiki/Laxmi_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Laxmi_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Lok Kalyan Marg": {
       "coordinates": {
         "lat": 28.5976575,
         "lng": 77.2111765
       },
-      "source_url": "https://en.wikipedia.org/wiki/Lok_Kalyan_Marg_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Lok_Kalyan_Marg_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "MG Road": {
       "coordinates": {
         "lat": 28.47955581,
         "lng": 77.07995211
       },
-      "source_url": "https://en.wikipedia.org/wiki/MG_Road_metro_station_(Gurgaon)"
+      "source_url": "https://en.wikipedia.org/wiki/MG_Road_metro_station_(Gurgaon)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Madipur": {
       "coordinates": {
         "lat": 28.6764,
         "lng": 77.1196
       },
-      "source_url": "https://en.wikipedia.org/wiki/Madipur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Madipur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Majlis Park": {
       "coordinates": {
         "lat": 28.7242,
         "lng": 77.182
       },
-      "source_url": "https://en.wikipedia.org/wiki/Majlis_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Majlis_Park_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 4
     },
     "Mandawali": {
       "coordinates": {
         "lat": 28.6249765,
         "lng": 77.304583
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mandawali_-_West_Vinod_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mandawali_-_West_Vinod_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mandi House": {
       "coordinates": {
         "lat": 28.6258,
         "lng": 77.2347
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mandi_House_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mandi_House_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Violet": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Mansarovar Park": {
       "coordinates": {
         "lat": 28.6754,
         "lng": 77.3016
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mansarovar_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mansarovar_Park_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Maujpur-Babarpur": {
       "coordinates": {
         "lat": 28.69207289,
         "lng": 77.27958489
       },
-      "source_url": "https://en.wikipedia.org/wiki/Maujpur_-_Babarpur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Maujpur_-_Babarpur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 4
     },
     "Mayapuri": {
       "coordinates": {
         "lat": 28.637099,
         "lng": 77.12974119
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mayapuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mayapuri_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mayur Vihar Extension": {
       "coordinates": {
         "lat": 28.59421111,
         "lng": 77.29466389
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mayur_Vihar_Extension_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mayur_Vihar_Extension_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Millennium City Centre Gurugram": {
       "coordinates": {
         "lat": 28.45926931,
         "lng": 77.07241919
       },
-      "source_url": "https://en.wikipedia.org/wiki/Millennium_City_Centre_Gurugram_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Millennium_City_Centre_Gurugram_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Model Town": {
       "coordinates": {
         "lat": 28.7028,
         "lng": 77.1939
       },
-      "source_url": "https://en.wikipedia.org/wiki/Model_Town_metro_station,_Delhi"
+      "source_url": "https://en.wikipedia.org/wiki/Model_Town_metro_station,_Delhi",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mohan Estate": {
       "coordinates": {
         "lat": 28.519622,
         "lng": 77.29462739
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mohan_Estate_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mohan_Estate_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Moolchand": {
       "coordinates": {
         "lat": 28.56398519,
         "lng": 77.23424481
       },
-      "source_url": "https://en.wikipedia.org/wiki/Moolchand_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Moolchand_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Moti Nagar": {
       "coordinates": {
         "lat": 28.6581,
         "lng": 77.1426
       },
-      "source_url": "https://en.wikipedia.org/wiki/Moti_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Moti_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mundka": {
       "coordinates": {
         "lat": 28.6824,
         "lng": 77.0306
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mundka_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mundka_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Munirka": {
       "coordinates": {
         "lat": 28.55789781,
         "lng": 77.17398489
       },
-      "source_url": "https://en.wikipedia.org/wiki/Munirka_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Munirka_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Najafgarh": {
       "coordinates": {
         "lat": 28.61255,
         "lng": 76.98650833
       },
-      "source_url": "https://en.wikipedia.org/wiki/Najafgarh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Najafgarh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Nangli": {
       "coordinates": {
         "lat": 28.61723889,
         "lng": 77.0104
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nangli_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nangli_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Nangloi": {
       "coordinates": {
         "lat": 28.6824,
         "lng": 77.0647
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nangloi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nangloi_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Naraina Vihar": {
       "coordinates": {
         "lat": 28.62412481,
         "lng": 77.13648831
       },
-      "source_url": "https://en.wikipedia.org/wiki/Naraina_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Naraina_Vihar_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Nawada": {
       "coordinates": {
         "lat": 28.6202,
         "lng": 77.0451
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nawada_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nawada_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Neelam Chowk Ajronda": {
       "coordinates": {
         "lat": 28.3978,
         "lng": 77.3124
       },
-      "source_url": "https://en.wikipedia.org/wiki/Neelam_Chowk_Ajronda_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Neelam_Chowk_Ajronda_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Nehru Enclave": {
       "coordinates": {
         "lat": 28.54584911,
         "lng": 77.25117089
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nehru_Enclave_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nehru_Enclave_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Nehru Place": {
       "coordinates": {
         "lat": 28.551403,
         "lng": 77.25176581
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nehru_Place_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nehru_Place_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Netaji Subhash Place": {
       "coordinates": {
         "lat": 28.6959,
         "lng": 77.1525
       },
-      "source_url": "https://en.wikipedia.org/wiki/Netaji_Subhash_Place_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Netaji_Subhash_Place_metro_station",
+      "platforms_by_line": {
+        "Red": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "New Ashok Nagar": {
       "coordinates": {
         "lat": 28.58916,
         "lng": 77.302067
       },
-      "source_url": "https://en.wikipedia.org/wiki/New_Ashok_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/New_Ashok_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "New Delhi": {
       "coordinates": {
         "lat": 28.6422,
         "lng": 77.2215
       },
-      "source_url": "https://en.wikipedia.org/wiki/New_Delhi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/New_Delhi_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "ISLAND",
+          "platform_count": 2,
+          "note": "Wikipedia's own field didn't enumerate platforms for this station; type+count corroborated by a secondary source"
+        },
+        "Airport Express": {
+          "platform_type": "SIDE",
+          "platform_count": 2,
+          "note": "Wikipedia's own field didn't enumerate platforms for this station; type+count corroborated by a secondary source"
+        }
+      }
     },
     "Nirman Vihar": {
       "coordinates": {
         "lat": 28.63653111,
         "lng": 77.28680389
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nirman_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nirman_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida City Centre": {
       "coordinates": {
         "lat": 28.5747,
         "lng": 77.3561
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_City_Centre_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_City_Centre_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 15": {
       "coordinates": {
         "lat": 28.58515611,
         "lng": 77.31158
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_15_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_15_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 16": {
       "coordinates": {
         "lat": 28.578395,
         "lng": 77.317635
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_16_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_16_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 18": {
       "coordinates": {
         "lat": 28.57081289,
         "lng": 77.32611581
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_18_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_18_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 34": {
       "coordinates": {
         "lat": 28.58019869,
         "lng": 77.3634415
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_34_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_34_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 52": {
       "coordinates": {
         "lat": 28.58669969,
         "lng": 77.37283919
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_52_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_52_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 59": {
       "coordinates": {
         "lat": 28.606493,
         "lng": 77.37272589
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_59_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_59_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 61": {
       "coordinates": {
         "lat": 28.597631,
         "lng": 77.37229881
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_61_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_61_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Sector 62": {
       "coordinates": {
         "lat": 28.61699481,
         "lng": 77.37360969
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_62_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Sector_62_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Okhla Bird Sanctuary": {
       "coordinates": {
         "lat": 28.55286431,
         "lng": 77.32164861
       },
-      "source_url": "https://en.wikipedia.org/wiki/Okhla_Bird_Sanctuary_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_Bird_Sanctuary_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Okhla NSIC": {
       "coordinates": {
         "lat": 28.5546,
         "lng": 77.2647
       },
-      "source_url": "https://en.wikipedia.org/wiki/Okhla_NSIC_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_NSIC_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Palam": {
       "coordinates": {
         "lat": 28.59,
         "lng": 77.08
       },
-      "source_url": "https://en.wikipedia.org/wiki/Palam_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Palam_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Panchsheel Park": {
       "coordinates": {
         "lat": 28.54233781,
         "lng": 77.22050719
       },
-      "source_url": "https://en.wikipedia.org/wiki/Panchsheel_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Panchsheel_Park_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Paschim Vihar East": {
       "coordinates": {
         "lat": 28.677327,
         "lng": 77.11243631
       },
-      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_East_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_East_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Paschim Vihar West": {
       "coordinates": {
         "lat": 28.6786,
         "lng": 77.1021
       },
-      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_West_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Paschim_Vihar_West_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Patel Chowk": {
       "coordinates": {
         "lat": 28.6232,
         "lng": 77.2118
       },
-      "source_url": "https://en.wikipedia.org/wiki/Patel_Chowk_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Patel_Chowk_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Patel Nagar": {
       "coordinates": {
         "lat": 28.645,
         "lng": 77.1693
       },
-      "source_url": "https://en.wikipedia.org/wiki/Patel_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Patel_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Raja Nahar Singh": {
       "coordinates": {
         "lat": 28.339801,
         "lng": 77.316446
       },
-      "source_url": "https://en.wikipedia.org/wiki/Raja_Nahar_Singh_(Ballabhgarh)_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Raja_Nahar_Singh_(Ballabhgarh)_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rajdhani Park": {
       "coordinates": {
         "lat": 28.6822,
         "lng": 77.0438
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rajdhani_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rajdhani_Park_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rajendra Place": {
       "coordinates": {
         "lat": 28.6422,
         "lng": 77.1783
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rajendra_Place_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rajendra_Place_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rajiv Chowk": {
       "coordinates": {
         "lat": 28.6328,
         "lng": 77.2196
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rajiv_Chowk_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rajiv_Chowk_metro_station",
+      "platforms_by_line": {
+        "Yellow": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Rajouri Garden": {
       "coordinates": {
         "lat": 28.649,
         "lng": 77.1226
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rajouri_Garden_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rajouri_Garden_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Ramesh Nagar": {
       "coordinates": {
         "lat": 28.653,
         "lng": 77.1315
       },
-      "source_url": "https://en.wikipedia.org/wiki/Ramesh_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Ramesh_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rithala": {
       "coordinates": {
         "lat": 28.7209,
         "lng": 77.107
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rithala_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rithala_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rohini Sector 18-19": {
       "coordinates": {
         "lat": 28.73831761,
         "lng": 77.13987539
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rohini_Sector_18,_19_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Rohini_Sector_18,_19_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Saket": {
       "coordinates": {
         "lat": 28.52049161,
         "lng": 77.20153531
       },
-      "source_url": "https://en.wikipedia.org/wiki/Saket_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Saket_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Samaypur Badli": {
       "coordinates": {
         "lat": 28.74504311,
         "lng": 77.1376725
       },
-      "source_url": "https://en.wikipedia.org/wiki/Samaypur_Badli_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Samaypur_Badli_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Sarita Vihar": {
       "coordinates": {
         "lat": 28.52858781,
         "lng": 77.28839461
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sarita_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sarita_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Seelampur": {
       "coordinates": {
         "lat": 28.6698,
         "lng": 77.2667
       },
-      "source_url": "https://en.wikipedia.org/wiki/Seelampur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Seelampur_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Shadipur": {
       "coordinates": {
         "lat": 28.651655,
         "lng": 77.15824889
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shadipur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shadipur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shahdara": {
       "coordinates": {
         "lat": 28.6735,
         "lng": 77.2899
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shahdara_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shahdara_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shakurpur": {
       "coordinates": {
         "lat": 28.68577881,
         "lng": 77.14962581
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shakurpur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shakurpur_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Shalimar Bagh": {
       "coordinates": {
         "lat": 28.70181889,
         "lng": 77.16519111
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shalimar_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shalimar_Bagh_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Shankar Vihar": {
       "coordinates": {
         "lat": 28.5607755,
         "lng": 77.1404875
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shankar_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shankar_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shastri Nagar": {
       "coordinates": {
         "lat": 28.6701,
         "lng": 77.1818
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shastri_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shastri_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shastri Park": {
       "coordinates": {
         "lat": 28.6682,
         "lng": 77.2501
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shastri_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shastri_Park_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shiv Vihar": {
       "coordinates": {
         "lat": 28.72161219,
         "lng": 77.28949381
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shiv_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shiv_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Shivaji Park": {
       "coordinates": {
         "lat": 28.6749,
         "lng": 77.1303
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Park_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Park_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Sir Vishweshwaraiah Moti Bagh": {
       "coordinates": {
         "lat": 28.5785038,
         "lng": 77.1757257
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sir_M._Vishweshwaraiah_Moti_Bagh_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sir_M._Vishweshwaraiah_Moti_Bagh_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "South Extension": {
       "coordinates": {
         "lat": 28.56861119,
         "lng": 77.22026511
       },
-      "source_url": "https://en.wikipedia.org/wiki/South_Extension_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/South_Extension_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Subhash Nagar": {
       "coordinates": {
         "lat": 28.6404,
         "lng": 77.1049
       },
-      "source_url": "https://en.wikipedia.org/wiki/Subhash_Nagar_metro_station_(Delhi)"
+      "source_url": "https://en.wikipedia.org/wiki/Subhash_Nagar_metro_station_(Delhi)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Sukhdev Vihar": {
       "coordinates": {
         "lat": 28.5597695,
         "lng": 77.27513311
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sukhdev_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sukhdev_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Sultanpur": {
       "coordinates": {
         "lat": 28.4991895,
         "lng": 77.16138931
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sultanpur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sultanpur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 3
     },
     "Supreme Court": {
       "coordinates": {
         "lat": 28.6235,
         "lng": 77.2425
       },
-      "source_url": "https://en.wikipedia.org/wiki/Supreme_Court_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Supreme_Court_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Surajmal Stadium": {
       "coordinates": {
         "lat": 28.6818,
         "lng": 77.074
       },
-      "source_url": "https://en.wikipedia.org/wiki/Maharaja_Surajmal_Stadium_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Maharaja_Surajmal_Stadium_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Tagore Garden": {
       "coordinates": {
         "lat": 28.6437,
         "lng": 77.1129
       },
-      "source_url": "https://en.wikipedia.org/wiki/Tagore_Garden_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Tagore_Garden_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Tilak Nagar": {
       "coordinates": {
         "lat": 28.6366,
         "lng": 77.0964
       },
-      "source_url": "https://en.wikipedia.org/wiki/Tilak_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Tilak_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Tis Hazari": {
       "coordinates": {
         "lat": 28.6672,
         "lng": 77.2165
       },
-      "source_url": "https://en.wikipedia.org/wiki/Tis_Hazari_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Tis_Hazari_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Trilokpuri Sanjay Lake": {
       "coordinates": {
         "lat": 28.6136784,
         "lng": 77.3088491
       },
-      "source_url": "https://en.wikipedia.org/wiki/Trilokpuri_-_Sanjay_Lake_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Trilokpuri_-_Sanjay_Lake_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Tughlakabad": {
       "coordinates": {
         "lat": 28.50256611,
         "lng": 77.29939831
       },
-      "source_url": "https://en.wikipedia.org/wiki/Tughlakabad_Station_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Tughlakabad_Station_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Udyog Bhawan": {
       "coordinates": {
         "lat": 28.61106,
         "lng": 77.2119637
       },
-      "source_url": "https://en.wikipedia.org/wiki/Udyog_Bhawan_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Udyog_Bhawan_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Udyog Nagar": {
       "coordinates": {
         "lat": 28.681,
         "lng": 77.0808
       },
-      "source_url": "https://en.wikipedia.org/wiki/Udyog_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Udyog_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Uttam Nagar East": {
       "coordinates": {
         "lat": 28.62478611,
         "lng": 77.06520694
       },
-      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_East_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_East_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Uttam Nagar West": {
       "coordinates": {
         "lat": 28.62172806,
         "lng": 77.05569806
       },
-      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_West_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Uttam_Nagar_West_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Vaishali": {
       "coordinates": {
         "lat": 28.64994681,
         "lng": 77.339711
       },
-      "source_url": "https://en.wikipedia.org/wiki/Vaishali_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Vaishali_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "note": "Wikipedia infobox confirms platform type (side) but doesn't enumerate platform count. Count corroborated by two independent secondary sources (thenewdelhi.in, delhicapital.com), both agreeing on 2."
     },
     "Vasant Vihar": {
       "coordinates": {
         "lat": 28.55782889,
         "lng": 77.16099031
       },
-      "source_url": "https://en.wikipedia.org/wiki/Vasant_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Vasant_Vihar_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Vinobapuri": {
       "coordinates": {
         "lat": 28.56594389,
         "lng": 77.25050194
       },
-      "source_url": "https://en.wikipedia.org/wiki/Vinobapuri_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Vinobapuri_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Vishwavidyalaya": {
       "coordinates": {
         "lat": 28.6948,
         "lng": 77.2146
       },
-      "source_url": "https://en.wikipedia.org/wiki/Vishwavidyalaya_metro_station_(Delhi)"
+      "source_url": "https://en.wikipedia.org/wiki/Vishwavidyalaya_metro_station_(Delhi)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Welcome": {
       "coordinates": {
         "lat": 28.6721,
         "lng": 77.2779
       },
-      "source_url": "https://en.wikipedia.org/wiki/Welcome_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Welcome_metro_station",
+      "platforms_by_line": {
+        "Red": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Yamuna Bank": {
       "coordinates": {
         "lat": 28.62328,
         "lng": 77.26793
       },
-      "source_url": "https://en.wikipedia.org/wiki/Yamuna_Bank_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Yamuna_Bank_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 4
     },
     "Yashobhoomi Dwarka Sector 25": {
       "coordinates": {
@@ -1920,112 +2433,158 @@
         "lat": 28.59712389,
         "lng": 77.03337389
       },
-      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_13_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dwarka_Sector_13_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Faridabad Old": {
       "coordinates": {
         "lat": 28.4108,
         "lng": 77.3114
       },
-      "source_url": "https://en.wikipedia.org/wiki/Old_Faridabad_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Old_Faridabad_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 3
     },
     "Inderlok": {
       "coordinates": {
         "lat": 28.6734,
         "lng": 77.1703
       },
-      "source_url": "https://en.wikipedia.org/wiki/Inderlok_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Inderlok_metro_station",
+      "platforms_by_line": {
+        "Red": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        },
+        "Green": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      }
     },
     "Jasola Apollo": {
       "coordinates": {
         "lat": 28.5381295,
         "lng": 77.28325811
       },
-      "source_url": "https://en.wikipedia.org/wiki/Jasola_Apollo_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Jasola_Apollo_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Krishna Nagar": {
       "coordinates": {
         "lat": 28.65785489,
         "lng": 77.29027611
       },
-      "source_url": "https://en.wikipedia.org/wiki/Krishna_Nagar_metro_station_(Delhi)"
+      "source_url": "https://en.wikipedia.org/wiki/Krishna_Nagar_metro_station_(Delhi)",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Malviya Nagar": {
       "coordinates": {
         "lat": 28.5287,
         "lng": 77.2033
       },
-      "source_url": "https://en.wikipedia.org/wiki/Malviya_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Malviya_Nagar_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Nangloi Railway Station": {
       "coordinates": {
         "lat": 28.6821,
         "lng": 77.0561
       },
-      "source_url": "https://en.wikipedia.org/wiki/Nangloi_Railway_Station_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Nangloi_Railway_Station_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Noida Electronic City": {
       "coordinates": {
         "lat": 28.62794119,
         "lng": 77.37493
       },
-      "source_url": "https://en.wikipedia.org/wiki/Noida_Electronic_City_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Noida_Electronic_City_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2,
+      "note": "Wikipedia infobox confirms platform type (side) but doesn't enumerate platform count. Count corroborated by secondary sources agreeing on 2 (Platform-1 terminus, Platform-2 through)."
     },
     "Okhla Vihar": {
       "coordinates": {
         "lat": 28.56128489,
         "lng": 77.29191231
       },
-      "source_url": "https://en.wikipedia.org/wiki/Okhla_Vihar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Okhla_Vihar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "R K Puram": {
       "coordinates": {
         "lat": 28.55049119,
         "lng": 77.18494181
       },
-      "source_url": "https://en.wikipedia.org/wiki/R._K._Puram_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/R._K._Puram_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Sarojini Nagar": {
       "coordinates": {
         "lat": 28.57580681,
         "lng": 77.19857069
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sarojini_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sarojini_Nagar_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Shivaji Stadium": {
       "coordinates": {
         "lat": 28.62876989,
         "lng": 77.21141211
       },
-      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Stadium_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Shivaji_Stadium_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "Terminal 1 IGI Airport": {
       "coordinates": {
         "lat": 28.5648,
         "lng": 77.1227
       },
-      "source_url": "https://en.wikipedia.org/wiki/Terminal_1_IGI_Airport_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Terminal_1_IGI_Airport_metro_station",
+      "platforms_by_line": {
+        "Magenta": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        }
+      },
+      "note": "Airport Express platform data NOT populated: research for this task turned up that Airport Express does not actually serve Terminal 1 (it serves Terminals 2/3 via a separate station) -- this repo's topology currently models Terminal 1 IGI Airport as an Airport Express+Magenta interchange, which appears to be a real error, not just missing data. Flagged for a dedicated topology fix; not corrected here since topology changes were out of scope for this pass."
     },
     "Vidhan Sabha": {
       "coordinates": {
         "lat": 28.6879,
         "lng": 77.2218
       },
-      "source_url": "https://en.wikipedia.org/wiki/Vidhan_Sabha_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Vidhan_Sabha_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Harkesh Nagar Okhla": {
       "coordinates": {
         "lat": 28.54291969,
         "lng": 77.27514039
       },
-      "source_url": "https://en.wikipedia.org/wiki/Harkesh_Nagar_Okhla_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Harkesh_Nagar_Okhla_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Qutub Minar": {
       "coordinates": {
         "lat": 28.512951,
         "lng": 77.186319
       },
-      "source_url": "https://en.wikipedia.org/wiki/Qutab_Minar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Qutab_Minar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Jama Masjid": {
       "coordinates": {
@@ -2039,42 +2598,62 @@
         "lat": 28.6566569,
         "lng": 77.236693
       },
-      "source_url": "https://en.wikipedia.org/wiki/Lal_Qila_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Lal_Qila_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "GTB Nagar": {
       "coordinates": {
         "lat": 28.6982,
         "lng": 77.207
       },
-      "source_url": "https://en.wikipedia.org/wiki/Guru_Tegh_Bahadur_Nagar_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Guru_Tegh_Bahadur_Nagar_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mayur Vihar Phase 1": {
       "coordinates": {
         "lat": 28.604134,
         "lng": 77.289526
       },
-      "source_url": "https://en.wikipedia.org/wiki/Mayur_Vihar-I_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Mayur_Vihar-I_metro_station",
+      "platforms_by_line": {
+        "Blue": {
+          "platform_type": "ISLAND",
+          "platform_count": 2
+        },
+        "Pink": {
+          "platform_type": "SIDE",
+          "platform_count": 2
+        }
+      }
     },
     "Delhi Cantt": {
       "coordinates": {
         "lat": 28.60871,
         "lng": 77.1404231
       },
-      "source_url": "https://en.wikipedia.org/wiki/Delhi_Cantonment_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Delhi_Cantonment_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "RK Ashram Marg": {
       "coordinates": {
         "lat": 28.6393,
         "lng": 77.2085
       },
-      "source_url": "https://en.wikipedia.org/wiki/Ramakrishna_Ashram_Marg_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Ramakrishna_Ashram_Marg_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rohini West": {
       "coordinates": {
         "lat": 28.715,
         "lng": 77.1154
       },
-      "source_url": "https://en.wikipedia.org/wiki/Rohini_West_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Dr._Baba_Saheb_Ambedkar_Hospital_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Rohini": {
       "coordinates": {
@@ -2082,27 +2661,35 @@
         "lng": 77.1259
       },
       "source_url": "https://en.wikipedia.org/wiki/Rohini_metro_station",
-      "note": "officially Rohini East until renamed"
+      "note": "officially Rohini East until renamed",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "IIT Delhi": {
       "coordinates": {
         "lat": 28.5472,
         "lng": 77.1938
       },
-      "source_url": "https://en.wikipedia.org/wiki/IIT_Delhi_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/IIT_metro_station",
+      "platform_type": "ISLAND",
+      "platform_count": 2
     },
     "ESI Hospital": {
       "coordinates": {
         "lat": 28.6582712,
         "lng": 77.1273906
       },
-      "source_url": "https://en.wikipedia.org/wiki/ESI_-_Basaidarapur_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/ESI_-_Basaidarapur_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "East Vinod Nagar": {
       "coordinates": {
         "lat": 28.6200392,
         "lng": 77.3052657
       },
+      "platform_type": "SIDE",
+      "platform_count": 2,
       "source_url": "https://en.wikipedia.org/wiki/East_Vinod_Nagar_-_Mayur_Vihar-II_metro_station"
     },
     "Sadar Bazaar Cantonment": {
@@ -2110,15 +2697,19 @@
         "lat": 28.5771,
         "lng": 77.1113
       },
-      "source_url": "https://en.wikipedia.org/wiki/Sadar_Bazar_Cantonment_metro_station"
+      "source_url": "https://en.wikipedia.org/wiki/Sadar_Bazar_Cantonment_metro_station",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Pitampura": {
       "coordinates": {
         "lat": 28.703151,
         "lng": 77.132397
       },
-      "source_url": "https://www.wikidata.org/wiki/Q7198601",
-      "note": "Officially renamed Madhuban Chowk in November 2025; kept under the existing 'Pitampura' key since renaming the topology was explicitly out of scope for this pass. Coordinate is Wikidata's structured claim (P625, precision 0.0001). Cross-verified against three independent sources, all agreeing within a few meters: Wikipedia infobox (28.7032, 77.1324), raw OpenStreetMap node 663765153 (28.7032676, 77.1322497, tagged railway=station + alt_name=Pitampura, confirming same physical station), and a third-party aggregator (28.703173, 77.132233). Red Line adjacency (Rohini / Kohat Enclave) matches this repo's existing topology exactly, confirming station identity. No disagreement across sources."
+      "source_url": "https://en.wikipedia.org/wiki/Madhuban_Chowk_metro_station",
+      "note": "Infobox (under the current name Madhuban Chowk) lists 4 platforms total, but platforms 3-4 are tagged for a Magenta Line extension not in this repo's topology. Counting only the 2 Red Line platforms actually modeled here.",
+      "platform_type": "SIDE",
+      "platform_count": 2
     },
     "Mayur Vihar Pocket I": {
       "coordinates": {

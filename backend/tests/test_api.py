@@ -57,6 +57,28 @@ def test_stations_map_endpoint_returns_only_sourced_coordinates():
         assert "lat" in s["coordinates"] and "lng" in s["coordinates"]
 
 
+def test_station_detail_single_line_platform_data():
+    resp = client.get("/api/v1/stations/Kohat Enclave")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["platform_type"] == "SIDE"
+    assert body["platform_count"] == 2
+    assert body["platforms_by_line"] is None
+
+
+def test_station_detail_interchange_uses_platforms_by_line():
+    resp = client.get("/api/v1/stations/Rajiv Chowk")
+    assert resp.status_code == 200
+    body = resp.json()
+    # no single value applies at an interchange with differing platform types
+    assert body["platform_type"] is None
+    assert body["platform_count"] is None
+    assert body["platforms_by_line"] == {
+        "Yellow": {"platform_type": "ISLAND", "platform_count": 2},
+        "Blue": {"platform_type": "SIDE", "platform_count": 2},
+    }
+
+
 def test_station_detail_includes_coordinates_when_sourced():
     resp = client.get("/api/v1/stations/Noida Sector 51")
     assert resp.status_code == 200

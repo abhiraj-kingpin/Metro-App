@@ -265,3 +265,95 @@ def test_all_stations_have_metadata_now():
     with_metadata = len(graph.station_metadata)
     assert total == with_metadata == 239
     assert with_metadata / total > 0.99
+
+
+# --- platform data ---------------------------------------------------
+
+def _platform_coverage():
+    with_platform = 0
+    for station, lines in graph.station_lines.items():
+        meta = graph.station_metadata.get(station, {})
+        if len(lines) == 1:
+            if "platform_type" in meta:
+                with_platform += 1
+        else:
+            if "platforms_by_line" in meta or "platform_type" in meta:
+                with_platform += 1
+    return with_platform
+
+
+def test_single_line_platform_data_spot_checks():
+    # a mix of stations resolved by the automated script vs by the
+    # font-color-template regex fix vs disambiguated-title retries
+    checks = {
+        "Kohat Enclave": ("SIDE", 2),
+        "Shivaji Stadium": ("ISLAND", 2),
+        "Chandni Chowk": ("ISLAND", 2),  # needed the (Delhi) disambiguation suffix
+        "Lal Quila": ("ISLAND", 2),  # Wikipedia title is actually "Lal Qila"
+        "Qutub Minar": ("SIDE", 2),  # Wikipedia title is actually "Qutab Minar"
+    }
+    for station, (ptype, count) in checks.items():
+        meta = graph.station_metadata[station]
+        assert meta["platform_type"] == ptype, station
+        assert meta["platform_count"] == count, station
+
+
+def test_single_line_platform_coverage_is_near_complete():
+    single_line = [s for s, lines in graph.station_lines.items() if len(lines) == 1]
+    resolved = [s for s in single_line if "platform_type" in graph.station_metadata.get(s, {})]
+    unresolved = sorted(set(single_line) - set(resolved))
+    # exactly the 3 stations no source had usable platform data for
+    assert unresolved == ["Jama Masjid", "Mayur Vihar Pocket I", "Yashobhoomi Dwarka Sector 25"]
+
+
+def test_interchange_platform_data_uses_per_line_schema():
+    meta = graph.station_metadata["Rajiv Chowk"]
+    assert "platform_type" not in meta  # no single value applies at an interchange
+    assert meta["platforms_by_line"] == {
+        "Yellow": {"platform_type": "ISLAND", "platform_count": 2},
+        "Blue": {"platform_type": "SIDE", "platform_count": 2},
+    }
+
+
+def test_three_way_interchange_platform_data():
+    meta = graph.station_metadata["Kashmere Gate"]
+    by_line = meta["platforms_by_line"]
+    assert set(by_line) == {"Yellow", "Red", "Violet"}
+    assert by_line["Yellow"] == {"platform_type": "ISLAND", "platform_count": 2}
+    assert by_line["Red"] == {"platform_type": "SIDE", "platform_count": 2}
+    assert by_line["Violet"] == {"platform_type": "ISLAND", "platform_count": 2}
+
+
+def test_sikanderpur_platforms_split_by_operator():
+    # was a flat, ambiguous value before this pass (sourced from the
+    # Rapid Metro page only, never verified for the DMRC Yellow side) --
+    # now properly split and both sides independently verified
+    by_line = graph.station_metadata["Sikanderpur"]["platforms_by_line"]
+    assert by_line["Yellow"] == {"platform_type": "SIDE", "platform_count": 2}
+    assert by_line["Rapid Metro"] == {"platform_type": "SIDE", "platform_count": 2}
+
+
+def test_dwarka_stations_honestly_unresolved():
+    # Dwarka's infobox states a bare total ("5") with no type or per-line
+    # breakdown; Dwarka Sector 21's platform field is entirely empty --
+    # neither has a trustworthy per-line value, so neither was populated
+    assert "platforms_by_line" not in graph.station_metadata.get("Dwarka", {})
+    assert "platforms_by_line" not in graph.station_metadata.get("Dwarka Sector 21", {})
+
+
+def test_terminal_1_igi_airport_only_has_magenta_data():
+    # Airport Express deliberately not populated here -- research for this
+    # task found Airport Express doesn't actually serve Terminal 1 in
+    # reality (it serves Terminals 2/3 via a different station), meaning
+    # this repo's Airport Express+Magenta interchange at this name may
+    # itself be a topology error. Not fixed here (out of scope), but not
+    # populated with unverifiable data either.
+    by_line = graph.station_metadata["Terminal 1 IGI Airport"]["platforms_by_line"]
+    assert by_line == {"Magenta": {"platform_type": "ISLAND", "platform_count": 2}}
+    assert "Airport Express" not in by_line
+
+
+def test_platform_coverage_is_near_complete_overall():
+    total = len(graph.station_lines)
+    covered = _platform_coverage()
+    assert covered / total > 0.85
